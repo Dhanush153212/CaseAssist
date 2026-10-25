@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { signIn, signUp, logOut, resetPassword } 
-from './auth';
+import { signIn, signUp } from './auth';
 import { useEffect, useState, type FormEvent } from 'react';
+import type { ReactNode } from 'react';
 import './App.css';
 import { auth } from './firebase';
 import {
@@ -463,7 +463,7 @@ function Legend({ color, label, value }: { color: string; label: string; value: 
   return <div className="legend-row"><span className="legend-dot" style={{ background: color }} /><span>{label}</span><strong style={{ marginLeft: 'auto' }}>{value}</strong></div>;
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return <label className="field">{label}{children}</label>;
 }
 
