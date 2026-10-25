@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ChevronRight, ChevronLeft, Check, User, Stethoscope,
-  ClipboardList, Settings, Eye, X, Plus, Trash2,
+  ClipboardList, Settings, Eye, X, Plus
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { generateCaseId } from '../utils/helpers';

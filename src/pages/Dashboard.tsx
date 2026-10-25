@@ -9,7 +9,7 @@ import {
   PieChart, Pie, Cell, Legend,
 } from 'recharts';
 import { useApp } from '../context/AppContext';
-import { formatDate, timeAgo, statusBadgeClass, priorityBadgeClass } from '../utils/helpers';
+import { timeAgo, statusBadgeClass, priorityBadgeClass } from '../utils/helpers';
 import type { CaseStatus } from '../types';
 
 // ─── Colour maps ──────────────────────────────────────────────────────────────
@@ -175,7 +175,7 @@ export default function Dashboard() {
                   <Cell key={i} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip formatter={(v: number) => [v, 'Cases']} />
+              <Tooltip formatter={(v) => [v ?? 0, 'Cases']} />
               <Legend
                 iconType="circle"
                 iconSize={8}
@@ -194,7 +194,7 @@ export default function Dashboard() {
             <BarChart data={deptData} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
               <XAxis dataKey="dept" tick={{ fontSize: 10 }} />
               <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
-              <Tooltip formatter={(v: number) => [v, 'Cases']} />
+              <Tooltip formatter={(v) => [v ?? 0, 'Cases']} />
               <Bar dataKey="count" fill="#0f5ec0" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>

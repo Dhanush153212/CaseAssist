@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
-  LayoutDashboard, Users, ClipboardList, Stethoscope, Brain,
+  LayoutDashboard, Users, ClipboardList, Brain,
   BarChart3, ScrollText, Settings, HelpCircle, LogOut, X, ChevronRight,
   Activity,
 } from 'lucide-react';

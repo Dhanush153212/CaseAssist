@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ScrollText, Activity, User, Shield } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { formatDateTime } from '../utils/helpers';

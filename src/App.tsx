@@ -4,16 +4,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import type { ReactNode } from 'react';
 import './App.css';
 import { auth } from './firebase';
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from 'firebase/firestore';
 
-import { db } from './firebase';
 type PatientCase = {
   id: string;
   name: string;
@@ -124,13 +115,6 @@ function App() {
     setActivities((old) => [`${new Date().toLocaleString('en-IN')} — ${text}`, ...old]);
   }
 
-  function login(email: string) {
-    sessionStorage.setItem('caseassist-user', email);
-    setUser(auth.currentUser);
-    setAuthError('');
-    setPage('Dashboard');
-    setMessage('Welcome to CaseAssist.');
-  }
   
   async function submitAuth(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();

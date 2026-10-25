@@ -1,7 +1,5 @@
 import type {
   PatientCase,
-  CaseStatus,
-  CasePriority,
   Department,
   ActivityEntry,
   TestResult,

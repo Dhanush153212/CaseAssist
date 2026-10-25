@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ClipboardList, Eye, CheckCircle, Clock, AlertTriangle, ChevronRight } from 'lucide-react';
+import { ClipboardList, Eye, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { formatDate, statusBadgeClass, priorityBadgeClass } from '../utils/helpers';
 import type { CaseStatus } from '../types';

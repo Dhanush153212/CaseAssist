@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
-  Brain, Sparkles, AlertCircle, CheckCircle, HelpCircle, ArrowLeft,
-  ClipboardList, User, Info,
-} from 'lucide-react';
+  Brain, Sparkles, AlertCircle, CheckCircle, HelpCircle, ArrowLeft,Info
+} 
+from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { statusBadgeClass, priorityBadgeClass } from '../utils/helpers';
 import type { PatientCase } from '../types';

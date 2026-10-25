@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react'; 
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Menu, Bell, Search, Plus, Activity } from 'lucide-react';
+import { Menu, Bell, Search, Plus } from 'lucide-react';
 import Sidebar from './Sidebar';
 import { useApp } from '../context/AppContext';
 

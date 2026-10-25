@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Search, Filter, Plus, Eye, Pencil, Trash2, ChevronDown, X, Users,
@@ -21,7 +21,7 @@ const PRIORITIES: CasePriority[] = ['Low', 'Normal', 'High', 'Critical'];
 export default function CasesList() {
   const { cases, deleteCase } = useApp();
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const [query, setQuery]         = useState(searchParams.get('q') ?? '');
   const [statusF, setStatusF]     = useState<CaseStatus | ''>('');

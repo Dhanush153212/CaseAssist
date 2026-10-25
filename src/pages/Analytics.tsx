@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend,
-  LineChart, Line, PieChart, Pie, Cell,
+  PieChart, Pie, Cell,
 } from 'recharts';
 import { BarChart3, TrendingUp, Users, Clock } from 'lucide-react';
 import { useApp } from '../context/AppContext';
@@ -122,7 +122,7 @@ export default function Analytics() {
             <BarChart data={deptData} layout="vertical" margin={{ left: 70, right: 10, top: 0, bottom: 0 }}>
               <XAxis type="number" tick={{ fontSize: 10 }} allowDecimals={false} />
               <YAxis type="category" dataKey="dept" tick={{ fontSize: 10 }} width={70} />
-              <Tooltip formatter={(v: number) => [v, 'Cases']} />
+              <Tooltip formatter={(v) => [v ?? 0, 'Cases']} />
               <Bar dataKey="count" fill="#0f5ec0" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -136,7 +136,7 @@ export default function Analytics() {
               <Pie data={statusData} cx="50%" cy="50%" outerRadius={80} paddingAngle={3} dataKey="value">
                 {statusData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
               </Pie>
-              <Tooltip formatter={(v: number) => [v, 'Cases']} />
+              <Tooltip formatter={(v) => [v ?? 0, 'Cases']} />
               <Legend iconType="circle" iconSize={8} formatter={(v) => <span className="text-xs text-gray-600">{v}</span>} />
             </PieChart>
           </ResponsiveContainer>
@@ -150,7 +150,7 @@ export default function Analytics() {
               <Pie data={priorityData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={3} dataKey="value">
                 {priorityData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
               </Pie>
-              <Tooltip formatter={(v: number) => [v, 'Cases']} />
+              <Tooltip formatter={(v) => [v ?? 0, 'Cases']} />
               <Legend iconType="circle" iconSize={8} formatter={(v) => <span className="text-xs text-gray-600">{v}</span>} />
             </PieChart>
           </ResponsiveContainer>
@@ -163,7 +163,7 @@ export default function Analytics() {
             <BarChart data={ageData} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
               <XAxis dataKey="range" tick={{ fontSize: 10 }} />
               <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
-              <Tooltip formatter={(v: number) => [v, 'Patients']} />
+              <Tooltip formatter={(v) => [v ?? 0,  'Patients']} />
               <Bar dataKey="count" fill="#14b8a6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>

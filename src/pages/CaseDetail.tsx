@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft, User, Stethoscope, ClipboardList, Activity, TestTube,
-  Pencil, Brain, Clock, AlertTriangle, CheckCircle, FileText,
+  ArrowLeft, Stethoscope, ClipboardList, Activity, TestTube,
+  Pencil, Brain, CheckCircle, FileText,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { formatDate, formatDateTime, timeAgo, statusBadgeClass, priorityBadgeClass } from '../utils/helpers';
+import { formatDate, formatDateTime, statusBadgeClass, priorityBadgeClass } from '../utils/helpers';
 
 // ─── CaseDetail ───────────────────────────────────────────────────────────────
 
 export default function CaseDetail() {
   const { id } = useParams();
-  const { getCaseById, updateCase, currentUser } = useApp();
+  const { getCaseById } = useApp();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'overview' | 'history' | 'tests' | 'activity'>('overview');
 
@@ -226,7 +226,7 @@ export default function CaseDetail() {
             <div className="relative">
               <div className="absolute left-3.5 top-0 bottom-0 w-px bg-gray-200" />
               <div className="space-y-4">
-                {c.activityLog.map((a, i) => (
+                {c.activityLog.map((a,) => (
                   <div key={a.id} className="flex gap-4 items-start relative">
                     <div className="w-7 h-7 rounded-full bg-navy-600 flex items-center justify-center text-white shrink-0 z-10">
                       <Activity className="w-3 h-3" />
