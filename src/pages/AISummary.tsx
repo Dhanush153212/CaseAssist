@@ -68,19 +68,47 @@ export default function AISummary() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const preselect = searchParams.get('case') ?? '';
-
   const [selectedId, setSelectedId] = useState(preselect);
   const [generating, setGenerating] = useState(false);
-  const [generated, setGenerated] = useState(!!preselect);
+  const [generated, setGenerated] = useState(false);
+  const [aiSummary, setAiSummary] = useState('');
+  const [error, setError] = useState('');
 
   const selectedCase = useMemo(() => cases.find(c => c.id === selectedId), [cases, selectedId]);
   const result = useMemo(() => selectedCase ? generateSummary(selectedCase) : null, [selectedCase]);
 
-  function handleGenerate() {
-    setGenerating(true);
-    setTimeout(() => { setGenerating(false); setGenerated(true); }, 1200);
-  }
+  async function handleGenerate() {
+  if (!selectedCase) return;
 
+  setGenerating(true);
+  setGenerated(false);
+  setAiSummary('');
+  setError('');
+
+  try {
+    const response = await fetch('/api/generate-summary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ caseData: selectedCase }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to generate summary.');
+    }
+
+    setAiSummary(data.summary);
+    setGenerated(true);
+  } catch (err) {
+    setError(
+      err instanceof Error ? err.message : 'Something went wrong.'
+    );
+  } finally {
+    setGenerating(false);
+  }
+}
+    
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto space-y-5 animate-fade-in">
 
@@ -93,7 +121,9 @@ export default function AISummary() {
           <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
             <Brain className="w-5 h-5 text-purple-600" /> AI Case Summary
           </h1>
-          <p className="text-sm text-gray-500">Simulated clinical case intelligence — demonstration only</p>
+          <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+  {aiSummary}
+</p>
         </div>
       </div>
 
@@ -130,6 +160,14 @@ export default function AISummary() {
           </button>
         </div>
       </div>
+      {error && (
+  <div
+    role="alert"
+    className="card border-red-200 bg-red-50 text-red-700 text-sm"
+  >
+    {error}
+  </div>
+)}
 
       {/* Loading skeleton */}
       {generating && (
