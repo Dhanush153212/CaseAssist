@@ -25,6 +25,11 @@ dist-ssr
 
 .env
 .env.*
+.Path.env
 !.env.example
 node_modules/
 dist/
+
+
+# Local Netlify folder
+.netlify

@@ -70,6 +70,24 @@ export default function CaseForm() {
   const [mgmt, setMgmt]           = useState<CaseManagement>(existing?.caseManagement ?? blankManagement());
   const [errors, setErrors]       = useState<Record<string, string>>({});
   const [saved, setSaved]         = useState(false);
+  const completenessItems = [
+    { label: 'Patient information', complete: Boolean(patient.name.trim() && patient.age > 0 && patient.contactNumber.trim() !== '+91 ' && patient.state && patient.city.trim()) },
+    { label: 'Clinical information', complete: Boolean(clinical.chiefComplaint.trim() && clinical.department && clinical.assignedClinician) },
+    { label: 'Symptoms recorded', complete: clinical.symptoms.length > 0 },
+    { label: 'Medical history recorded', complete: Boolean(history.existingConditions.length || history.currentMedications.length || history.allergies.length || history.previousProcedures.length || history.familyHistory.trim()) },
+    { label: 'Case management', complete: Boolean(mgmt.priority && mgmt.assignedDepartment && mgmt.reviewStatus) },
+  ];
+
+  const completedItems = completenessItems.filter(item => item.complete).length;
+  const completenessScore = Math.round((completedItems / completenessItems.length) * 100);
+  const memoryPrompts = [
+    !patient.dateOfBirth.trim() && 'Do you know the patient’s date of birth?',
+    !clinical.duration.trim() && 'When did the symptoms start, and how long have they lasted?',
+    clinical.symptoms.length === 0 && 'Are there any other symptoms to record?',
+    history.allergies.length === 0 && 'Please confirm whether the patient has any known allergies.',
+    history.currentMedications.length === 0 && 'Is the patient currently taking any medications?',
+    !history.familyHistory.trim() && 'Is there any relevant family medical history?',
+  ].filter((prompt): prompt is string => Boolean(prompt));
 
   // ── Tag-input helper ─────────────────────────────────────────────────────
 
@@ -256,6 +274,30 @@ export default function CaseForm() {
         {step === 1 && (
           <div className="space-y-4 animate-fade-in">
             <h2 className="text-base font-semibold text-gray-800 border-b pb-2">Patient Information</h2>
+            <div className="rounded-lg border border-teal-200 bg-teal-50 p-4">
+  <div className="flex items-center justify-between mb-2">
+    <h3 className="font-semibold text-gray-800">Case Completeness Score</h3>
+    <span className="text-lg font-bold text-teal-700">{completenessScore}%</span>
+  </div>
+  <div className="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+    <div
+      className="h-full rounded-full bg-teal-500 transition-all duration-300"
+      style={{ width: `${completenessScore}%` }}
+    />
+  </div>
+  <p className="text-sm text-gray-600 mt-2">
+    {completedItems} of {completenessItems.length} case sections completed.
+  </p>
+  <ul className="mt-2 space-y-1">
+    {completenessItems.map(item => (
+      <li key={item.label} className="text-sm text-gray-700 flex items-center gap-2">
+        <span>{item.complete ? '✓' : '○'}</span>
+        {item.label}
+      </li>
+    ))}
+  </ul>
+</div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
                 <label className="input-label">Full Name *</label>
@@ -468,6 +510,49 @@ export default function CaseForm() {
         {step === 5 && (
           <div className="space-y-4 animate-fade-in">
             <h2 className="text-base font-semibold text-gray-800 border-b pb-2">Review &amp; Submit</h2>
+            <div className="rounded-lg border border-teal-200 bg-teal-50 p-4">
+  <div className="flex items-center justify-between mb-2">
+    <h3 className="font-semibold text-gray-800">Case Completeness Score</h3>
+    <span className="text-lg font-bold text-teal-700">{completenessScore}%</span>
+  </div>
+  <div className="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+    <div
+      className="h-full rounded-full bg-teal-500 transition-all duration-300"
+      style={{ width: `${completenessScore}%` }}
+    />
+  </div>
+  <p className="text-sm text-gray-600 mt-2">
+    {completedItems} of {completenessItems.length} case sections completed.
+  </p>
+  <ul className="mt-2 space-y-1">
+    {completenessItems.map(item => (
+      <li key={item.label} className="text-sm text-gray-700 flex items-center gap-2">
+        <span>{item.complete ? '✓' : '○'}</span>
+        {item.label}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<div className="rounded-lg border border-amber-200 bg-amber-50 p-4 mt-4">
+  <h3 className="font-semibold text-gray-800 mb-2">Patient Memory Prompts</h3>
+  <p className="text-sm text-gray-600 mb-3">
+    Confirm these details with the patient before submitting.
+  </p>
+  {memoryPrompts.length > 0 ? (
+    <ul className="space-y-2">
+      {memoryPrompts.map(prompt => (
+        <li key={prompt} className="text-sm text-gray-700">
+          • {prompt}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-sm text-teal-700">
+      All listed reminder fields have been recorded.
+    </p>
+  )}
+</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <ReviewSection title="Patient Information">
                 <ReviewRow label="Name"    value={patient.name || '—'} />

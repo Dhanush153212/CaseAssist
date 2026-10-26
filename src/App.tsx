@@ -4,7 +4,6 @@ import { useEffect, useState, type FormEvent } from 'react';
 import type { ReactNode } from 'react';
 import './App.css';
 import { auth } from './firebase';
-
 type PatientCase = {
   id: string;
   name: string;
@@ -101,6 +100,21 @@ function App() {
     hospital: 'Victoria Hospital', department: 'General Medicine',
     complaint: '', priority: 'Medium',
   });
+  const completenessItems = [
+  { label: 'Patient name', complete: !!form.name.trim() },
+  { label: 'Age', complete: form.age !== '' && Number(form.age) >= 0 },
+  { label: 'Gender', complete: !!form.gender },
+  { label: 'City', complete: !!form.city },
+  { label: 'Hospital', complete: !!form.hospital },
+  { label: 'Department', complete: !!form.department },
+  { label: 'Priority', complete: !!form.priority },
+  { label: 'Reason for visit', complete: !!form.complaint.trim() },
+];
+
+const completedItems = completenessItems.filter(item => item.complete).length;
+const completenessScore = Math.round(
+  (completedItems / completenessItems.length) * 100
+);
 
   function saveCases(updated: PatientCase[]) {
     setCases(updated);
@@ -408,6 +422,43 @@ async function logout() {
                   <Field label="Priority"><select value={form.priority} onChange={(e) => setForm({ ...form, priority: e.target.value })}><option>Low</option><option>Medium</option><option>High</option></select></Field>
                   <Field label="Reason for visit"><input required maxLength={250} placeholder="Example: routine follow-up" value={form.complaint} onChange={(e) => setForm({ ...form, complaint: e.target.value })} /></Field>
                 </div>
+                <div className="form-note">
+  <h3>Case Completeness Score: {completenessScore}%</h3>
+  <div style={{
+    height: '10px',
+    background: '#e5e7eb',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    margin: '8px 0'
+  }}>
+    <div style={{
+      width: `${completenessScore}%`,
+      height: '100%',
+      background: '#0d9488'
+    }} />
+  </div>
+  <p>{completedItems} of {completenessItems.length} fields completed.</p>
+  <ul>
+    {completenessItems.map(item => (
+      <li key={item.label}>
+        {item.complete ? '✓' : '○'} {item.label}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<div className="form-note">
+  <h3>Patient Memory Prompts</h3>
+  <p>Ask the patient these questions to help recall important information:</p>
+  <ul>
+    <li>When did your symptoms start?</li>
+    <li>What medicines are you currently taking, including doses?</li>
+    <li>Do you have any known allergies?</li>
+    <li>Have you had previous illnesses or surgeries?</li>
+    <li>Is there any relevant family medical history?</li>
+  </ul>
+  <p>Record only details the patient confirms.</p>
+</div>
                 <p className="form-note">Demo records are saved in this browser only.</p>
                 <div className="form-actions"><button className="primary-button" type="submit">Create Case</button><button className="secondary-button" type="button" onClick={() => navigate('Dashboard')}>Cancel</button></div>
               </form>
