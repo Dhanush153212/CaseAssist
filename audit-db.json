@@ -1,5 +1,140 @@
 [
   {
+    "id": "AUD-1793119476632",
+    "timestamp": "2026-10-27T16:44:36.632Z",
+    "userId": "abdm-gateway-service",
+    "userName": "ABDM Health Information Exchange",
+    "role": "System",
+    "action": "ABDM_RECORD_LINKED",
+    "details": "FHIR Bundle for case AIIA-MK-2026-9569 linked to ABHA 91-7788-9900-1122. Care Context: AIIA-CC-2783. Txn: ABDM-TXN-19476632",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-9569"
+  },
+  {
+    "id": "AUD-1793119476628",
+    "timestamp": "2026-10-27T16:44:36.628Z",
+    "userId": "dr-vaidya-01",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "Doctor",
+    "action": "CLINICAL_SUMMARY_APPROVED",
+    "details": "Case AIIA-MK-2026-9569 status changed to Reviewed. Notes updated.",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-9569"
+  },
+  {
+    "id": "AUD-1793119476616",
+    "timestamp": "2026-10-27T16:44:36.616Z",
+    "userId": "kiosk-terminal-01",
+    "userName": "Kavitha Narayanan",
+    "role": "Patient",
+    "action": "CASE_SUBMITTED",
+    "details": "Patient case AIIA-MK-2026-9569 registered for department: Kayachikitsa (Ayurveda Internal Medicine)",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-9569"
+  },
+  {
+    "id": "AUD-1793119475711",
+    "timestamp": "2026-10-27T16:44:35.711Z",
+    "userId": "dr.sharma",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "doctor",
+    "action": "SECURE_MESSAGE_SENT",
+    "details": "Message sent regarding case AIIA-MK-2026-1765: \"Apply warm Mahanarayana Taila and take Rasnasaptak...\"",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1765"
+  },
+  {
+    "id": "AUD-1793119475696",
+    "timestamp": "2026-10-27T16:44:35.696Z",
+    "userId": "patient1",
+    "userName": "Dhanush C",
+    "role": "patient",
+    "action": "SECURE_MESSAGE_SENT",
+    "details": "Message sent regarding case AIIA-MK-2026-1765: \"Namaste Vaidya ji, I have mild joint stiffness aft...\"",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1765"
+  },
+  {
+    "id": "AUD-1793119475676",
+    "timestamp": "2026-10-27T16:44:35.676Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793119390129",
+    "timestamp": "2026-10-27T16:43:10.129Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793118652760",
+    "timestamp": "2026-10-27T16:30:52.760Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793118642862",
+    "timestamp": "2026-10-27T16:30:42.862Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793118629702",
+    "timestamp": "2026-10-27T16:30:29.702Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793118589001",
+    "timestamp": "2026-10-27T16:29:49.001Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793118576777",
+    "timestamp": "2026-10-27T16:29:36.777Z",
+    "userId": "USR-101",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "doctor",
+    "action": "USER_LOGIN",
+    "details": "User logged in to DOCTOR portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793118565198",
+    "timestamp": "2026-10-27T16:29:25.198Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
     "id": "AUD-1793117185825",
     "timestamp": "2026-10-27T16:06:25.825Z",
     "userId": "USR-100",

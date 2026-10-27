@@ -1,5 +1,38 @@
 [
   {
+    "id": "AIIA-MK-2026-9569",
+    "name": "Kavitha Narayanan",
+    "abhaId": "91-7788-9900-1122",
+    "age": 44,
+    "gender": "Female",
+    "contact": "+91 98451 22334",
+    "complaint": "Amlapitta (Hyperacidity) with retrosternal burning and insomnia for 3 weeks",
+    "priority": "Low",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "status": "Reviewed",
+    "source": "Kiosk Intake",
+    "ayushAssessment": {
+      "agni": "Tikshnagni (Intense / Acidic Fire)",
+      "koshtha": "Krura (Constipated / Hard)",
+      "prakriti": "Pitta-Vata Predominant",
+      "nidra": "Alpanidra (Disturbed Sleep)",
+      "mutra": "Normal",
+      "jihva": "Sama (Coated / Ama Present)"
+    },
+    "ocrFindings": {
+      "documentName": "Upper_GI_Endoscopy_Report.pdf",
+      "abnormalFlags": [
+        "Mild Antral Gastritis",
+        "Erythematous Duodenopathy"
+      ]
+    },
+    "createdAt": "2026-10-27T16:44:36.615Z",
+    "messages": [],
+    "reviewerName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "doctorNotes": "Prescribed: Avipattikar Churna 3g bd before food + Kamadudha Ras 250mg. Advised Pitta shamaka pathya and lukewarm water.",
+    "updatedAt": "2026-10-27T16:44:36.626Z"
+  },
+  {
     "id": "AIIA-MK-2026-1765",
     "name": "Dhanush C",
     "age": 28,
@@ -29,7 +62,25 @@
       "agni": "Mandagni (Sluggish/Ama prone)",
       "koshtha": "Krura Koshtha (Hard/Constipated)"
     },
-    "createdAt": "2026-10-27T15:44:40.729Z"
+    "createdAt": "2026-10-27T15:44:40.729Z",
+    "messages": [
+      {
+        "id": "MSG-1793119475694",
+        "senderRole": "patient",
+        "senderName": "Dhanush C",
+        "text": "Namaste Vaidya ji, I have mild joint stiffness after waking up.",
+        "timestamp": "2026-10-27T16:44:35.694Z",
+        "formattedTime": "10:14 pm"
+      },
+      {
+        "id": "MSG-1793119475710",
+        "senderRole": "doctor",
+        "senderName": "Dr. Ramesh Sharma, MD (Ayu)",
+        "text": "Apply warm Mahanarayana Taila and take Rasnasaptak Kashayam 15ml with warm water.",
+        "timestamp": "2026-10-27T16:44:35.710Z",
+        "formattedTime": "10:14 pm"
+      }
+    ]
   },
   {
     "id": "AIIA-MK-2026-1481",
