@@ -1738,27 +1738,49 @@
     let activePatientCaseId = "AIIA-MK-2026-1001"; // Default demo case
 
     // ─── Routing & Navigation ───
+    const VIEW_ID_MAP = {
+      gateway: 'viewGateway',
+      patient: 'viewPatientDashboard',
+      patientDashboard: 'viewPatientDashboard',
+      doctor: 'viewDoctorPortal',
+      doctorPortal: 'viewDoctorPortal',
+      admin: 'viewAdminPortal',
+      adminPortal: 'viewAdminPortal',
+      kiosk: 'viewKioskFlow',
+      kioskFlow: 'viewKioskFlow'
+    };
+
     function navigateTo(viewId) {
       document.querySelectorAll('.view-screen').forEach(v => v.classList.remove('active'));
-      const target = document.getElementById('view' + viewId.charAt(0).toUpperCase() + viewId.slice(1));
-      if (target) target.classList.add('active');
-
-      if (viewId === 'gateway') {
-        document.getElementById('userSessionBadge').style.display = 'none';
-        document.getElementById('btnLogout').style.display = 'none';
+      const targetId = VIEW_ID_MAP[viewId] || ('view' + viewId.charAt(0).toUpperCase() + viewId.slice(1));
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        document.getElementById('userSessionBadge').style.display = 'inline-flex';
-        document.getElementById('btnLogout').style.display = 'inline-flex';
+        console.warn(`Target view element not found for: ${viewId} -> #${targetId}`);
       }
 
-      if (viewId === 'doctor') {
+      if (viewId === 'gateway') {
+        const badge = document.getElementById('userSessionBadge');
+        if (badge) badge.style.display = 'none';
+        const logoutBtn = document.getElementById('btnLogout');
+        if (logoutBtn) logoutBtn.style.display = 'none';
+      } else {
+        const badge = document.getElementById('userSessionBadge');
+        if (badge) badge.style.display = 'inline-flex';
+        const logoutBtn = document.getElementById('btnLogout');
+        if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+      }
+
+      if (viewId === 'doctor' || viewId === 'doctorPortal') {
         renderDoctorCasesTable();
         renderDoctorInquiryThreads();
-      } else if (viewId === 'admin') {
+      } else if (viewId === 'admin' || viewId === 'adminPortal') {
         renderAdminUsersTable();
         renderFhirPreview();
         fetchAuditLog();
-      } else if (viewId === 'patient') {
+      } else if (viewId === 'patient' || viewId === 'patientDashboard') {
         renderPatientDashboard();
       }
     }
@@ -1837,38 +1859,79 @@
     // ─── Patient Portal Dashboard & Messaging ───
     function renderPatientDashboard() {
       if (!currentUser) return;
-      document.getElementById('patDashName').textContent = currentUser.name;
-      document.getElementById('patDashUhid').textContent = activePatientCaseId;
+      const patNameEl = document.getElementById('patDashName');
+      if (patNameEl) patNameEl.textContent = currentUser.name;
+      
+      const patUhidEl = document.getElementById('patDashUhid');
+      if (patUhidEl) patUhidEl.textContent = activePatientCaseId || "AIIA-MK-2026-1001";
+      
+      const patAbhaEl = document.getElementById('patDashAbha');
+      if (patAbhaEl) patAbhaEl.textContent = currentUser.abhaId || "91-4829-1049-2810";
 
-      // Find this patient's case
-      const patCase = globalCases.find(c => c.id === activePatientCaseId) || globalCases[0];
+      // Find this patient's case or fallback safely
+      let patCase = null;
+      if (globalCases && globalCases.length > 0) {
+        patCase = globalCases.find(c => c.id === activePatientCaseId) ||
+                  globalCases.find(c => c.name && currentUser.name && c.name.toLowerCase().includes(currentUser.name.toLowerCase())) ||
+                  globalCases[0];
+      }
+
+      if (!patCase) {
+        patCase = {
+          id: activePatientCaseId || "AIIA-MK-2026-1001",
+          name: currentUser.name || "Rajesh Varma",
+          department: "Kayachikitsa (Ayurveda Internal Medicine)",
+          complaint: "Severe bilateral knee joint pain and morning stiffness for 6 months (Amavata)",
+          priority: "Medium",
+          status: "Reviewed",
+          date: "2026-10-27",
+          doctorNotes: "Prescribed: Avipattikar Churna 3g bd before food + Kamadudha Ras 250mg. Advised Pitta shamaka pathya and lukewarm water intake.",
+          messages: [
+            {
+              id: "MSG-1",
+              senderRole: "patient",
+              senderName: currentUser.name || "Rajesh Varma",
+              text: "Namaste Doctor, should I come fasting tomorrow morning for the joint blood tests?",
+              formattedTime: "08:30 AM"
+            },
+            {
+              id: "MSG-2",
+              senderRole: "doctor",
+              senderName: "Dr. Ramesh Sharma, MD (Ayu)",
+              text: "Yes, please observe 8 hours fasting for ESR, RA Factor, and Lipid profile. Continue warm water intake.",
+              formattedTime: "08:45 AM"
+            }
+          ]
+        };
+      }
+
       const listContainer = document.getElementById('patientCasesList');
-      if (!listContainer || !patCase) return;
-
-      listContainer.innerHTML = `
-        <div style="background:var(--surface-elevated); border:1.5px solid var(--ayush-green); border-radius:14px; padding:1.25rem; display:flex; flex-direction:column; gap:0.5rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <strong>${patCase.id} &bull; ${patCase.department || 'Kayachikitsa'}</strong>
-            <span class="status-badge ${patCase.status === 'Reviewed' ? 'reviewed' : 'awaiting'}">${patCase.status || 'Under Review'}</span>
-          </div>
-          <div style="font-size:0.95rem; font-weight:700; color:var(--text); margin-top:0.25rem;">
-            ${patCase.complaint}
-          </div>
-          <div style="font-size:0.85rem; color:var(--text-muted);">
-            Registration Date: <strong>${patCase.date || '2026-10-27'}</strong> &bull; Priority: <strong>${patCase.priority}</strong>
-          </div>
-          ${patCase.doctorNotes ? `
-            <div style="background:var(--ayush-green-whisper); border:1px solid #a7f3d0; border-radius:8px; padding:0.75rem; margin-top:0.5rem; font-size:0.88rem;">
-              <strong style="color:var(--ayush-green-dark);">👨‍⚕️ Attending Doctor's Verified Advice:</strong>
-              <div>${patCase.doctorNotes}</div>
+      if (listContainer) {
+        listContainer.innerHTML = `
+          <div style="background:var(--surface-elevated); border:1.5px solid var(--ayush-green); border-radius:14px; padding:1.25rem; display:flex; flex-direction:column; gap:0.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>${patCase.id} &bull; ${patCase.department || 'Kayachikitsa'}</strong>
+              <span class="status-badge ${patCase.status === 'Reviewed' ? 'reviewed' : 'awaiting'}">${patCase.status || 'Under Review'}</span>
             </div>
-          ` : `
-            <div style="font-size:0.82rem; color:#b45309; background:var(--saffron-pastel); padding:0.5rem 0.75rem; border-radius:8px; margin-top:0.5rem;">
-              ⏳ Your intake summary is in the doctor's queue. A verified prescription will appear here after clinical sign-off.
+            <div style="font-size:0.95rem; font-weight:700; color:var(--text); margin-top:0.25rem;">
+              ${patCase.complaint}
             </div>
-          `}
-        </div>
-      `;
+            <div style="font-size:0.85rem; color:var(--text-muted);">
+              Registration Date: <strong>${patCase.date || '2026-10-27'}</strong> &bull; Priority: <strong>${patCase.priority || 'Medium'}</strong>
+            </div>
+            ${patCase.doctorNotes ? `
+              <div style="background:var(--ayush-green-whisper); border:1px solid #a7f3d0; border-radius:8px; padding:0.75rem; margin-top:0.5rem; font-size:0.88rem;">
+                <strong style="color:var(--ayush-green-dark);">👨‍⚕️ Attending Doctor's Verified Advice:</strong>
+                <div style="margin-top:0.25rem;">${patCase.doctorNotes}</div>
+              </div>
+            ` : `
+              <div style="font-size:0.82rem; color:#b45309; background:var(--saffron-pastel); padding:0.5rem 0.75rem; border-radius:8px; margin-top:0.5rem;">
+                ⏳ Your intake summary is in the doctor's queue. A verified prescription will appear here after clinical sign-off.
+              </div>
+            `}
+          </div>
+        `;
+      }
 
       renderPatientMessageThread(patCase);
     }
@@ -2234,8 +2297,12 @@
         if (res.ok) {
           const data = await res.json();
           globalCases = data.cases || [];
-          document.getElementById('docQueueCount').textContent = globalCases.length;
+          const countEl = document.getElementById('docQueueCount');
+          if (countEl) countEl.textContent = globalCases.length;
           renderDoctorCasesTable();
+          if (currentUser && currentUser.role === 'patient') {
+            renderPatientDashboard();
+          }
         }
       } catch (e) {
         console.error("Cases fetch error:", e);
