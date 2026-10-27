@@ -1,5 +1,35 @@
 [
   {
+    "id": "AUD-1793119595541",
+    "timestamp": "2026-10-27T16:46:35.541Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793119579788",
+    "timestamp": "2026-10-27T16:46:19.788Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793119555225",
+    "timestamp": "2026-10-27T16:45:55.225Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
     "id": "AUD-1793119476632",
     "timestamp": "2026-10-27T16:44:36.632Z",
     "userId": "abdm-gateway-service",
