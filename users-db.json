@@ -1,0 +1,74 @@
+[
+  {
+    "id": "USR-101",
+    "name": "Dr. Ramesh Sharma, MD (Ayu)",
+    "email": "dr.sharma@aiia.gov.in",
+    "role": "doctor",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "regNumber": "AYUSH-AIIA-DEL-8921",
+    "status": "Active",
+    "phone": "+91 98110 11223"
+  },
+  {
+    "id": "USR-102",
+    "name": "Dr. Meenakshi Sundaram, MS (Ayu)",
+    "email": "dr.meenakshi@aiia.gov.in",
+    "role": "doctor",
+    "department": "Shalya Tantra (Surgery)",
+    "regNumber": "AYUSH-AIIA-DEL-8922",
+    "status": "Active",
+    "phone": "+91 98110 33445"
+  },
+  {
+    "id": "USR-103",
+    "name": "Dr. Arvind Hegde, MD (Ayu)",
+    "email": "dr.hegde@aiia.gov.in",
+    "role": "doctor",
+    "department": "Panchakarma",
+    "regNumber": "AYUSH-AIIA-DEL-8923",
+    "status": "Active",
+    "phone": "+91 98110 55667"
+  },
+  {
+    "id": "USR-104",
+    "name": "Sister Manju Sharma",
+    "email": "triage.nurse@aiia.gov.in",
+    "role": "triage",
+    "department": "Casualty & Triage Station",
+    "regNumber": "INC-DEL-2018-4421",
+    "status": "Active",
+    "phone": "+91 98110 77889"
+  },
+  {
+    "id": "USR-100",
+    "name": "AIIA Hospital Director / Super Administrator",
+    "email": "director.admin@aiia.gov.in",
+    "role": "superadmin",
+    "department": "Hospital Administration & IT",
+    "regNumber": "AIIA-ADM-001",
+    "status": "Active",
+    "phone": "+91 11 2695 0401"
+  },
+  {
+    "id": "USR-201",
+    "name": "Rajesh Varma",
+    "email": "rajesh.varma@gmail.com",
+    "role": "patient",
+    "abhaId": "91-4829-1049-2810",
+    "uhid": "AIIA-MK-2026-1001",
+    "phone": "+91 98450 12345",
+    "city": "Bengaluru",
+    "status": "Active"
+  },
+  {
+    "id": "USR-202",
+    "name": "Sunita Devi",
+    "email": "sunita.devi@gmail.com",
+    "role": "patient",
+    "abhaId": "91-3829-5829-1920",
+    "uhid": "AIIA-MK-2026-1002",
+    "phone": "+91 97110 54321",
+    "city": "Hyderabad",
+    "status": "Active"
+  }
+]

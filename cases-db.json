@@ -1,0 +1,598 @@
+[
+  {
+    "id": "AIIA-MK-2026-1765",
+    "name": "Dhanush C",
+    "age": 28,
+    "gender": "Male",
+    "contact": "+91 98450 88219",
+    "city": "Bengaluru, Karnataka",
+    "state": "Karnataka",
+    "abhaId": "91-4829-1049-2810",
+    "abhaAddress": "dhanush.c@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "complaint": "\n            Severe bilateral knee joint pain and morning stiffness for 6 months\n          ",
+    "hpi": {
+      "site": "Knee / Joints",
+      "severity": 7,
+      "timing": "Morning stiffness"
+    },
+    "duration": "6 months",
+    "priority": "Medium",
+    "status": "Awaiting Clinical Review",
+    "date": "2026-10-27",
+    "time": "09:14 pm",
+    "source": "Kiosk Intake",
+    "ayushAssessment": {
+      "prakriti": "Vata-Kapha",
+      "vikriti": "Vata-Kapha Dushti with Ama",
+      "agni": "Mandagni (Sluggish/Ama prone)",
+      "koshtha": "Krura Koshtha (Hard/Constipated)"
+    },
+    "createdAt": "2026-10-27T15:44:40.729Z"
+  },
+  {
+    "id": "AIIA-MK-2026-1481",
+    "name": "Dhanush C",
+    "age": 28,
+    "gender": "Male",
+    "contact": "+91 98450 88219",
+    "city": "Bengaluru, Karnataka",
+    "state": "Karnataka",
+    "abhaId": "91-4829-1049-2810",
+    "abhaAddress": "dhanush.c@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "complaint": "\n            Severe bilateral knee joint pain and morning stiffness for 6 months\n          ",
+    "hpi": {
+      "site": "Knee / Joints",
+      "severity": 7,
+      "timing": "Morning stiffness"
+    },
+    "duration": "6 months",
+    "priority": "Medium",
+    "status": "Awaiting Clinical Review",
+    "date": "2026-10-27",
+    "time": "09:10 pm",
+    "source": "Kiosk Intake",
+    "ayushAssessment": {
+      "prakriti": "Vata-Kapha",
+      "vikriti": "Vata-Kapha Dushti with Ama",
+      "agni": "Mandagni (Sluggish/Ama prone)",
+      "koshtha": "Krura Koshtha (Hard/Constipated)"
+    },
+    "createdAt": "2026-10-27T15:40:07.204Z"
+  },
+  {
+    "id": "AIIA-MK-2026-1001",
+    "name": "Rajesh Varma",
+    "age": 48,
+    "gender": "Male",
+    "contact": "+91 98450 12345",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "abhaId": "91-4829-1049-2810",
+    "abhaAddress": "rajesh.varma@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "complaint": "Severe bilateral knee joint pain and morning stiffness for 6 months (Amavata)",
+    "hpi": {
+      "site": "Both knee joints, right wrist",
+      "onset": "Gradual onset over past 6 months",
+      "character": "Deep throbbing pain with early morning stiffness lasting > 45 minutes",
+      "radiation": "None",
+      "associated": "Mild swelling, warmth, fatigue, reduced appetite",
+      "timing": "Worse in early morning and cold damp weather",
+      "exacerbating": "Climbing stairs, cold water exposure",
+      "relieving": "Hot fomentation, rest",
+      "severity": 7
+    },
+    "duration": "6 months",
+    "pastMedical": "Hypertension (managed on Amlodipine 5mg OD for 4 years)",
+    "pastSurgical": "None",
+    "medications": [
+      {
+        "name": "Tab Amlodipine",
+        "dosage": "5mg",
+        "freq": "Once daily (Morning)",
+        "source": "Prescription OCR"
+      },
+      {
+        "name": "Tab Yogaraj Guggulu",
+        "dosage": "500mg",
+        "freq": "Twice daily after food",
+        "source": "Patient Reported"
+      },
+      {
+        "name": "Dashamoola Kashaya",
+        "dosage": "15ml with warm water",
+        "freq": "Twice daily",
+        "source": "Patient Reported"
+      }
+    ],
+    "allergies": "No known drug allergies. Mild dust allergy.",
+    "familyHistory": "Maternal grandmother had severe osteoarthritis.",
+    "lifestyle": {
+      "diet": "Vegetarian",
+      "sleep": "6 hours, disturbed by joint ache",
+      "exercise": "Sedentary due to pain",
+      "habits": "Tea 3 times daily, Non-smoker"
+    },
+    "reviewOfSystems": "Musculoskeletal: Joint pain and swelling present. Cardiovascular: Stable BP. GI: Mild constipation and sluggish digestion (Agnimandya).",
+    "ayushAssessment": {
+      "prakriti": "Vata-Kapha",
+      "vikriti": "Vata-Pitta Dushti with Ama",
+      "sara": "Madhyama Asthi Sara",
+      "samhanana": "Madhyama",
+      "pramana": "Sama (Height: 172cm, Weight: 74kg, BMI: 25.0)",
+      "satmya": "Madhyama",
+      "sattva": "Pravara",
+      "aharaShakti": "Madhyama Abhyavaharana, Avara Jarana",
+      "vyayamaShakti": "Avara (due to knee pain)",
+      "vaya": "Madhyama Vaya (48 yrs)",
+      "agni": "Mandagni (Sluggish metabolic fire)",
+      "koshtha": "Krura Koshtha (tendency to constipation)",
+      "aharaVihara": "Intake of heavy foods, irregular dinner times",
+      "nidanaSamprapti": "Snigdha-Guru Ahara with lack of physical vyayama leading to Ama formation in Amashaya, migrating to Sandhi"
+    },
+    "documents": [
+      {
+        "id": "DOC-101",
+        "title": "AIIA OPD Prescription & Blood Panel",
+        "type": "Prescription & Lab",
+        "date": "2026-10-14",
+        "extractedText": "Patient: Rajesh Varma, 48M. Dx: Amavata (Early RA). Rx: Tab Yogaraj Guggulu 2 tabs BD, Dashamoola Kashaya 15ml BD. Lab: ESR 48 mm/hr (Ref: 0-15), RA Factor Positive 32 IU/mL (Ref: <14). Fasting Blood Sugar: 104 mg/dL.",
+        "confidence": 96,
+        "abnormalFlags": [
+          {
+            "parameter": "ESR",
+            "value": "48 mm/hr",
+            "reference": "0-15 mm/hr",
+            "flag": "HIGH"
+          },
+          {
+            "parameter": "RA Factor",
+            "value": "Positive 32 IU/mL",
+            "reference": "< 14 IU/mL",
+            "flag": "HIGH"
+          }
+        ]
+      }
+    ],
+    "priority": "High",
+    "status": "Awaiting Clinical Review",
+    "date": "2026-10-24",
+    "time": "10:30 AM",
+    "doctorNotes": "",
+    "completeness": 94,
+    "source": "Kiosk Intake",
+    "redFlag": false,
+    "messages": [
+      {
+        "id": "MSG-1793116794007",
+        "senderRole": "patient",
+        "senderName": "Rajesh Varma",
+        "text": "Hello Doctor, I will be reaching OPD counter at 9:00 AM.",
+        "timestamp": "2026-10-27T15:59:54.007Z",
+        "formattedTime": "09:29 pm"
+      },
+      {
+        "id": "MSG-1793116815011",
+        "senderRole": "doctor",
+        "senderName": "Dr. Ramesh Sharma, MD (Ayu)",
+        "text": "Noted Rajesh ji. Please collect your OPD token at Room 14.",
+        "timestamp": "2026-10-27T16:00:15.011Z",
+        "formattedTime": "09:30 pm"
+      }
+    ]
+  },
+  {
+    "id": "AIIA-MK-2026-1002",
+    "name": "Sunita Devi",
+    "age": 56,
+    "gender": "Female",
+    "contact": "+91 97110 54321",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "abhaId": "91-3829-5829-1920",
+    "abhaAddress": "sunita.devi@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "Emergency & Casualty / Cardiology",
+    "complaint": "Acute retrosternal squeezing chest pain with breathing difficulty and profuse sweating",
+    "hpi": {
+      "site": "Retrosternal chest, radiating to left shoulder and jaw",
+      "onset": "Sudden onset 90 minutes ago while climbing stairs",
+      "character": "Crushing, heavy pressure-like sensation",
+      "radiation": "Left arm and lower jaw",
+      "associated": "Dyspnea, cold diaphoresis, mild nausea",
+      "timing": "Continuous, intensifying over past 30 mins",
+      "exacerbating": "Any physical exertion",
+      "relieving": "None",
+      "severity": 9
+    },
+    "duration": "90 minutes",
+    "pastMedical": "Type 2 Diabetes Mellitus (8 yrs), Dyslipidemia (3 yrs)",
+    "pastSurgical": "Tubectomy (2002)",
+    "medications": [
+      {
+        "name": "Tab Metformin",
+        "dosage": "500mg",
+        "freq": "Twice daily after meals",
+        "source": "Prescription OCR"
+      },
+      {
+        "name": "Tab Atorvastatin",
+        "dosage": "20mg",
+        "freq": "Once daily at bedtime",
+        "source": "Prescription OCR"
+      }
+    ],
+    "allergies": "Known allergy to Sulfa drugs (urticaria).",
+    "familyHistory": "Father died of myocardial infarction at age 52.",
+    "lifestyle": {
+      "diet": "Mixed (Non-veg once a week)",
+      "sleep": "6 hours",
+      "exercise": "Irregular walking",
+      "habits": "Non-smoker, Non-alcoholic"
+    },
+    "reviewOfSystems": "Cardiovascular: Squeezing chest pressure, diaphoresis. Respiratory: Acute shortness of breath. CNS: Mild lightheadedness.",
+    "ayushAssessment": {
+      "prakriti": "Pitta-Vata",
+      "vikriti": "Tivra Hridshoola (Emergency Condition - Allopathic Casualty Referred)",
+      "sara": "Avara",
+      "samhanana": "Madhyama",
+      "pramana": "Sama",
+      "satmya": "Madhyama",
+      "sattva": "Avara (High anxiety)",
+      "aharaShakti": "Avara",
+      "vyayamaShakti": "Avara",
+      "vaya": "Madhyama Vaya (56 yrs)",
+      "agni": "Vishamagni",
+      "koshtha": "Madhyama",
+      "aharaVihara": "High stress, high glycemic diet",
+      "nidanaSamprapti": "Emergency Red Flag Alert triggered. Immediate acute cardiac referral."
+    },
+    "documents": [
+      {
+        "id": "DOC-102",
+        "title": "Hospital Emergency ECG & Troponin Rapid Test",
+        "type": "Investigation Report",
+        "date": "2026-10-27",
+        "extractedText": "Patient: Sunita Devi, 56F. ECG: ST-segment elevation in leads V1-V4. Serum Troponin-I: 0.85 ng/mL (Ref: <0.04 ng/mL). BP: 160/95 mmHg. Pulse: 104 bpm regular.",
+        "confidence": 98,
+        "abnormalFlags": [
+          {
+            "parameter": "Serum Troponin-I",
+            "value": "0.85 ng/mL",
+            "reference": "< 0.04 ng/mL",
+            "flag": "HIGH"
+          },
+          {
+            "parameter": "Blood Pressure",
+            "value": "160/95 mmHg",
+            "reference": "< 120/80 mmHg",
+            "flag": "HIGH"
+          },
+          {
+            "parameter": "Pulse Rate",
+            "value": "104 bpm",
+            "reference": "60-100 bpm",
+            "flag": "HIGH"
+          }
+        ]
+      }
+    ],
+    "priority": "Urgent Review Required",
+    "status": "Urgent Review Required",
+    "date": "2026-10-27",
+    "time": "08:15 AM",
+    "doctorNotes": "EMERGENCY TRIAGE ALERT: Patient routed to Emergency ICU / Cardiac Cath Lab. Sublingual Sorbitrate administered. Triage Nurse informed immediately.",
+    "completeness": 98,
+    "source": "Kiosk Intake",
+    "redFlag": true,
+    "redFlagReason": "Acute crushing chest pain radiating to left arm and jaw with diaphoresis and dyspnea (Suspicion of Acute Coronary Syndrome)"
+  },
+  {
+    "id": "AIIA-MK-2026-1003",
+    "name": "Kavitha Rao",
+    "age": 34,
+    "gender": "Female",
+    "contact": "+91 99800 87654",
+    "city": "Mysuru",
+    "state": "Karnataka",
+    "abhaId": "91-7482-9102-4829",
+    "abhaAddress": "kavitha.rao@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "Shalakya Tantra (ENT & Eye)",
+    "complaint": "Recurrent right-sided throbbing headache with nausea and photophobia (Ardhavabhedaka)",
+    "hpi": {
+      "site": "Right temporal and periorbital region",
+      "onset": "Attacks every 2-3 weeks, episodes lasting 12-24 hours",
+      "character": "Pulsating, throbbing headache",
+      "radiation": "Radiates from neck to right forehead",
+      "associated": "Nausea, photophobia, phonophobia, visual aura (scintillating scotoma)",
+      "timing": "Often triggered by sunlight exposure or missed meals",
+      "exacerbating": "Bright lights, loud sounds, stress, lack of sleep",
+      "relieving": "Sleeping in a dark quiet room, cold compress",
+      "severity": 8
+    },
+    "duration": "1 year",
+    "pastMedical": "Mild Acid Peptic Disorder (Amlapitta)",
+    "pastSurgical": "None",
+    "medications": [
+      {
+        "name": "Tab Paracetamol",
+        "dosage": "650mg",
+        "freq": "SOS during acute attacks",
+        "source": "Patient Reported"
+      },
+      {
+        "name": "Sutshekhar Rasa",
+        "dosage": "1 tab",
+        "freq": "Twice daily with milk",
+        "source": "Patient Reported"
+      },
+      {
+        "name": "Pathyadi Kashaya",
+        "dosage": "20ml with equal warm water",
+        "freq": "Twice daily empty stomach",
+        "source": "Prescription OCR"
+      }
+    ],
+    "allergies": "No known allergies",
+    "familyHistory": "Mother suffered from chronic migraines.",
+    "lifestyle": {
+      "diet": "Vegetarian, enjoys spicy and sour foods",
+      "sleep": "Irregular 5-6 hours due to IT screen work",
+      "exercise": "Occasional yoga on weekends",
+      "habits": "Coffee 3 cups daily"
+    },
+    "reviewOfSystems": "CNS: Unilateral throbbing headaches with aura. GI: Burning sensation in epigastrium (Amlapitta). Ophthalmic: Photosensitivity.",
+    "ayushAssessment": {
+      "prakriti": "Pitta-Vata",
+      "vikriti": "Pitta-Vataja Shiroroga (Ardhavabhedaka)",
+      "sara": "Rakta Sara Madhyama",
+      "samhanana": "Madhyama",
+      "pramana": "Sama",
+      "satmya": "Madhyama",
+      "sattva": "Madhyama",
+      "aharaShakti": "Madhyama",
+      "vyayamaShakti": "Madhyama",
+      "vaya": "Madhyama Vaya (34 yrs)",
+      "agni": "Tikshnagni (Intense appetite, burning when hungry)",
+      "koshtha": "Mrudu Koshtha (soft stools, frequent elimination)",
+      "aharaVihara": "Excessive intake of Katu-Amla-Lavana ahara, ratrijagarana (late nights)",
+      "nidanaSamprapti": "Sun exposure and irregular meals aggravate Pitta; Vata blocks Shirah srotas leading to Ardhavabhedaka"
+    },
+    "documents": [
+      {
+        "id": "DOC-103",
+        "title": "MRI Brain with Contrast Report & Serum Ferritin",
+        "type": "Radiology & Lab",
+        "date": "2026-08-19",
+        "extractedText": "Patient: Kavitha Rao, 34F. MRI Brain: Normal parenchymal signal, no intracranial mass lesion or acute infarct. Lab: Hemoglobin 11.8 g/dL (Normal: 12-15), Serum Ferritin: 18 ng/mL (Low-normal).",
+        "confidence": 97,
+        "abnormalFlags": [
+          {
+            "parameter": "Hemoglobin",
+            "value": "11.8 g/dL",
+            "reference": "12.0 - 15.5 g/dL",
+            "flag": "LOW"
+          }
+        ]
+      }
+    ],
+    "priority": "Medium",
+    "status": "Reviewed",
+    "date": "2026-10-22",
+    "time": "11:45 AM",
+    "doctorNotes": "Advised Nasya with Ksheerabala 101 Taila (6 drops in each nostril for 7 days). Prescribed Shirahshooladivajra Rasa 1 BD and advised avoiding spicy meals & direct sun exposure.",
+    "completeness": 96,
+    "source": "Kiosk Intake",
+    "redFlag": false
+  },
+  {
+    "id": "AIIA-MK-2026-1004",
+    "name": "Mohammed Farooq",
+    "age": 62,
+    "gender": "Male",
+    "contact": "+91 94440 23456",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "abhaId": "91-1029-4829-5019",
+    "abhaAddress": "m.farooq@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "Panchakarma",
+    "complaint": "Radiating pain from lower back to right leg and foot with numbness (Gridhrasi / Sciatica)",
+    "hpi": {
+      "site": "Lumbosacral region radiating down right posterior thigh and calf to lateral foot",
+      "onset": "Insidious onset 4 months ago, worsened after lifting a heavy luggage",
+      "character": "Shooting, electric shock-like sharp pain with paresthesia (pins and needles)",
+      "radiation": "L5-S1 dermatomal distribution",
+      "associated": "Difficulty walking > 100 meters, stiffness in lumbar spine",
+      "timing": "Continuous ache, acute stabbing on bending forward",
+      "exacerbating": "Prolonged sitting, bending, coughing",
+      "relieving": "Lying supine with knee bent, hot water bag",
+      "severity": 8
+    },
+    "duration": "4 months",
+    "pastMedical": "Type 2 Diabetes Mellitus (12 yrs), Hyperlipidemia",
+    "pastSurgical": "Cataract surgery left eye (2023)",
+    "medications": [
+      {
+        "name": "Tab Glimepiride",
+        "dosage": "2mg",
+        "freq": "Once daily before breakfast",
+        "source": "Prescription OCR"
+      },
+      {
+        "name": "Tab Metformin",
+        "dosage": "1000mg",
+        "freq": "Twice daily after meals",
+        "source": "Prescription OCR"
+      },
+      {
+        "name": "Maharasnadi Kwatha",
+        "dosage": "20ml with warm water",
+        "freq": "Twice daily",
+        "source": "Patient Reported"
+      }
+    ],
+    "allergies": "No known drug allergies",
+    "familyHistory": "Sibling has diabetes and spinal disc disease.",
+    "lifestyle": {
+      "diet": "Non-vegetarian",
+      "sleep": "5 hours, broken due to leg cramps",
+      "exercise": "None due to sciatica",
+      "habits": "Ex-smoker (quit 10 years ago)"
+    },
+    "reviewOfSystems": "Musculoskeletal: Severe lumbar stiffness, positive SLR on right at 40 degrees. Neuro: Hypoesthesia over right S1 dermatome. Endocrine: Diabetes mellitus.",
+    "ayushAssessment": {
+      "prakriti": "Vataja",
+      "vikriti": "Vata-Kaphaja Gridhrasi (Sciatica)",
+      "sara": "Asthi-Majja Sara Avara",
+      "samhanana": "Madhyama",
+      "pramana": "Sama",
+      "satmya": "Madhyama",
+      "sattva": "Madhyama",
+      "aharaShakti": "Madhyama",
+      "vyayamaShakti": "Avara",
+      "vaya": "Vriddha Vaya (62 yrs)",
+      "agni": "Vishamagni",
+      "koshtha": "Krura Koshtha",
+      "aharaVihara": "Sedentary posture, travel on two-wheelers, cold air exposure",
+      "nidanaSamprapti": "Vitiated Vata lodged in Kandara and Snayu of Kati and Sakthi causing Stambha, Ruk, Toda in Gridhrasi nadi"
+    },
+    "documents": [
+      {
+        "id": "DOC-104",
+        "title": "MRI Lumbo-Sacral Spine & HbA1c Lab Report",
+        "type": "MRI & Pathology",
+        "date": "2026-09-30",
+        "extractedText": "Patient: Mohammed Farooq, 62M. MRI LS Spine: L4-L5 and L5-S1 posterior disc bulge causing right neural foraminal stenosis and right S1 nerve root compression. Lab: HbA1c 8.6% (Uncontrolled, Ref: <5.7%), Fasting Blood Sugar 168 mg/dL (Ref: 70-100), Serum Creatinine 1.0 mg/dL.",
+        "confidence": 95,
+        "abnormalFlags": [
+          {
+            "parameter": "HbA1c",
+            "value": "8.6%",
+            "reference": "< 5.7%",
+            "flag": "HIGH"
+          },
+          {
+            "parameter": "Fasting Blood Sugar",
+            "value": "168 mg/dL",
+            "reference": "70 - 100 mg/dL",
+            "flag": "HIGH"
+          }
+        ]
+      }
+    ],
+    "priority": "High",
+    "status": "Submitted",
+    "date": "2026-10-25",
+    "time": "02:15 PM",
+    "doctorNotes": "",
+    "completeness": 92,
+    "source": "Kiosk Intake",
+    "redFlag": false
+  },
+  {
+    "id": "AIIA-MK-2026-1005",
+    "name": "Ananya Deshmukh",
+    "age": 29,
+    "gender": "Female",
+    "contact": "+91 98220 34567",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "abhaId": "91-8392-1920-3849",
+    "abhaAddress": "ananya.d@abdm",
+    "hospital": "All India Institute of Ayurveda (AIIA)",
+    "department": "General Medicine / Prasuti & Stri Roga",
+    "complaint": "Paroxysmal morning sneezing, rhinorrhea, and nasal congestion with eye itching (Vataja Pratishyaya)",
+    "hpi": {
+      "site": "Nose, eyes, throat",
+      "onset": "Present for 2 years, worse in spring and rainy seasons",
+      "character": "Bouts of 15-20 sneezes in the morning, profuse watery nasal discharge",
+      "radiation": "None",
+      "associated": "Ocular pruritus, mild frontal heaviness, post-nasal drip",
+      "timing": "Immediately upon waking and exposure to dust/sweeping",
+      "exacerbating": "Cold breeze, air conditioning, dust, pollen, cold drinks",
+      "relieving": "Hot herbal steam inhalation, warm sunlight",
+      "severity": 5
+    },
+    "duration": "2 years",
+    "pastMedical": "Mild allergic eczema in childhood (resolved)",
+    "pastSurgical": "None",
+    "medications": [
+      {
+        "name": "Tab Levocetirizine",
+        "dosage": "5mg",
+        "freq": "SOS at night",
+        "source": "Prescription OCR"
+      },
+      {
+        "name": "Haridra Khanda",
+        "dosage": "5g with warm milk",
+        "freq": "Twice daily",
+        "source": "Patient Reported"
+      }
+    ],
+    "allergies": "House dust mites, cold draft, pollen",
+    "familyHistory": "Mother has allergic asthma.",
+    "lifestyle": {
+      "diet": "Lacto-vegetarian",
+      "sleep": "7-8 hours sound sleep",
+      "exercise": "Jogging 3 days a week",
+      "habits": "No smoking, no alcohol"
+    },
+    "reviewOfSystems": "ENT: Profuse watery nasal discharge, paroxysmal sneezing. Respiratory: Occasional dry cough, no wheezing. Skin: Clear.",
+    "ayushAssessment": {
+      "prakriti": "Kapha-Pitta",
+      "vikriti": "Vata-Kaphaja Pratishyaya",
+      "sara": "Rasa-Rakta Sara Madhyama",
+      "samhanana": "Su-samhanana",
+      "pramana": "Sama (BMI: 21.5)",
+      "satmya": "Sama",
+      "sattva": "Pravara",
+      "aharaShakti": "Uttama",
+      "vyayamaShakti": "Uttama",
+      "vaya": "Balya-Madhyama transition (29 yrs)",
+      "agni": "Samagni",
+      "koshtha": "Madhyama Koshtha",
+      "aharaVihara": "Exposure to cold AC temperatures at IT workspace, intake of cold beverages",
+      "nidanaSamprapti": "Raja-Dhuma-Sheeta Vayu sevana vitiates Vata and Kapha in Nasa pradesha leading to Pratishyaya"
+    },
+    "documents": [
+      {
+        "id": "DOC-105",
+        "title": "Serum Total IgE & Absolute Eosinophil Count",
+        "type": "Pathology Report",
+        "date": "2026-09-15",
+        "extractedText": "Patient: Ananya Deshmukh, 29F. Absolute Eosinophil Count (AEC): 620 cells/mcL (Ref: 40-450 cells/mcL). Serum Total IgE: 380 IU/mL (Ref: <100 IU/mL). Hemoglobin: 13.2 g/dL.",
+        "confidence": 98,
+        "abnormalFlags": [
+          {
+            "parameter": "Absolute Eosinophil Count (AEC)",
+            "value": "620 cells/mcL",
+            "reference": "40 - 450 cells/mcL",
+            "flag": "HIGH"
+          },
+          {
+            "parameter": "Serum Total IgE",
+            "value": "380 IU/mL",
+            "reference": "< 100 IU/mL",
+            "flag": "HIGH"
+          }
+        ]
+      }
+    ],
+    "priority": "Low",
+    "status": "Completed",
+    "date": "2026-10-18",
+    "time": "09:30 AM",
+    "doctorNotes": "Advised Vyadhikshamatwa promotion with Haridra Khanda and Anu Taila Pratimarsha Nasya 2 drops daily morning. Avoid cold food and drinks. Completed consultation.",
+    "completeness": 96,
+    "source": "Kiosk Intake",
+    "redFlag": false
+  }
+]

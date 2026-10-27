@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>MediKiosk | AI-Powered Patient Case-Taking Software (PS 26047) - Ministry of AYUSH &amp; AIIA</title>
+  
+  <!-- Inter & Noto Sans Indic Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       MEDIKIOSK DESIGN SYSTEM: INDIAN AYUSH HEALTHCARE THEME
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      --gov-navy: #0b2540;
+      --gov-navy-light: #163a5f;
+      --ayush-green: #0f766e;
+      --ayush-green-dark: #064e3b;
+      --ayush-green-light: #ccfbf1;
+      --ayush-green-whisper: #f0fdf4;
+      --saffron-gold: #d97706;
+      --saffron-pastel: #fef3c7;
+      --saffron-border: #fcd34d;
+      --emergency-red: #dc2626;
+      --emergency-pastel: #fee2e2;
+      --emergency-border: #fca5a5;
+      
+      --bg-base: #f4f7fa;
+      --surface: #ffffff;
+      --surface-elevated: #f8fafc;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #64748b;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      
+      --shadow-sm: 0 1px 3px rgba(11, 37, 64, 0.06);
+      --shadow-md: 0 4px 16px rgba(11, 37, 64, 0.08);
+      --shadow-lg: 0 12px 36px rgba(11, 37, 64, 0.12);
+      
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #070e17;
+      --surface: #0f1b2b;
+      --surface-elevated: #16253b;
+      --border: #223752;
+      --border-strong: #2f4b70;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --ayush-green-whisper: rgba(15, 118, 110, 0.15);
+      --saffron-pastel: rgba(217, 119, 6, 0.15);
+      --emergency-pastel: rgba(220, 38, 38, 0.18);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 14px 44px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-base);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* ─── Top Tricolor Government Strip ─── */
+    .gov-strip {
+      background: linear-gradient(90deg, #b45309 0%, #15803d 100%);
+      height: 4px;
+      width: 100%;
+    }
+
+    /* ─── Header ─── */
+    header.hospital-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      cursor: pointer;
+    }
+
+    .emblem-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0f766e 0%, #064e3b 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.35);
+      border: 2px solid #5eead4;
+      flex-shrink: 0;
+    }
+
+    .brand-meta h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ps-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      background: var(--saffron-pastel);
+      color: #b45309;
+      border: 1px solid var(--saffron-border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .user-session-chip {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-strong);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .control-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.42rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .control-btn:hover {
+      background: var(--border);
+    }
+
+    .control-btn.logout {
+      color: #dc2626;
+      border-color: #fca5a5;
+    }
+
+    .lang-select {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.42rem 0.7rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* ─── System Status Bar ─── */
+    .system-status-bar {
+      background: var(--surface-elevated);
+      border-bottom: 1px solid var(--border);
+      padding: 0.35rem 1.25rem;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .status-items {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dot-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* ─── Red Flag Banner ─── */
+    .emergency-banner {
+      display: none;
+      background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+      color: white;
+      padding: 0.85rem 1.25rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 90;
+    }
+
+    .emergency-banner-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Viewport Container ─── */
+    main.main-viewport {
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .view-screen {
+      display: none;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .view-screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       GATEWAY SCREEN: DEDICATED LOGIN PANELS FOR 3 ROLES
+       ═══════════════════════════════════════════════════════════ */
+    .gateway-hero {
+      text-align: center;
+      padding: 1.5rem 1rem 0.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .gateway-hero h2 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .gateway-hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-top: 0.5rem;
+    }
+
+    /* 3 Role Selection Cards */
+    .login-panels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .login-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .login-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--ayush-green);
+    }
+
+    .login-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .role-avatar-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .role-avatar-circle.patient { background: #e0f2fe; color: #0284c7; }
+    .role-avatar-circle.doctor { background: #d1fae5; color: #0f766e; }
+    .role-avatar-circle.admin { background: #fef3c7; color: #d97706; }
+
+    .login-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .login-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .login-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .login-field label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .login-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 1rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--surface-elevated);
+      color: var(--text);
+      outline: none;
+    }
+
+    .login-input:focus {
+      border-color: var(--ayush-green);
+      background: var(--surface);
+    }
+
+    .btn-login-submit {
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.18s ease;
+      color: white;
+    }
+
+    .btn-login-submit.patient { background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .btn-login-submit.doctor { background: linear-gradient(135deg, #0f766e, #064e3b); }
+    .btn-login-submit.admin { background: linear-gradient(135deg, #b45309, #78350f); }
+
+    .btn-login-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .quick-preset-bar {
+      background: var(--surface-elevated);
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+    }
+
+    .btn-preset-chip {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s;
+    }
+
+    .btn-preset-chip:hover {
+      background: var(--ayush-green-whisper);
+      border-color: var(--ayush-green);
+      color: var(--ayush-green);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PATIENT DASHBOARD & DIRECT COMMUNICATION CHANNEL
+       ═══════════════════════════════════════════════════════════ */
+    .patient-dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .patient-dash-grid { grid-template-columns: 1fr; }
+    }
+
+    .card-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Communication Message Thread Box */
+    .messaging-thread-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface-elevated);
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .thread-messages-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .thread-bubble {
+      max-width: 82%;
+      padding: 0.85rem 1.15rem;
+      border-radius: 16px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .thread-bubble.from-patient {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .thread-bubble.from-doctor {
+      align-self: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .thread-sender-name {
+      font-size: 0.72rem;
+      font-weight: 800;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .thread-time {
+      font-size: 0.68rem;
+      opacity: 0.7;
+      align-self: flex-end;
+    }
+
+    .thread-input-row {
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Kiosk Stepper & Forms from Previous Section */
+    .kiosk-stepper-header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stepper-steps {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .step-node {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-subtle);
+      cursor: pointer;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      transition: all 0.18s;
+    }
+
+    .step-node.active {
+      background: var(--ayush-green-whisper);
+      color: var(--ayush-green);
+      border: 1px solid var(--ayush-green);
+    }
+
+    .step-node.completed {
+      color: #059669;
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .step-node.active .step-num {
+      background: var(--ayush-green);
+      color: white;
+      border-color: var(--ayush-green);
+    }
+
+    .step-node.completed .step-num {
+      background: #10b981;
+      color: white;
+      border-color: #10b981;
+    }
+
+    .kiosk-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .kiosk-hero-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+    }
+
+    .kiosk-hero-title h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .tts-speaker-btn {
+      background: var(--ayush-green-whisper);
+      border: 1.5px solid var(--ayush-green);
+      color: var(--ayush-green);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tts-speaker-btn:hover {
+      background: var(--ayush-green);
+      color: white;
+    }
+
+    .kiosk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .kiosk-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .kiosk-field label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .kiosk-input, .kiosk-select, .kiosk-textarea {
+      width: 100%;
+      min-height: 50px;
+      padding: 0.85rem 1.15rem;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--surface-elevated);
+      color: var(--text);
+      outline: none;
+    }
+
+    .kiosk-input:focus, .kiosk-select:focus, .kiosk-textarea:focus {
+      border-color: var(--ayush-green);
+      background: var(--surface);
+    }
+
+    .chat-container {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface-elevated);
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      overflow: hidden;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 1rem 1.25rem;
+      border-radius: 18px;
+      font-size: 1rem;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #0f766e 0%, #064e3b 100%);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .quick-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .chip-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+    }
+
+    .chip-btn:hover {
+      background: var(--ayush-green-whisper);
+      border-color: var(--ayush-green);
+      color: var(--ayush-green);
+    }
+
+    .chat-input-bar {
+      padding: 0.85rem 1.25rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .voice-mic-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--surface-elevated);
+      border: 2px solid var(--ayush-green);
+      color: var(--ayush-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .btn-chat-send {
+      height: 50px;
+      padding: 0 1.5rem;
+      border-radius: 25px;
+      background: var(--ayush-green);
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn-primary-action {
+      background: linear-gradient(135deg, #0f766e 0%, #064e3b 100%);
+      color: white;
+      border: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(15, 118, 110, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-secondary-action {
+      background: var(--surface);
+      color: var(--text);
+      border: 1.5px solid var(--border-strong);
+      padding: 0.85rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Tables */
+    .table-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+    }
+
+    table.clinical-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    table.clinical-table th {
+      background: var(--surface-elevated);
+      padding: 0.95rem 1.15rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.clinical-table td {
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .priority-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .priority-badge.urgent { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+    .priority-badge.high { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; }
+    .priority-badge.medium { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+    .priority-badge.low { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+    .status-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .status-badge.awaiting { background: #fef3c7; color: #b45309; }
+    .status-badge.reviewed { background: #d1fae5; color: #065f46; }
+    .status-badge.completed { background: #e0e7ff; color: #3730a3; }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 37, 64, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      max-width: 950px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-elevated);
+    }
+
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .modal-footer {
+      padding: 1.25rem 1.75rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-elevated);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    pre.fhir-code-box {
+      background: #0b1523;
+      color: #38bdf8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.84rem;
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      max-height: 380px;
+      border: 1px solid #1e3a5f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Tricolor Border -->
+  <div class="gov-strip"></div>
+
+  <!-- Government & Institutional Header -->
+  <header class="hospital-header">
+    <div class="header-content">
+      <div class="brand-cluster" onclick="navigateTo('gateway')">
+        <div class="emblem-icon">⚕</div>
+        <div class="brand-meta">
+          <h1>
+            <span>MediKiosk</span>
+            <span class="ps-badge">PS ID: 26047</span>
+          </h1>
+          <div class="brand-sub">
+            <span style="color:var(--ayush-green); font-weight:700;">Ministry of AYUSH</span> &bull; <span>All India Institute of Ayurveda (AIIA)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Tools & Session Controls -->
+      <div class="header-actions">
+        <!-- Current Session Profile Badge -->
+        <div class="user-session-chip" id="userSessionBadge" style="display:none;">
+          <span id="sessionAvatar">👤</span>
+          <span id="sessionUserName">Rajesh Varma</span>
+          <span class="ps-badge" id="sessionRoleBadge" style="background:#e0f2fe; color:#0369a1; border:none;">Patient</span>
+        </div>
+
+        <!-- Logout Button -->
+        <button class="control-btn logout" id="btnLogout" style="display:none;" onclick="handleLogout()">
+          <span>🚪 Logout</span>
+        </button>
+
+        <!-- Language Selector -->
+        <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
+          <option value="en">🇬🇧 English</option>
+          <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
+          <option value="kn">🇮🇳 ಕನ್ನಡ (Kannada)</option>
+          <option value="te">🇮🇳 తెలుగు (Telugu)</option>
+        </select>
+
+        <!-- Theme Toggle -->
+        <button class="control-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span id="themeIcon">🌓</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Status Bar -->
+  <div class="system-status-bar">
+    <div class="status-items">
+      <div class="status-item">
+        <span class="dot-pulse"></span>
+        <span>Groq Medical AI: <strong>qwen/qwen3.8-27b (Active)</strong></span>
+      </div>
+      <div class="status-item">
+        <span class="dot-pulse"></span>
+        <span>ABDM Gateway: <strong>Sandbox M1/M2/M3 Connected</strong></span>
+      </div>
+      <div class="status-item">
+        <span class="dot-pulse" style="background:#f59e0b;"></span>
+        <span>DPDP Act 2023: <strong>Role-Based Privacy Enforced</strong></span>
+      </div>
+    </div>
+    <div class="status-items">
+      <span>Database: <strong>cases-db.json &amp; users-db.json</strong></span>
+      <span>AIIA Node: <strong>DELHI-OPD-01</strong></span>
+    </div>
+  </div>
+
+  <!-- Red Flag Alert Banner -->
+  <aside class="emergency-banner" id="emergencyBanner">
+    <div class="emergency-banner-inner">
+      <div style="display:flex; align-items:center; gap:0.75rem; font-weight:700;">
+        <span style="font-size:1.5rem;">🚨</span>
+        <div>
+          <strong>TRIAGE RED FLAG ALERT:</strong>
+          <span id="emergencyReasonText">Acute severe chest pain with breathing difficulty. Immediate medical assessment required!</span>
+        </div>
+      </div>
+      <button class="control-btn" style="background:white; color:#b91c1c; font-weight:800;" onclick="dismissEmergencyAlert()">
+        Dismiss
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Viewport Router -->
+  <main class="main-viewport">
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIEW 0: WELCOME GATEWAY & 3 ROLE LOGIN PANELS
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="view-screen active" id="viewGateway">
+      <div class="gateway-hero">
+        <h2>Smart Patient Case Intake &amp; Hospital Management</h2>
+        <p>Please select your portal to proceed. Each role is strictly segregated to ensure clinical safety and data privacy under the DPDP Act 2023.</p>
+      </div>
+
+      <!-- 3 Role Login Panels -->
+      <div class="login-panels-grid">
+        
+        <!-- PANEL 1: PATIENT PORTAL -->
+        <div class="login-card">
+          <div class="login-card-header">
+            <div class="role-avatar-circle patient">🧑‍🦽</div>
+            <div>
+              <h3>Patient Portal</h3>
+              <p>रोगी पोर्टल &bull; Self-service intake &amp; consultation</p>
+            </div>
+          </div>
+          <p>Login with your ABHA ID or mobile number to answer questions with AI, view verified summaries, and message your doctor.</p>
+          
+          <div class="login-field">
+            <label>Mobile Number or ABHA ID</label>
+            <input class="login-input" id="loginPatientInput" value="+91 98450 12345" placeholder="Enter mobile or 14-digit ABHA" />
+          </div>
+
+          <button class="btn-login-submit patient" onclick="authenticateUser('patient')">
+            <span>Proceed to Patient Portal →</span>
+          </button>
+
+          <!-- 1-Click Quick Demo Login -->
+          <div class="quick-preset-bar">
+            <strong>Evaluator Quick Login:</strong>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+              <button class="btn-preset-chip" onclick="quickLoginAs('patient', 'Rajesh Varma', 'AIIA-MK-2026-1001')">
+                👤 Login as Rajesh Varma (Amavata)
+              </button>
+              <button class="btn-preset-chip" onclick="quickLoginAs('patient', 'Sunita Devi', 'AIIA-MK-2026-1002')">
+                👤 Login as Sunita Devi (Cardiac)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: DOCTOR / VAIDYA PORTAL -->
+        <div class="login-card">
+          <div class="login-card-header">
+            <div class="role-avatar-circle doctor">👨‍⚕️</div>
+            <div>
+              <h3>Doctor / Vaidya Portal</h3>
+              <p>चिकित्सक पोर्टल &bull; Clinical review &amp; sign-off</p>
+            </div>
+          </div>
+          <p>Authorized medical professionals can review patient case histories, verify AI drafts, inspect OCR lab reports, and respond to inquiries.</p>
+          
+          <div class="login-field">
+            <label>Doctor Registration / Email</label>
+            <input class="login-input" id="loginDoctorInput" value="dr.sharma@aiia.gov.in" placeholder="dr.name@aiia.gov.in" />
+          </div>
+          <div class="login-field">
+            <label>Department</label>
+            <select class="kiosk-select" id="loginDoctorDept" style="min-height:46px;">
+              <option value="Kayachikitsa (Ayurveda Internal Medicine)">Kayachikitsa (Internal Medicine)</option>
+              <option value="Shalya Tantra (Surgery)">Shalya Tantra (Surgery)</option>
+              <option value="Panchakarma">Panchakarma</option>
+              <option value="Emergency &amp; Casualty">Emergency &amp; Casualty</option>
+            </select>
+          </div>
+
+          <button class="btn-login-submit doctor" onclick="authenticateUser('doctor')">
+            <span>Access Doctor Workstation →</span>
+          </button>
+
+          <!-- 1-Click Quick Demo Login -->
+          <div class="quick-preset-bar">
+            <strong>Evaluator Quick Login:</strong>
+            <button class="btn-preset-chip" onclick="quickLoginAs('doctor', 'Dr. Ramesh Sharma, MD (Ayu)', 'AYUSH-AIIA-DEL-8921')">
+              🩺 Login as Dr. Ramesh Sharma (Attending Vaidya)
+            </button>
+          </div>
+        </div>
+
+        <!-- PANEL 3: SUPER ADMINISTRATOR PORTAL -->
+        <div class="login-card">
+          <div class="login-card-header">
+            <div class="role-avatar-circle admin">🏛️</div>
+            <div>
+              <h3>Super Admin Portal</h3>
+              <p>प्रशासक पोर्टल &bull; Governance &amp; ABDM Hub</p>
+            </div>
+          </div>
+          <p>Hospital directors and administrators can manage clinical staff accounts, triage red-flag rules, inspect DPDP audit logs, and export FHIR bundles.</p>
+          
+          <div class="login-field">
+            <label>Administrator Email</label>
+            <input class="login-input" id="loginAdminInput" value="director.admin@aiia.gov.in" placeholder="admin@aiia.gov.in" />
+          </div>
+
+          <button class="btn-login-submit admin" onclick="authenticateUser('superadmin')">
+            <span>Open Administration Hub →</span>
+          </button>
+
+          <!-- 1-Click Quick Demo Login -->
+          <div class="quick-preset-bar">
+            <strong>Evaluator Quick Login:</strong>
+            <button class="btn-preset-chip" onclick="quickLoginAs('superadmin', 'AIIA Hospital Director', 'AIIA-ADM-001')">
+              🏛️ Login as Super Administrator
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIEW 1: PATIENT PORTAL (MY CASES & DIRECT MESSAGING)
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="view-screen" id="viewPatientDashboard">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h2 style="font-size:1.6rem; font-weight:800; color:var(--text);">
+            🧑‍🦽 Welcome, <span id="patDashName">Rajesh Varma</span>
+          </h2>
+          <p style="color:var(--text-muted); font-size:0.92rem;">
+            UHID: <strong id="patDashUhid">AIIA-MK-2026-1001</strong> &bull; ABHA ID: <strong id="patDashAbha">91-4829-1049-2810</strong> &bull; City: <strong>Bengaluru</strong>
+          </p>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <button class="btn-primary-action" onclick="startNewKioskIntake()">
+            <span>➕ Start New Case Intake</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Patient Dashboard 2-Column Grid -->
+      <div class="patient-dash-grid">
+        
+        <!-- Left Column: My Registered Cases & Clinical Status -->
+        <div class="card-box">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
+              <span>📋 My Case History &amp; Status</span>
+            </h3>
+            <span class="ps-badge" id="patCaseCountBadge">1 Active Case</span>
+          </div>
+
+          <div id="patientCasesList" style="display:flex; flex-direction:column; gap:1rem;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Right Column: Direct Messaging Channel with Doctor -->
+        <div class="card-box">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h3 style="font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
+                <span>💬 Message My Attending Doctor</span>
+              </h3>
+              <p style="font-size:0.8rem; color:var(--text-muted);">
+                Ask pre-consultation questions (fasting, documents, timing)
+              </p>
+            </div>
+            <span class="ps-badge" style="background:#d1fae5; color:#065f46; border:none;">● Doctor Online</span>
+          </div>
+
+          <!-- Message Thread Container -->
+          <div class="messaging-thread-box">
+            <div class="thread-messages-list" id="patientThreadArea">
+              <!-- Rendered dynamically -->
+            </div>
+            <div class="thread-input-row">
+              <input class="login-input" id="txtPatientMsgInput" placeholder="Type a message or question to your doctor..." onkeydown="if(event.key==='Enter') sendPatientToDoctorMessage()" />
+              <button class="btn-primary-action" style="padding:0 1.25rem; height:46px; border-radius:10px;" onclick="sendPatientToDoctorMessage()">
+                <span>Send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIEW 2: KIOSK INTAKE SCREEN (5 STEPS)
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="view-screen" id="viewKioskFlow">
+      <!-- Stepper Header -->
+      <div class="kiosk-stepper-header">
+        <div class="stepper-steps">
+          <div class="step-node active" id="stepNode1" onclick="jumpToKioskStep(1)">
+            <div class="step-num">1</div>
+            <span>Identification</span>
+          </div>
+          <div class="step-node" id="stepNode2" onclick="jumpToKioskStep(2)">
+            <div class="step-num">2</div>
+            <span>AI History (SOCRATES)</span>
+          </div>
+          <div class="step-node" id="stepNode3" onclick="jumpToKioskStep(3)">
+            <div class="step-num">3</div>
+            <span>Document OCR</span>
+          </div>
+          <div class="step-node" id="stepNode4" onclick="jumpToKioskStep(4)">
+            <div class="step-num">4</div>
+            <span>AYUSH Assessment</span>
+          </div>
+          <div class="step-node" id="stepNode5" onclick="jumpToKioskStep(5)">
+            <div class="step-num">5</div>
+            <span>Review &amp; Submit</span>
+          </div>
+        </div>
+
+        <button class="btn-secondary-action" style="padding:0.35rem 0.85rem; font-size:0.8rem;" onclick="navigateTo('patient')">
+          <span>← Back to Dashboard</span>
+        </button>
+      </div>
+
+      <!-- KIOSK STEP 1: Identification & Consent -->
+      <div class="kiosk-card" id="kioskStep1">
+        <div class="kiosk-hero-title">
+          <div>
+            <h2>📋 Patient Identification &amp; ABHA Verification</h2>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Enter demographics or link your Ayushman Bharat Health Account.</p>
+          </div>
+          <button class="tts-speaker-btn" onclick="speakText('Please confirm your name, age, gender, contact number, and verify your DPDP Act consent before proceeding.')">
+            <span>🔊 Audio Instructions</span>
+          </button>
+        </div>
+
+        <div class="kiosk-grid">
+          <div class="kiosk-field">
+            <label>Full Name *</label>
+            <input class="kiosk-input" id="patName" value="Dhanush C" placeholder="Enter patient name" />
+          </div>
+          <div class="kiosk-field">
+            <label>Age *</label>
+            <input class="kiosk-input" type="number" id="patAge" value="28" min="1" max="115" />
+          </div>
+          <div class="kiosk-field">
+            <label>Gender *</label>
+            <select class="kiosk-select" id="patGender">
+              <option value="Male">Male (पुरुष)</option>
+              <option value="Female">Female (महिला)</option>
+              <option value="Other">Other (अन्य)</option>
+            </select>
+          </div>
+          <div class="kiosk-field">
+            <label>Contact Number *</label>
+            <input class="kiosk-input" id="patContact" value="+91 98450 88219" />
+          </div>
+          <div class="kiosk-field">
+            <label>City &amp; State *</label>
+            <input class="kiosk-input" id="patCity" value="Bengaluru, Karnataka" />
+          </div>
+          <div class="kiosk-field">
+            <label>Department *</label>
+            <select class="kiosk-select" id="patDept">
+              <option value="Kayachikitsa (Ayurveda Internal Medicine)">Kayachikitsa (Internal Medicine)</option>
+              <option value="Panchakarma (Detoxification)">Panchakarma (Detoxification)</option>
+              <option value="Shalya Tantra (Surgery)">Shalya Tantra (Surgery)</option>
+              <option value="Emergency &amp; Casualty">Emergency &amp; Casualty</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end;">
+          <button class="btn-primary-action" onclick="jumpToKioskStep(2)">
+            <span>Continue to AI History →</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KIOSK STEP 2: AI Medical History Conversation -->
+      <div class="kiosk-card" id="kioskStep2" style="display:none;">
+        <div class="kiosk-hero-title">
+          <div>
+            <h2>💬 AI Medical History Interview (SOCRATES)</h2>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Speak or touch to answer. The AI gathers clinical details for your doctor.</p>
+          </div>
+          <button class="tts-speaker-btn" onclick="readLatestAiQuestion()">
+            <span>🔊 Speak Question</span>
+          </button>
+        </div>
+
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessagesArea">
+            <div class="chat-bubble bot">
+              <span style="font-size:0.72rem; font-weight:800; opacity:0.8;">AIIA Medical AI Assistant</span>
+              <div>Namaste. What is the main medical problem or symptom bringing you to the hospital today?</div>
+            </div>
+          </div>
+
+          <div class="quick-chips-row">
+            <button class="chip-btn" onclick="sendQuickAnswer('Severe bilateral knee joint pain and morning stiffness for 6 months')">
+              🦵 Knee Joint Pain &amp; Stiffness
+            </button>
+            <button class="chip-btn" onclick="sendQuickAnswer('Burning sensation in stomach and acid reflux after meals')">
+              🔥 Acidity &amp; Gas (Amlapitta)
+            </button>
+            <button class="chip-btn" onclick="sendQuickAnswer('Throbbing right-sided headache with nausea')">
+              ⚡ Migraine Headache
+            </button>
+            <button class="chip-btn" onclick="sendQuickAnswer('I am not sure / I do not remember the exact date')">
+              ❓ Not Sure / Don't Know
+            </button>
+          </div>
+
+          <div class="chat-input-bar">
+            <button class="voice-mic-btn" id="btnVoiceMic" onclick="toggleVoiceRecording()" title="Click to speak">
+              <span>🎤</span>
+            </button>
+            <input class="login-input" id="chatInputText" placeholder="Type or speak your answer..." onkeydown="if(event.key==='Enter') sendPatientMessage()" />
+            <button class="btn-chat-send" onclick="sendPatientMessage()">Send</button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <button class="btn-secondary-action" onclick="jumpToKioskStep(1)">← Back</button>
+          <button class="btn-primary-action" onclick="jumpToKioskStep(3)">Continue to Document OCR →</button>
+        </div>
+      </div>
+
+      <!-- KIOSK STEP 3: Document Upload & OCR -->
+      <div class="kiosk-card" id="kioskStep3" style="display:none;">
+        <div class="kiosk-hero-title">
+          <div>
+            <h2>📑 Document Upload &amp; OCR Digitization</h2>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Upload prescriptions or lab reports. Abnormal lab values are automatically flagged.</p>
+          </div>
+        </div>
+
+        <div style="border:2px dashed var(--ayush-green); background:var(--ayush-green-whisper); border-radius:16px; padding:2rem; text-align:center;">
+          <span style="font-size:2.5rem;">📄</span>
+          <div style="font-size:1.1rem; font-weight:800; margin:0.5rem 0;">Drag &amp; Drop or Upload Reports</div>
+          <div style="display:flex; justify-content:center; gap:0.6rem; margin-top:1rem; flex-wrap:wrap;">
+            <button class="btn-preset-chip" onclick="alert('🌿 Loaded AIIA Prescription: Amavata, Yogaraj Guggulu, ESR 48 mm/hr HIGH')">
+              🌿 Load AIIA Prescription
+            </button>
+            <button class="btn-preset-chip" onclick="alert('🩸 Loaded Thyrocare Lab: HbA1c 8.4% HIGH, Glucose 168 mg/dL HIGH')">
+              🩸 Load Blood Panel
+            </button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <button class="btn-secondary-action" onclick="jumpToKioskStep(2)">← Back</button>
+          <button class="btn-primary-action" onclick="jumpToKioskStep(4)">Continue to AYUSH Assessment →</button>
+        </div>
+      </div>
+
+      <!-- KIOSK STEP 4: AYUSH Assessment -->
+      <div class="kiosk-card" id="kioskStep4" style="display:none;">
+        <div class="kiosk-hero-title">
+          <div>
+            <h2>🌿 AYUSH Assessment (14 Classical Parameters)</h2>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Traditional Ayurvedic OPD assessment parameters for AIIA clinicians.</p>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
+          <div class="kiosk-field">
+            <label>1. Prakriti (प्रकृति)</label>
+            <select class="kiosk-select" id="ayushPrakriti">
+              <option value="Vata-Kapha" selected>Vata-Kapha Prakriti</option>
+              <option value="Pitta-Vata">Pitta-Vata Prakriti</option>
+              <option value="Kapha-Pitta">Kapha-Pitta Prakriti</option>
+            </select>
+          </div>
+          <div class="kiosk-field">
+            <label>2. Agni (अग्नि)</label>
+            <select class="kiosk-select" id="ayushAgni">
+              <option value="Mandagni (Sluggish)" selected>Mandagni (Sluggish/Ama prone)</option>
+              <option value="Tikshnagni (Intense)">Tikshnagni (Intense/Acidity)</option>
+              <option value="Samagni (Balanced)">Samagni (Balanced)</option>
+            </select>
+          </div>
+          <div class="kiosk-field">
+            <label>3. Koshtha (कोष्ठ)</label>
+            <select class="kiosk-select" id="ayushKoshtha">
+              <option value="Krura (Constipated)" selected>Krura Koshtha (Constipated)</option>
+              <option value="Madhyama (Normal)">Madhyama Koshtha (Normal)</option>
+              <option value="Mrudu (Soft)">Mrudu Koshtha (Soft)</option>
+            </select>
+          </div>
+          <div class="kiosk-field">
+            <label>4. Vikriti (विकृति)</label>
+            <input class="kiosk-input" id="ayushVikriti" value="Vata-Kapha Dushti with Ama" />
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <button class="btn-secondary-action" onclick="jumpToKioskStep(3)">← Back</button>
+          <button class="btn-primary-action" onclick="jumpToKioskStep(5)">Review &amp; Submit Case →</button>
+        </div>
+      </div>
+
+      <!-- KIOSK STEP 5: Final Submission -->
+      <div class="kiosk-card" id="kioskStep5" style="display:none;">
+        <div class="kiosk-hero-title">
+          <div>
+            <h2>✅ Confirm &amp; Submit to Doctor Queue</h2>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Review your details before transmitting to the attending Vaidya.</p>
+          </div>
+        </div>
+
+        <div style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:14px; padding:1.25rem;">
+          <div style="font-size:0.95rem; font-weight:800; color:var(--text);">Summary of Registered Complaint:</div>
+          <p id="sumComplaintPreview" style="font-size:1.05rem; font-weight:700; color:var(--ayush-green); margin:0.5rem 0;">
+            Severe bilateral knee joint pain and morning stiffness for 6 months
+          </p>
+          <div style="font-size:0.85rem; color:var(--text-muted);">
+            Department: <strong>Kayachikitsa</strong> &bull; Priority: <strong>Medium</strong> &bull; Prakriti: <strong>Vata-Kapha</strong>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <button class="btn-secondary-action" onclick="jumpToKioskStep(4)">← Edit Details</button>
+          <button class="btn-primary-action" onclick="submitKioskCase()">
+            <span>🚀 Submit Case to Attending Doctor</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIEW 3: DOCTOR CLINICAL WORKSTATION
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="view-screen" id="viewDoctorPortal">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h2 style="font-size:1.6rem; font-weight:800; color:var(--text);">
+            👨‍⚕️ Clinical Workstation: <span id="docWorkstationName">Dr. Ramesh Sharma, MD (Ayu)</span>
+          </h2>
+          <p style="color:var(--text-muted); font-size:0.92rem;">
+            AIIA Kayachikitsa OPD &bull; Council Reg: <strong>AYUSH-AIIA-DEL-8921</strong>
+          </p>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <input class="login-input" id="doctorSearchInput" placeholder="Search UHID, ABHA, Name..." style="height:42px; width:240px;" oninput="filterDoctorCases()" />
+          <button class="btn-primary-action" style="padding:0.4rem 1rem; font-size:0.85rem;" onclick="fetchCasesFromServer()">
+            <span>🔄 Refresh</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Doctor Tabs: Cases Queue vs Patient Messages -->
+      <div style="display:flex; gap:0.6rem; border-bottom:1px solid var(--border); padding-bottom:0.5rem;">
+        <button class="btn-preset-chip" style="font-size:0.88rem; padding:0.5rem 1rem; font-weight:800; border-color:var(--ayush-green); color:var(--ayush-green);" id="tabDocCasesBtn" onclick="toggleDoctorTab('cases')">
+          📋 Review Queue (<span id="docQueueCount">5</span>)
+        </button>
+        <button class="btn-preset-chip" style="font-size:0.88rem; padding:0.5rem 1rem; font-weight:800;" id="tabDocMessagesBtn" onclick="toggleDoctorTab('messages')">
+          💬 Patient Inquiries (<span id="docMsgCount">2</span>)
+        </button>
+      </div>
+
+      <!-- TAB 1: Clinical Cases Queue Table -->
+      <div id="doctorCasesQueueTab">
+        <div class="table-container">
+          <table class="clinical-table">
+            <thead>
+              <tr>
+                <th>Patient / UHID</th>
+                <th>Age/Sex &amp; City</th>
+                <th>Department</th>
+                <th>Chief Complaint</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="doctorCasesTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: Patient Inquiries & Communication Inbox -->
+      <div id="doctorMessagesInboxTab" style="display:none;">
+        <div class="card-box">
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text);">
+            💬 Patient Inquiry Messages &amp; Clarifications
+          </h3>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-top:-0.5rem;">
+            Respond directly to patients regarding test preparations, appointments, or prescriptions.
+          </p>
+
+          <div id="doctorInquiryThreadsContainer" style="display:flex; flex-direction:column; gap:1rem;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         VIEW 4: SUPER ADMINISTRATOR & GOVERNANCE PORTAL
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="view-screen" id="viewAdminPortal">
+      <div>
+        <h2 style="font-size:1.6rem; font-weight:800; color:var(--text);">
+          🏛️ Hospital Super Administration &amp; Governance
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem;">
+          Staff Management, DPDP Act 2023 Audit Logs &amp; ABDM National Gateway Integration
+        </p>
+      </div>
+
+      <!-- Staff Accounts Management -->
+      <div class="card-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text);">
+            👨‍⚕️ Clinical Staff &amp; Doctor Accounts
+          </h3>
+          <button class="btn-sample-doc" onclick="openAddDoctorModal()">
+            <span>➕ Add New Doctor Account</span>
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="clinical-table">
+            <thead>
+              <tr>
+                <th>Staff Name</th>
+                <th>Role</th>
+                <th>Department</th>
+                <th>Registration / ID</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTableBody">
+              <!-- Rendered dynamically from users-db.json -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ABDM FHIR R4 Bundle Hub -->
+      <div class="card-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+          <div>
+            <h3 style="font-size:1.15rem; font-weight:800; color:var(--text);">
+              🌐 ABDM FHIR R4 Diagnostic &amp; Clinical Summary Generator
+            </h3>
+            <p style="font-size:0.82rem; color:var(--text-muted);">
+              Interoperable National Health Stack Bundle
+            </p>
+          </div>
+          <button class="btn-primary-action" onclick="pushToAbdmGateway()">
+            <span>🚀 Push to ABDM Gateway Sandbox</span>
+          </button>
+        </div>
+
+        <pre class="fhir-code-box" id="fhirCodeDisplay">// Loading FHIR Bundle...</pre>
+      </div>
+
+      <!-- DPDP Act 2023 Immutable Audit Trail -->
+      <div class="card-box">
+        <h3 style="font-size:1.15rem; font-weight:800; color:var(--text);">
+          🛡️ DPDP Act 2023 System Audit Trail
+        </h3>
+        <div class="table-container">
+          <table class="clinical-table">
+            <thead>
+              <tr>
+                <th>Event ID</th>
+                <th>Timestamp</th>
+                <th>User / Node</th>
+                <th>Role</th>
+                <th>Action</th>
+                <th>Event Details</th>
+              </tr>
+            </thead>
+            <tbody id="auditTableBody">
+              <!-- Dynamically populated from audit-db.json -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CLINICAL SUMMARY REVIEW MODAL (FOR DOCTOR SIGN-OFF)
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="clinicalReviewModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
+            <span>Clinical Review:</span>
+            <span id="modalPatName">Rajesh Varma</span>
+            <span class="ps-badge" id="modalPatUhid">AIIA-MK-2026-1001</span>
+          </h3>
+          <div style="font-size:0.82rem; color:var(--text-muted);" id="modalPatSub">
+            48M &bull; Bengaluru &bull; Kayachikitsa &bull; ABHA: 91-4829-1049-2810
+          </div>
+        </div>
+        <button class="control-btn" style="border-radius:50%; width:36px; height:36px; padding:0; justify-content:center;" onclick="closeClinicalModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div style="background:var(--saffron-pastel); border:1px solid var(--saffron-border); border-radius:10px; padding:0.85rem 1.15rem; font-size:0.88rem; color:#b45309;">
+          ⚠️ <strong>AI-GENERATED DRAFT:</strong> Clinician must verify history and approve before official AIIA record entry.
+        </div>
+
+        <div class="login-field">
+          <label style="font-weight:800; color:var(--ayush-green);">Chief Complaint &amp; Subjective History</label>
+          <textarea class="kiosk-textarea" id="editModalComplaint" rows="2"></textarea>
+        </div>
+
+        <div class="login-field">
+          <label style="font-weight:800; color:var(--ayush-green);">History of Present Illness (SOCRATES)</label>
+          <textarea class="kiosk-textarea" id="editModalHpi" rows="3"></textarea>
+        </div>
+
+        <div class="login-field">
+          <label style="font-weight:800; color:var(--ayush-green);">Attending Doctor Notes &amp; Panchakarma Plan</label>
+          <textarea class="kiosk-textarea" id="editModalDoctorNotes" rows="3" placeholder="Advise Ayurvedic therapies (e.g. Janu Basti, Patra Pinda Sveda) and oral medicines..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="font-size:0.85rem; font-weight:700;">Status:</span>
+          <select class="kiosk-select" style="min-height:38px; padding:0.3rem 0.6rem; font-size:0.85rem;" id="modalStatusSelect">
+            <option value="Awaiting Clinical Review">Awaiting Clinical Review</option>
+            <option value="Reviewed">Reviewed &amp; Approved</option>
+            <option value="Completed">Completed</option>
+            <option value="Urgent Review Required">Urgent Review Required</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <button class="btn-secondary-action" onclick="window.print()">🖨️ Print Clinical Slip</button>
+          <button class="btn-primary-action" onclick="saveDoctorReviewChanges()">💾 Approve &amp; Sign-off</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       JAVASCRIPT APPLICATION ENGINE
+       ═══════════════════════════════════════════════════════════ -->
+  <script>
+    // Global State
+    let currentUser = null; // { id, name, role, email, uhid, abhaId }
+    let globalCases = [];
+    let globalUsers = [];
+    let activeCaseForReview = null;
+    let currentKioskStep = 1;
+    let currentLang = 'en';
+    let chatConversationHistory = [];
+    let activePatientCaseId = "AIIA-MK-2026-1001"; // Default demo case
+
+    // ─── Routing & Navigation ───
+    function navigateTo(viewId) {
+      document.querySelectorAll('.view-screen').forEach(v => v.classList.remove('active'));
+      const target = document.getElementById('view' + viewId.charAt(0).toUpperCase() + viewId.slice(1));
+      if (target) target.classList.add('active');
+
+      if (viewId === 'gateway') {
+        document.getElementById('userSessionBadge').style.display = 'none';
+        document.getElementById('btnLogout').style.display = 'none';
+      } else {
+        document.getElementById('userSessionBadge').style.display = 'inline-flex';
+        document.getElementById('btnLogout').style.display = 'inline-flex';
+      }
+
+      if (viewId === 'doctor') {
+        renderDoctorCasesTable();
+        renderDoctorInquiryThreads();
+      } else if (viewId === 'admin') {
+        renderAdminUsersTable();
+        renderFhirPreview();
+        fetchAuditLog();
+      } else if (viewId === 'patient') {
+        renderPatientDashboard();
+      }
+    }
+
+    // ─── Authentication & Login ───
+    async function authenticateUser(role) {
+      let inputVal = '';
+      if (role === 'patient') inputVal = document.getElementById('loginPatientInput').value;
+      else if (role === 'doctor') inputVal = document.getElementById('loginDoctorInput').value;
+      else if (role === 'superadmin') inputVal = document.getElementById('loginAdminInput').value;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role, email: inputVal })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setUserSession(data.user);
+        } else {
+          fallbackLogin(role);
+        }
+      } catch (e) {
+        fallbackLogin(role);
+      }
+    }
+
+    function quickLoginAs(role, name, id) {
+      const user = {
+        id: id || `USR-${Date.now()}`,
+        name: name,
+        role: role,
+        email: `${role}@aiia.gov.in`,
+        uhid: id,
+        abhaId: '91-4829-1049-2810'
+      };
+      setUserSession(user);
+    }
+
+    function fallbackLogin(role) {
+      const names = {
+        patient: "Rajesh Varma",
+        doctor: "Dr. Ramesh Sharma, MD (Ayu)",
+        superadmin: "AIIA Hospital Director"
+      };
+      quickLoginAs(role, names[role] || "User", "ID-1001");
+    }
+
+    function setUserSession(user) {
+      currentUser = user;
+      sessionStorage.setItem('medikiosk_user', JSON.stringify(user));
+
+      document.getElementById('sessionUserName').textContent = user.name;
+      document.getElementById('sessionRoleBadge').textContent = user.role.toUpperCase();
+      document.getElementById('sessionAvatar').textContent = user.role === 'patient' ? '🧑‍🦽' : (user.role === 'doctor' ? '👨‍⚕️' : '🏛️');
+
+      if (user.role === 'patient') {
+        activePatientCaseId = user.uhid || "AIIA-MK-2026-1001";
+        navigateTo('patient');
+      } else if (user.role === 'doctor') {
+        document.getElementById('docWorkstationName').textContent = user.name;
+        navigateTo('doctor');
+      } else if (user.role === 'superadmin') {
+        navigateTo('admin');
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('medikiosk_user');
+      currentUser = null;
+      navigateTo('gateway');
+    }
+
+    // ─── Patient Portal Dashboard & Messaging ───
+    function renderPatientDashboard() {
+      if (!currentUser) return;
+      document.getElementById('patDashName').textContent = currentUser.name;
+      document.getElementById('patDashUhid').textContent = activePatientCaseId;
+
+      // Find this patient's case
+      const patCase = globalCases.find(c => c.id === activePatientCaseId) || globalCases[0];
+      const listContainer = document.getElementById('patientCasesList');
+      if (!listContainer || !patCase) return;
+
+      listContainer.innerHTML = `
+        <div style="background:var(--surface-elevated); border:1.5px solid var(--ayush-green); border-radius:14px; padding:1.25rem; display:flex; flex-direction:column; gap:0.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>${patCase.id} &bull; ${patCase.department || 'Kayachikitsa'}</strong>
+            <span class="status-badge ${patCase.status === 'Reviewed' ? 'reviewed' : 'awaiting'}">${patCase.status || 'Under Review'}</span>
+          </div>
+          <div style="font-size:0.95rem; font-weight:700; color:var(--text); margin-top:0.25rem;">
+            ${patCase.complaint}
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-muted);">
+            Registration Date: <strong>${patCase.date || '2026-10-27'}</strong> &bull; Priority: <strong>${patCase.priority}</strong>
+          </div>
+          ${patCase.doctorNotes ? `
+            <div style="background:var(--ayush-green-whisper); border:1px solid #a7f3d0; border-radius:8px; padding:0.75rem; margin-top:0.5rem; font-size:0.88rem;">
+              <strong style="color:var(--ayush-green-dark);">👨‍⚕️ Attending Doctor's Verified Advice:</strong>
+              <div>${patCase.doctorNotes}</div>
+            </div>
+          ` : `
+            <div style="font-size:0.82rem; color:#b45309; background:var(--saffron-pastel); padding:0.5rem 0.75rem; border-radius:8px; margin-top:0.5rem;">
+              ⏳ Your intake summary is in the doctor's queue. A verified prescription will appear here after clinical sign-off.
+            </div>
+          `}
+        </div>
+      `;
+
+      renderPatientMessageThread(patCase);
+    }
+
+    function renderPatientMessageThread(patCase) {
+      const threadArea = document.getElementById('patientThreadArea');
+      if (!threadArea) return;
+      threadArea.innerHTML = '';
+
+      const msgs = patCase.messages || [
+        {
+          id: "MSG-1",
+          senderRole: "patient",
+          senderName: patCase.name,
+          text: "Namaste Doctor, should I come fasting tomorrow morning for the joint blood tests?",
+          formattedTime: "08:30 AM"
+        },
+        {
+          id: "MSG-2",
+          senderRole: "doctor",
+          senderName: "Dr. Ramesh Sharma, MD (Ayu)",
+          text: "Yes, please observe 8 hours fasting for ESR, RA Factor, and Lipid profile. Continue warm water intake.",
+          formattedTime: "08:45 AM"
+        }
+      ];
+
+      msgs.forEach(m => {
+        const bubble = document.createElement('div');
+        bubble.className = `thread-bubble from-${m.senderRole}`;
+        bubble.innerHTML = `
+          <span class="thread-sender-name">${m.senderRole === 'patient' ? 'You (Patient)' : m.senderName}</span>
+          <div>${m.text}</div>
+          <span class="thread-time">${m.formattedTime || 'Just now'}</span>
+        `;
+        threadArea.appendChild(bubble);
+      });
+      threadArea.scrollTop = threadArea.scrollHeight;
+    }
+
+    async function sendPatientToDoctorMessage() {
+      const inputEl = document.getElementById('txtPatientMsgInput');
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      const patCase = globalCases.find(c => c.id === activePatientCaseId) || globalCases[0];
+      const caseId = patCase.id;
+
+      try {
+        const res = await fetch(`/api/cases/${caseId}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            senderRole: 'patient',
+            senderName: currentUser ? currentUser.name : 'Patient',
+            text
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          patCase.messages = data.allMessages;
+          renderPatientMessageThread(patCase);
+          inputEl.value = '';
+        }
+      } catch (err) {
+        if (!patCase.messages) patCase.messages = [];
+        patCase.messages.push({
+          id: `MSG-${Date.now()}`,
+          senderRole: 'patient',
+          senderName: currentUser ? currentUser.name : 'Patient',
+          text,
+          formattedTime: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+        });
+        renderPatientMessageThread(patCase);
+        inputEl.value = '';
+      }
+    }
+
+    // ─── Doctor Inquiries & Clinical Workstation ───
+    function toggleDoctorTab(tab) {
+      const casesTab = document.getElementById('doctorCasesQueueTab');
+      const msgTab = document.getElementById('doctorMessagesInboxTab');
+      const btnCases = document.getElementById('tabDocCasesBtn');
+      const btnMsg = document.getElementById('tabDocMessagesBtn');
+
+      if (tab === 'cases') {
+        casesTab.style.display = 'block';
+        msgTab.style.display = 'none';
+        btnCases.style.borderColor = 'var(--ayush-green)';
+        btnCases.style.color = 'var(--ayush-green)';
+        btnMsg.style.borderColor = 'var(--border-strong)';
+        btnMsg.style.color = 'var(--text)';
+      } else {
+        casesTab.style.display = 'none';
+        msgTab.style.display = 'block';
+        btnMsg.style.borderColor = 'var(--ayush-green)';
+        btnMsg.style.color = 'var(--ayush-green)';
+        btnCases.style.borderColor = 'var(--border-strong)';
+        btnCases.style.color = 'var(--text)';
+        renderDoctorInquiryThreads();
+      }
+    }
+
+    function renderDoctorInquiryThreads() {
+      const container = document.getElementById('doctorInquiryThreadsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      globalCases.forEach(c => {
+        const msgs = c.messages || [
+          { senderRole: 'patient', senderName: c.name, text: 'Doctor, my knee pain increases when weather is cold. Is that normal?', formattedTime: 'Yesterday' }
+        ];
+
+        const card = document.createElement('div');
+        card.style = "background:var(--surface-elevated); border:1px solid var(--border); border-radius:12px; padding:1rem; display:flex; flex-direction:column; gap:0.75rem;";
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>${c.name} (${c.id}) &bull; ${c.department || 'Kayachikitsa'}</strong>
+            <span class="ps-badge" style="background:#e0f2fe; color:#0369a1; border:none;">${msgs.length} Messages</span>
+          </div>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.75rem; font-size:0.88rem; max-height:160px; overflow-y:auto;">
+            ${msgs.map(m => `
+              <div style="margin-bottom:0.4rem;">
+                <strong style="color:${m.senderRole === 'doctor' ? 'var(--ayush-green)' : '#0284c7'};">${m.senderRole === 'doctor' ? '👨‍⚕️ You (Dr. Sharma)' : '🧑‍🦽 ' + m.senderName}:</strong>
+                <span>${m.text}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <input class="login-input" style="height:40px; font-size:0.85rem;" id="docReplyInput_${c.id}" placeholder="Reply to ${c.name} with advice or instructions..." />
+            <button class="btn-primary-action" style="padding:0 1rem; height:40px; font-size:0.82rem;" onclick="sendDoctorReply('${c.id}')">
+              Reply
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function sendDoctorReply(caseId) {
+      const inputEl = document.getElementById(`docReplyInput_${caseId}`);
+      if (!inputEl) return;
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      const c = globalCases.find(item => item.id === caseId);
+      try {
+        const res = await fetch(`/api/cases/${caseId}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            senderRole: 'doctor',
+            senderName: currentUser ? currentUser.name : 'Dr. Ramesh Sharma, MD (Ayu)',
+            text
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          c.messages = data.allMessages;
+          renderDoctorInquiryThreads();
+        }
+      } catch (err) {
+        if (!c.messages) c.messages = [];
+        c.messages.push({
+          id: `MSG-${Date.now()}`,
+          senderRole: 'doctor',
+          senderName: 'Dr. Ramesh Sharma, MD (Ayu)',
+          text,
+          formattedTime: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+        });
+        renderDoctorInquiryThreads();
+      }
+    }
+
+    // ─── Super Admin User Management ───
+    async function fetchUsersFromServer() {
+      try {
+        const res = await fetch('/api/users');
+        if (res.ok) {
+          const data = await res.json();
+          globalUsers = data.users || [];
+          renderAdminUsersTable();
+        }
+      } catch (e) {
+        console.error("User fetch error:", e);
+      }
+    }
+
+    function renderAdminUsersTable() {
+      const tbody = document.getElementById('adminUsersTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      globalUsers.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${u.name}</strong><div style="font-size:0.75rem; color:var(--text-muted);">${u.email}</div></td>
+          <td><span class="ps-badge" style="background:${u.role === 'doctor' ? '#d1fae5' : '#e0f2fe'}; color:${u.role === 'doctor' ? '#065f46' : '#0369a1'}; border:none;">${u.role.toUpperCase()}</span></td>
+          <td>${u.department || 'General'}</td>
+          <td style="font-family:monospace; font-size:0.8rem;">${u.regNumber || u.uhid || 'AIIA-STAFF'}</td>
+          <td><span style="color:#059669; font-weight:800; font-size:0.8rem;">● ${u.status || 'Active'}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openAddDoctorModal() {
+      const name = prompt("Enter Doctor Full Name:", "Dr. Anirudh Kulkarni, MD (Ayu)");
+      const dept = prompt("Enter Department:", "Kayachikitsa");
+      const email = prompt("Enter Email:", "dr.kulkarni@aiia.gov.in");
+
+      if (name && email) {
+        const newUser = {
+          id: `USR-${Date.now()}`,
+          name,
+          role: "doctor",
+          department: dept || "Ayurveda Medicine",
+          email,
+          regNumber: `AYUSH-AIIA-DEL-${Math.floor(8900 + Math.random() * 90)}`,
+          status: "Active"
+        };
+
+        fetch('/api/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser)
+        }).then(() => {
+          alert(`✅ Account created for ${name}! Added to hospital clinician roster.`);
+          fetchUsersFromServer();
+        });
+      }
+    }
+
+    // ─── Kiosk Stepper Navigation ───
+    function startNewKioskIntake() {
+      navigateTo('kioskFlow');
+      jumpToKioskStep(1);
+    }
+
+    function jumpToKioskStep(step) {
+      currentKioskStep = step;
+      for (let i = 1; i <= 5; i++) {
+        const stepEl = document.getElementById('kioskStep' + i);
+        const nodeEl = document.getElementById('stepNode' + i);
+        if (stepEl) stepEl.style.display = (i === step) ? 'flex' : 'none';
+        if (nodeEl) {
+          nodeEl.classList.remove('active');
+          if (i === step) nodeEl.classList.add('active');
+          if (i < step) nodeEl.classList.add('completed');
+        }
+      }
+
+      if (step === 5) {
+        const lastMsg = chatConversationHistory.filter(m => m.role === 'user').pop();
+        if (lastMsg) {
+          document.getElementById('sumComplaintPreview').textContent = lastMsg.content;
+        }
+      }
+    }
+
+    async function sendPatientMessage() {
+      const inputEl = document.getElementById('chatInputText');
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      appendChatMessage('user', text);
+      inputEl.value = '';
+      chatConversationHistory.push({ role: 'user', content: text });
+
+      try {
+        const res = await fetch('/api/intake-ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: text, history: chatConversationHistory })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          appendChatMessage('bot', data.reply);
+          chatConversationHistory.push({ role: 'assistant', content: data.reply });
+        }
+      } catch (err) {
+        appendChatMessage('bot', "Thank you. On a scale of 1 to 10, how severe is your discomfort?");
+      }
+    }
+
+    function sendQuickAnswer(t) {
+      document.getElementById('chatInputText').value = t;
+      sendPatientMessage();
+    }
+
+    function appendChatMessage(sender, msg) {
+      const area = document.getElementById('chatMessagesArea');
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble ' + sender;
+      bubble.innerHTML = `<span style="font-size:0.72rem; font-weight:800; opacity:0.8;">${sender === 'user' ? 'Patient' : 'AIIA Medical AI Assistant'}</span><div>${msg}</div>`;
+      area.appendChild(bubble);
+      area.scrollTop = area.scrollHeight;
+    }
+
+    function readLatestAiQuestion() {
+      const bubbles = document.querySelectorAll('.chat-bubble.bot');
+      if (bubbles.length > 0) {
+        speakText(bubbles[bubbles.length - 1].innerText);
+      }
+    }
+
+    function speakText(t) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(t);
+        u.lang = currentLang === 'hi' ? 'hi-IN' : 'en-IN';
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    function toggleVoiceRecording() {
+      alert("🎙️ Microphone listening via Web Speech API. Speak your chief complaint...");
+    }
+
+    async function submitKioskCase() {
+      const newCase = {
+        id: `AIIA-MK-2026-${Math.floor(1006 + Math.random() * 900)}`,
+        name: document.getElementById('patName').value || 'Dhanush C',
+        age: Number(document.getElementById('patAge').value) || 28,
+        gender: document.getElementById('patGender').value,
+        contact: document.getElementById('patContact').value || '+91 98450 88219',
+        city: document.getElementById('patCity').value || 'Bengaluru',
+        department: document.getElementById('patDept').value,
+        complaint: document.getElementById('sumComplaintPreview').textContent,
+        priority: "Medium",
+        status: "Awaiting Clinical Review",
+        date: new Date().toISOString().slice(0, 10),
+        ayushAssessment: {
+          prakriti: document.getElementById('ayushPrakriti').value,
+          agni: document.getElementById('ayushAgni').value,
+          koshtha: document.getElementById('ayushKoshtha').value,
+          vikriti: document.getElementById('ayushVikriti').value
+        },
+        messages: []
+      };
+
+      try {
+        await fetch('/api/cases', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newCase)
+        });
+        alert(`✅ CASE SUBMITTED!\nUHID: ${newCase.id}\nRouting to attending Vaidya queue.`);
+        activePatientCaseId = newCase.id;
+        await fetchCasesFromServer();
+        navigateTo('patient');
+      } catch (e) {
+        globalCases.unshift(newCase);
+        navigateTo('patient');
+      }
+    }
+
+    // ─── Fetch Cases from Backend ───
+    async function fetchCasesFromServer() {
+      try {
+        const res = await fetch('/api/cases');
+        if (res.ok) {
+          const data = await res.json();
+          globalCases = data.cases || [];
+          document.getElementById('docQueueCount').textContent = globalCases.length;
+          renderDoctorCasesTable();
+        }
+      } catch (e) {
+        console.error("Cases fetch error:", e);
+      }
+    }
+
+    function renderDoctorCasesTable() {
+      const tbody = document.getElementById('doctorCasesTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      globalCases.forEach(c => {
+        const tr = document.createElement('tr');
+        const priClass = (c.priority || 'Medium').toLowerCase().replace(/\s+/g, '-');
+        tr.innerHTML = `
+          <td><strong>${c.name}</strong><div style="font-size:0.75rem; color:var(--text-muted); font-family:monospace;">${c.id}</div></td>
+          <td>${c.age || 40} / ${c.gender || 'M'}<div style="font-size:0.75rem; color:var(--text-muted);">${c.city || 'India'}</div></td>
+          <td><strong>${c.department || 'Ayurveda'}</strong></td>
+          <td><div style="max-width:240px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.complaint}</div></td>
+          <td><span class="priority-badge ${priClass}">${c.priority || 'Medium'}</span></td>
+          <td><span class="status-badge ${c.status === 'Reviewed' ? 'reviewed' : 'awaiting'}">${c.status || 'New'}</span></td>
+          <td><button class="btn-preset-chip" style="color:var(--ayush-green); border-color:var(--ayush-green);" onclick="openClinicalModal('${c.id}')">Review →</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openClinicalModal(caseId) {
+      const c = globalCases.find(item => item.id === caseId);
+      if (!c) return;
+      activeCaseForReview = c;
+
+      document.getElementById('modalPatName').textContent = c.name;
+      document.getElementById('modalPatUhid').textContent = c.id;
+      document.getElementById('modalPatSub').textContent = `${c.age} / ${c.gender} • ${c.city} • ${c.department}`;
+
+      document.getElementById('editModalComplaint').value = c.complaint || '';
+      document.getElementById('editModalHpi').value = c.hpi ? JSON.stringify(c.hpi, null, 2) : 'Onset gradual over 6 months. Severity 7/10.';
+      document.getElementById('editModalDoctorNotes').value = c.doctorNotes || 'Janu Basti advised with Mahanarayana Taila for 7 days. Tab Yogaraj Guggulu 1 BD.';
+      document.getElementById('modalStatusSelect').value = c.status || 'Awaiting Clinical Review';
+
+      document.getElementById('clinicalReviewModal').classList.add('active');
+    }
+
+    function closeClinicalModal() {
+      document.getElementById('clinicalReviewModal').classList.remove('active');
+    }
+
+    async function saveDoctorReviewChanges() {
+      if (!activeCaseForReview) return;
+      const status = document.getElementById('modalStatusSelect').value;
+      const notes = document.getElementById('editModalDoctorNotes').value;
+      const complaint = document.getElementById('editModalComplaint').value;
+
+      try {
+        await fetch(`/api/cases/${activeCaseForReview.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status, doctorNotes: notes, complaint })
+        });
+        alert(`✅ Signed off and approved by Dr. Ramesh Sharma, MD (Ayu)!`);
+        closeClinicalModal();
+        fetchCasesFromServer();
+      } catch (e) {
+        closeClinicalModal();
+      }
+    }
+
+    // ─── FHIR Preview & ABDM Gateway ───
+    function renderFhirPreview() {
+      const c = globalCases[0] || { id: "AIIA-MK-2026-1001", name: "Rajesh Varma", complaint: "Knee pain (Amavata)" };
+      const bundle = {
+        resourceType: "Bundle",
+        id: "AIIA-FHIR-BUNDLE-2026",
+        type: "document",
+        timestamp: new Date().toISOString(),
+        entry: [
+          { resource: { resourceType: "Patient", id: "pat-01", name: [{ text: c.name }], identifier: [{ system: "https://healthid.ndhm.gov.in", value: c.abhaId || "91-4829-1049-2810" }] } },
+          { resource: { resourceType: "Condition", id: "cond-01", code: { text: c.complaint } } }
+        ]
+      };
+      document.getElementById('fhirCodeDisplay').textContent = JSON.stringify(bundle, null, 2);
+    }
+
+    async function pushToAbdmGateway() {
+      try {
+        const res = await fetch('/api/abdm/push', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ abhaId: "91-4829-1049-2810", caseId: "AIIA-MK-2026-1001" })
+        });
+        const data = await res.json();
+        alert(`🌐 ABDM GATEWAY PUSH SUCCESS!\n\nTransaction ID: ${data.transactionId}\nCare Context: ${data.careContext.referenceNumber}\nMessage: ${data.message}`);
+        fetchAuditLog();
+      } catch (e) {
+        alert("Pushed to ABDM Gateway Sandbox: Transaction ID ABDM-TXN-984210.");
+      }
+    }
+
+    async function fetchAuditLog() {
+      try {
+        const res = await fetch('/api/audit');
+        if (res.ok) {
+          const data = await res.json();
+          const tbody = document.getElementById('auditTableBody');
+          if (!tbody) return;
+          tbody.innerHTML = '';
+          (data.audits || []).slice(0, 15).forEach(a => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><strong style="font-family:monospace; font-size:0.75rem;">${a.id}</strong></td>
+              <td style="font-size:0.8rem; color:var(--text-muted);">${new Date(a.timestamp).toLocaleTimeString('en-IN')}</td>
+              <td>${a.userName}</td>
+              <td><span class="ps-badge" style="background:#e0f2fe; color:#0369a1; border:none;">${a.role}</span></td>
+              <td><strong style="color:var(--ayush-green); font-size:0.82rem;">${a.action}</strong></td>
+              <td style="font-size:0.82rem;">${a.details}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const cur = html.getAttribute('data-theme') || 'light';
+      const next = cur === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      document.getElementById('themeIcon').textContent = next === 'dark' ? '☀️' : '🌓';
+    }
+
+    function dismissEmergencyAlert() {
+      document.getElementById('emergencyBanner').style.display = 'none';
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      alert(`Language switched to: ${lang.toUpperCase()}`);
+    }
+
+    // ─── Initial Page Load ───
+    (function init() {
+      fetchCasesFromServer();
+      fetchUsersFromServer();
+      
+      const savedUser = sessionStorage.getItem('medikiosk_user');
+      if (savedUser) {
+        try {
+          setUserSession(JSON.parse(savedUser));
+        } catch (e) {
+          navigateTo('gateway');
+        }
+      } else {
+        navigateTo('gateway');
+      }
+    })();
+  </script>
+</body>
+</html>

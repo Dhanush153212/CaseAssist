@@ -1,0 +1,171 @@
+[
+  {
+    "id": "AUD-1793117185825",
+    "timestamp": "2026-10-27T16:06:25.825Z",
+    "userId": "USR-100",
+    "userName": "AIIA Hospital Director / Super Administrator",
+    "role": "superadmin",
+    "action": "USER_LOGIN",
+    "details": "User logged in to SUPERADMIN portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793117116058",
+    "timestamp": "2026-10-27T16:05:16.058Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793117070167",
+    "timestamp": "2026-10-27T16:04:30.167Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793117032659",
+    "timestamp": "2026-10-27T16:03:52.659Z",
+    "userId": "USR-100",
+    "userName": "AIIA Hospital Director / Super Administrator",
+    "role": "superadmin",
+    "action": "USER_LOGIN",
+    "details": "User logged in to SUPERADMIN portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793117026763",
+    "timestamp": "2026-10-27T16:03:46.763Z",
+    "userId": "USR-101",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "doctor",
+    "action": "USER_LOGIN",
+    "details": "User logged in to DOCTOR portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793117010473",
+    "timestamp": "2026-10-27T16:03:30.473Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793116966739",
+    "timestamp": "2026-10-27T16:02:46.739Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793116815013",
+    "timestamp": "2026-10-27T16:00:15.013Z",
+    "userId": "patient-user",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "doctor",
+    "action": "SECURE_MESSAGE_SENT",
+    "details": "Message sent regarding case AIIA-MK-2026-1001: \"Noted Rajesh ji. Please collect your OPD token at ...\"",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1001"
+  },
+  {
+    "id": "AUD-1793116794030",
+    "timestamp": "2026-10-27T15:59:54.030Z",
+    "userId": "patient-user",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "SECURE_MESSAGE_SENT",
+    "details": "Message sent regarding case AIIA-MK-2026-1001: \"Hello Doctor, I will be reaching OPD counter at 9:...\"",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1001"
+  },
+  {
+    "id": "AUD-1793115880743",
+    "timestamp": "2026-10-27T15:44:40.743Z",
+    "userId": "kiosk-terminal-01",
+    "userName": "Dhanush C",
+    "role": "Patient",
+    "action": "CASE_SUBMITTED",
+    "details": "Patient case AIIA-MK-2026-1765 registered for department: Kayachikitsa (Ayurveda Internal Medicine)",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1765"
+  },
+  {
+    "id": "AUD-1793115607213",
+    "timestamp": "2026-10-27T15:40:07.214Z",
+    "userId": "kiosk-terminal-01",
+    "userName": "Dhanush C",
+    "role": "Patient",
+    "action": "CASE_SUBMITTED",
+    "details": "Patient case AIIA-MK-2026-1481 registered for department: Kayachikitsa (Ayurveda Internal Medicine)",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1481"
+  },
+  {
+    "id": "AUD-1793115520612",
+    "timestamp": "2026-10-27T15:38:40.612Z",
+    "userId": "abdm-gateway-service",
+    "userName": "ABDM Health Information Exchange",
+    "role": "System",
+    "action": "ABDM_RECORD_LINKED",
+    "details": "FHIR Bundle for case AIIA-MK-2026-1001 linked to ABHA 91-4829-1049-2810. Care Context: AIIA-CC-1288. Txn: ABDM-TXN-15520612",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1001"
+  },
+  {
+    "id": "AUD-1001",
+    "timestamp": "2026-10-27T08:15:32.120Z",
+    "userId": "kiosk-terminal-01",
+    "userName": "Patient Sunita Devi",
+    "role": "Patient",
+    "action": "TRIAGE_RED_FLAG_TRIGGERED",
+    "details": "Emergency chest pain symptoms triggered instant triage red-flag alert. Immediate casualty notice issued.",
+    "ip": "192.168.1.42",
+    "resourceId": "AIIA-MK-2026-1002"
+  },
+  {
+    "id": "AUD-1002",
+    "timestamp": "2026-10-27T08:16:10.450Z",
+    "userId": "triage-nurse-02",
+    "userName": "Sister Manju Sharma (Triage Nurse)",
+    "role": "Triage Staff",
+    "action": "TRIAGE_ESCALATION",
+    "details": "Patient Sunita Devi routed to Emergency ICU / Cardiac Cath Lab. Sublingual Sorbitrate administered.",
+    "ip": "192.168.1.18",
+    "resourceId": "AIIA-MK-2026-1002"
+  },
+  {
+    "id": "AUD-1003",
+    "timestamp": "2026-10-27T09:30:15.820Z",
+    "userId": "dr-sharma-vaidya",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "Doctor",
+    "action": "CLINICAL_SUMMARY_APPROVED",
+    "details": "Reviewed and signed off clinical summary and Ayurvedic treatment plan for Rajesh Varma (AIIA-MK-2026-1001).",
+    "ip": "192.168.1.25",
+    "resourceId": "AIIA-MK-2026-1001"
+  },
+  {
+    "id": "AUD-1004",
+    "timestamp": "2026-10-27T10:12:44.200Z",
+    "userId": "abdm-service-agent",
+    "userName": "ABDM National Health Gateway Connector",
+    "role": "System",
+    "action": "FHIR_BUNDLE_EXPORT",
+    "details": "Generated FHIR R4 Bundle and linked Care Context AIIA-CC-2026-001 to ABHA 91-4829-1049-2810.",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1001"
+  }
+]
