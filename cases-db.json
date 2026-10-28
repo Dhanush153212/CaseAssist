@@ -1,5 +1,49 @@
 [
   {
+    "id": "AIIA-MK-2026-1285",
+    "name": "likhith s",
+    "age": 28,
+    "gender": "Male",
+    "contact": "+91 98450 88219",
+    "city": "Bengaluru, Karnataka",
+    "department": "Emergency & Casualty",
+    "complaint": "\n            Severe bilateral knee joint pain and morning stiffness for 6 months\n          ",
+    "priority": "Medium",
+    "status": "Completed",
+    "date": "2026-10-27",
+    "ayushAssessment": {
+      "prakriti": "Vata-Kapha",
+      "agni": "Tikshnagni (Intense)",
+      "koshtha": "Krura (Constipated)",
+      "vikriti": "Vata-Kapha Dushti with Ama"
+    },
+    "messages": [],
+    "createdAt": "2026-10-27T17:00:39.841Z",
+    "doctorNotes": "Janu Basti advised with Mahanarayana Taila for 7 days. Tab Yogaraj Guggulu 1 BD.",
+    "updatedAt": "2026-10-27T17:01:38.681Z"
+  },
+  {
+    "id": "AIIA-MK-2026-1669",
+    "name": "Dhanush C",
+    "age": 28,
+    "gender": "Male",
+    "contact": "+91 98450 88219",
+    "city": "Bengaluru, Karnataka",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "complaint": "\n            Severe bilateral knee joint pain and morning stiffness for 6 months\n          ",
+    "priority": "Medium",
+    "status": "Awaiting Clinical Review",
+    "date": "2026-10-27",
+    "ayushAssessment": {
+      "prakriti": "Vata-Kapha",
+      "agni": "Samagni (Balanced)",
+      "koshtha": "Krura (Constipated)",
+      "vikriti": "Vata-Kapha Dushti with Ama"
+    },
+    "messages": [],
+    "createdAt": "2026-10-27T16:58:39.864Z"
+  },
+  {
     "id": "AIIA-MK-2026-9569",
     "name": "Kavitha Narayanan",
     "abhaId": "91-7788-9900-1122",
@@ -234,6 +278,22 @@
         "text": "Noted Rajesh ji. Please collect your OPD token at Room 14.",
         "timestamp": "2026-10-27T16:00:15.011Z",
         "formattedTime": "09:30 pm"
+      },
+      {
+        "id": "MSG-1793120366621",
+        "senderRole": "patient",
+        "senderName": "Rajesh Varma",
+        "text": "i am likhith",
+        "timestamp": "2026-10-27T16:59:26.621Z",
+        "formattedTime": "10:29 pm"
+      },
+      {
+        "id": "MSG-1793120383871",
+        "senderRole": "patient",
+        "senderName": "Rajesh Varma",
+        "text": "i had fever form last night",
+        "timestamp": "2026-10-27T16:59:43.871Z",
+        "formattedTime": "10:29 pm"
       }
     ]
   },

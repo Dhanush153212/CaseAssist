@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>MediKiosk | AI-Powered Patient Case-Taking Software (PS 26047) - Ministry of AYUSH &amp; AIIA</title>
-  
+
   <!-- Inter & Noto Sans Indic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap"
+    rel="stylesheet" />
 
   <style>
     /* ═══════════════════════════════════════════════════════════
@@ -27,7 +30,7 @@
       --emergency-red: #dc2626;
       --emergency-pastel: #fee2e2;
       --emergency-border: #fca5a5;
-      
+
       --bg-base: #f4f7fa;
       --surface: #ffffff;
       --surface-elevated: #f8fafc;
@@ -36,16 +39,16 @@
       --text: #0f172a;
       --text-muted: #475569;
       --text-subtle: #64748b;
-      
+
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
       --radius-xl: 28px;
-      
+
       --shadow-sm: 0 1px 3px rgba(11, 37, 64, 0.06);
       --shadow-md: 0 4px 16px rgba(11, 37, 64, 0.08);
       --shadow-lg: 0 12px 36px rgba(11, 37, 64, 0.12);
-      
+
       --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
@@ -299,8 +302,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════
@@ -370,9 +380,20 @@
       flex-shrink: 0;
     }
 
-    .role-avatar-circle.patient { background: #e0f2fe; color: #0284c7; }
-    .role-avatar-circle.doctor { background: #d1fae5; color: #0f766e; }
-    .role-avatar-circle.admin { background: #fef3c7; color: #d97706; }
+    .role-avatar-circle.patient {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .role-avatar-circle.doctor {
+      background: #d1fae5;
+      color: #0f766e;
+    }
+
+    .role-avatar-circle.admin {
+      background: #fef3c7;
+      color: #d97706;
+    }
 
     .login-card h3 {
       font-size: 1.3rem;
@@ -432,9 +453,17 @@
       color: white;
     }
 
-    .btn-login-submit.patient { background: linear-gradient(135deg, #0284c7, #0369a1); }
-    .btn-login-submit.doctor { background: linear-gradient(135deg, #0f766e, #064e3b); }
-    .btn-login-submit.admin { background: linear-gradient(135deg, #b45309, #78350f); }
+    .btn-login-submit.patient {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+    }
+
+    .btn-login-submit.doctor {
+      background: linear-gradient(135deg, #0f766e, #064e3b);
+    }
+
+    .btn-login-submit.admin {
+      background: linear-gradient(135deg, #b45309, #78350f);
+    }
 
     .btn-login-submit:hover {
       transform: translateY(-2px);
@@ -483,7 +512,9 @@
     }
 
     @media (max-width: 900px) {
-      .patient-dash-grid { grid-template-columns: 1fr; }
+      .patient-dash-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .card-box {
@@ -702,7 +733,9 @@
       color: var(--text);
     }
 
-    .kiosk-input, .kiosk-select, .kiosk-textarea {
+    .kiosk-input,
+    .kiosk-select,
+    .kiosk-textarea {
       width: 100%;
       min-height: 50px;
       padding: 0.85rem 1.15rem;
@@ -715,7 +748,9 @@
       outline: none;
     }
 
-    .kiosk-input:focus, .kiosk-select:focus, .kiosk-textarea:focus {
+    .kiosk-input:focus,
+    .kiosk-select:focus,
+    .kiosk-textarea:focus {
       border-color: var(--ayush-green);
       background: var(--surface);
     }
@@ -902,10 +937,29 @@
       border-radius: 999px;
     }
 
-    .priority-badge.urgent { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
-    .priority-badge.high { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; }
-    .priority-badge.medium { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-    .priority-badge.low { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+    .priority-badge.urgent {
+      background: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+    }
+
+    .priority-badge.high {
+      background: #ffedd5;
+      color: #c2410c;
+      border: 1px solid #fdba74;
+    }
+
+    .priority-badge.medium {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .priority-badge.low {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
 
     .status-badge {
       font-size: 0.72rem;
@@ -914,9 +968,20 @@
       border-radius: 999px;
     }
 
-    .status-badge.awaiting { background: #fef3c7; color: #b45309; }
-    .status-badge.reviewed { background: #d1fae5; color: #065f46; }
-    .status-badge.completed { background: #e0e7ff; color: #3730a3; }
+    .status-badge.awaiting {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .status-badge.reviewed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-badge.completed {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
 
     /* Modal */
     .modal-overlay {
@@ -990,6 +1055,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Top Tricolor Border -->
@@ -1006,7 +1072,8 @@
             <span class="ps-badge">PS ID: 26047</span>
           </h1>
           <div class="brand-sub">
-            <span style="color:var(--ayush-green); font-weight:700;">Ministry of AYUSH</span> &bull; <span>All India Institute of Ayurveda (AIIA)</span>
+            <span style="color:var(--ayush-green); font-weight:700;">Ministry of AYUSH</span> &bull; <span>All India
+              Institute of Ayurveda (AIIA)</span>
           </div>
         </div>
       </div>
@@ -1017,7 +1084,8 @@
         <div class="user-session-chip" id="userSessionBadge" style="display:none;">
           <span id="sessionAvatar">👤</span>
           <span id="sessionUserName">Rajesh Varma</span>
-          <span class="ps-badge" id="sessionRoleBadge" style="background:#e0f2fe; color:#0369a1; border:none;">Patient</span>
+          <span class="ps-badge" id="sessionRoleBadge"
+            style="background:#e0f2fe; color:#0369a1; border:none;">Patient</span>
         </div>
 
         <!-- Logout Button -->
@@ -1070,10 +1138,12 @@
         <span style="font-size:1.5rem;">🚨</span>
         <div>
           <strong>TRIAGE RED FLAG ALERT:</strong>
-          <span id="emergencyReasonText">Acute severe chest pain with breathing difficulty. Immediate medical assessment required!</span>
+          <span id="emergencyReasonText">Acute severe chest pain with breathing difficulty. Immediate medical assessment
+            required!</span>
         </div>
       </div>
-      <button class="control-btn" style="background:white; color:#b91c1c; font-weight:800;" onclick="dismissEmergencyAlert()">
+      <button class="control-btn" style="background:white; color:#b91c1c; font-weight:800;"
+        onclick="dismissEmergencyAlert()">
         Dismiss
       </button>
     </div>
@@ -1088,12 +1158,13 @@
     <section class="view-screen active" id="viewGateway">
       <div class="gateway-hero">
         <h2>Smart Patient Case Intake &amp; Hospital Management</h2>
-        <p>Please select your portal to proceed. Each role is strictly segregated to ensure clinical safety and data privacy under the DPDP Act 2023.</p>
+        <p>Please select your portal to proceed. Each role is strictly segregated to ensure clinical safety and data
+          privacy under the DPDP Act 2023.</p>
       </div>
 
       <!-- 3 Role Login Panels -->
       <div class="login-panels-grid">
-        
+
         <!-- PANEL 1: PATIENT PORTAL -->
         <div class="login-card">
           <div class="login-card-header">
@@ -1103,11 +1174,13 @@
               <p>रोगी पोर्टल &bull; Self-service intake &amp; consultation</p>
             </div>
           </div>
-          <p>Login with your ABHA ID or mobile number to answer questions with AI, view verified summaries, and message your doctor.</p>
-          
+          <p>Login with your ABHA ID or mobile number to answer questions with AI, view verified summaries, and message
+            your doctor.</p>
+
           <div class="login-field">
             <label>Mobile Number or ABHA ID</label>
-            <input class="login-input" id="loginPatientInput" value="+91 98450 12345" placeholder="Enter mobile or 14-digit ABHA" />
+            <input class="login-input" id="loginPatientInput" value="+91 98450 12345"
+              placeholder="Enter mobile or 14-digit ABHA" />
           </div>
 
           <button class="btn-login-submit patient" onclick="authenticateUser('patient')">
@@ -1137,11 +1210,13 @@
               <p>चिकित्सक पोर्टल &bull; Clinical review &amp; sign-off</p>
             </div>
           </div>
-          <p>Authorized medical professionals can review patient case histories, verify AI drafts, inspect OCR lab reports, and respond to inquiries.</p>
-          
+          <p>Authorized medical professionals can review patient case histories, verify AI drafts, inspect OCR lab
+            reports, and respond to inquiries.</p>
+
           <div class="login-field">
             <label>Doctor Registration / Email</label>
-            <input class="login-input" id="loginDoctorInput" value="dr.sharma@aiia.gov.in" placeholder="dr.name@aiia.gov.in" />
+            <input class="login-input" id="loginDoctorInput" value="dr.sharma@aiia.gov.in"
+              placeholder="dr.name@aiia.gov.in" />
           </div>
           <div class="login-field">
             <label>Department</label>
@@ -1160,7 +1235,8 @@
           <!-- 1-Click Quick Demo Login -->
           <div class="quick-preset-bar">
             <strong>Evaluator Quick Login:</strong>
-            <button class="btn-preset-chip" onclick="quickLoginAs('doctor', 'Dr. Ramesh Sharma, MD (Ayu)', 'AYUSH-AIIA-DEL-8921')">
+            <button class="btn-preset-chip"
+              onclick="quickLoginAs('doctor', 'Dr. Ramesh Sharma, MD (Ayu)', 'AYUSH-AIIA-DEL-8921')">
               🩺 Login as Dr. Ramesh Sharma (Attending Vaidya)
             </button>
           </div>
@@ -1175,11 +1251,13 @@
               <p>प्रशासक पोर्टल &bull; Governance &amp; ABDM Hub</p>
             </div>
           </div>
-          <p>Hospital directors and administrators can manage clinical staff accounts, triage red-flag rules, inspect DPDP audit logs, and export FHIR bundles.</p>
-          
+          <p>Hospital directors and administrators can manage clinical staff accounts, triage red-flag rules, inspect
+            DPDP audit logs, and export FHIR bundles.</p>
+
           <div class="login-field">
             <label>Administrator Email</label>
-            <input class="login-input" id="loginAdminInput" value="director.admin@aiia.gov.in" placeholder="admin@aiia.gov.in" />
+            <input class="login-input" id="loginAdminInput" value="director.admin@aiia.gov.in"
+              placeholder="admin@aiia.gov.in" />
           </div>
 
           <button class="btn-login-submit admin" onclick="authenticateUser('superadmin')">
@@ -1189,7 +1267,8 @@
           <!-- 1-Click Quick Demo Login -->
           <div class="quick-preset-bar">
             <strong>Evaluator Quick Login:</strong>
-            <button class="btn-preset-chip" onclick="quickLoginAs('superadmin', 'AIIA Hospital Director', 'AIIA-ADM-001')">
+            <button class="btn-preset-chip"
+              onclick="quickLoginAs('superadmin', 'AIIA Hospital Director', 'AIIA-ADM-001')">
               🏛️ Login as Super Administrator
             </button>
           </div>
@@ -1208,7 +1287,8 @@
             🧑‍🦽 Welcome, <span id="patDashName">Rajesh Varma</span>
           </h2>
           <p style="color:var(--text-muted); font-size:0.92rem;">
-            UHID: <strong id="patDashUhid">AIIA-MK-2026-1001</strong> &bull; ABHA ID: <strong id="patDashAbha">91-4829-1049-2810</strong> &bull; City: <strong>Bengaluru</strong>
+            UHID: <strong id="patDashUhid">AIIA-MK-2026-1001</strong> &bull; ABHA ID: <strong
+              id="patDashAbha">91-4829-1049-2810</strong> &bull; City: <strong>Bengaluru</strong>
           </p>
         </div>
         <div style="display:flex; gap:0.6rem;">
@@ -1220,11 +1300,12 @@
 
       <!-- Patient Dashboard 2-Column Grid -->
       <div class="patient-dash-grid">
-        
+
         <!-- Left Column: My Registered Cases & Clinical Status -->
         <div class="card-box">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h3 style="font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
+            <h3
+              style="font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
               <span>📋 My Case History &amp; Status</span>
             </h3>
             <span class="ps-badge" id="patCaseCountBadge">1 Active Case</span>
@@ -1239,7 +1320,8 @@
         <div class="card-box">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <h3 style="font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
+              <h3
+                style="font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
                 <span>💬 Message My Attending Doctor</span>
               </h3>
               <p style="font-size:0.8rem; color:var(--text-muted);">
@@ -1255,8 +1337,11 @@
               <!-- Rendered dynamically -->
             </div>
             <div class="thread-input-row">
-              <input class="login-input" id="txtPatientMsgInput" placeholder="Type a message or question to your doctor..." onkeydown="if(event.key==='Enter') sendPatientToDoctorMessage()" />
-              <button class="btn-primary-action" style="padding:0 1.25rem; height:46px; border-radius:10px;" onclick="sendPatientToDoctorMessage()">
+              <input class="login-input" id="txtPatientMsgInput"
+                placeholder="Type a message or question to your doctor..."
+                onkeydown="if(event.key==='Enter') sendPatientToDoctorMessage()" />
+              <button class="btn-primary-action" style="padding:0 1.25rem; height:46px; border-radius:10px;"
+                onclick="sendPatientToDoctorMessage()">
                 <span>Send</span>
               </button>
             </div>
@@ -1295,7 +1380,8 @@
           </div>
         </div>
 
-        <button class="btn-secondary-action" style="padding:0.35rem 0.85rem; font-size:0.8rem;" onclick="navigateTo('patient')">
+        <button class="btn-secondary-action" style="padding:0.35rem 0.85rem; font-size:0.8rem;"
+          onclick="navigateTo('patient')">
           <span>← Back to Dashboard</span>
         </button>
       </div>
@@ -1305,9 +1391,11 @@
         <div class="kiosk-hero-title">
           <div>
             <h2>📋 Patient Identification &amp; ABHA Verification</h2>
-            <p style="color:var(--text-muted); font-size:0.92rem;">Enter demographics or link your Ayushman Bharat Health Account.</p>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Enter demographics or link your Ayushman Bharat
+              Health Account.</p>
           </div>
-          <button class="tts-speaker-btn" onclick="speakText('Please confirm your name, age, gender, contact number, and verify your DPDP Act consent before proceeding.')">
+          <button class="tts-speaker-btn"
+            onclick="speakText('Please confirm your name, age, gender, contact number, and verify your DPDP Act consent before proceeding.')">
             <span>🔊 Audio Instructions</span>
           </button>
         </div>
@@ -1360,7 +1448,8 @@
         <div class="kiosk-hero-title">
           <div>
             <h2>💬 AI Medical History Interview (SOCRATES)</h2>
-            <p style="color:var(--text-muted); font-size:0.92rem;">Speak or touch to answer. The AI gathers clinical details for your doctor.</p>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Speak or touch to answer. The AI gathers clinical
+              details for your doctor.</p>
           </div>
           <button class="tts-speaker-btn" onclick="readLatestAiQuestion()">
             <span>🔊 Speak Question</span>
@@ -1376,10 +1465,12 @@
           </div>
 
           <div class="quick-chips-row">
-            <button class="chip-btn" onclick="sendQuickAnswer('Severe bilateral knee joint pain and morning stiffness for 6 months')">
+            <button class="chip-btn"
+              onclick="sendQuickAnswer('Severe bilateral knee joint pain and morning stiffness for 6 months')">
               🦵 Knee Joint Pain &amp; Stiffness
             </button>
-            <button class="chip-btn" onclick="sendQuickAnswer('Burning sensation in stomach and acid reflux after meals')">
+            <button class="chip-btn"
+              onclick="sendQuickAnswer('Burning sensation in stomach and acid reflux after meals')">
               🔥 Acidity &amp; Gas (Amlapitta)
             </button>
             <button class="chip-btn" onclick="sendQuickAnswer('Throbbing right-sided headache with nausea')">
@@ -1394,7 +1485,8 @@
             <button class="voice-mic-btn" id="btnVoiceMic" onclick="toggleVoiceRecording()" title="Click to speak">
               <span>🎤</span>
             </button>
-            <input class="login-input" id="chatInputText" placeholder="Type or speak your answer..." onkeydown="if(event.key==='Enter') sendPatientMessage()" />
+            <input class="login-input" id="chatInputText" placeholder="Type or speak your answer..."
+              onkeydown="if(event.key==='Enter') sendPatientMessage()" />
             <button class="btn-chat-send" onclick="sendPatientMessage()">Send</button>
           </div>
         </div>
@@ -1410,18 +1502,22 @@
         <div class="kiosk-hero-title">
           <div>
             <h2>📑 Document Upload &amp; OCR Digitization</h2>
-            <p style="color:var(--text-muted); font-size:0.92rem;">Upload prescriptions or lab reports. Abnormal lab values are automatically flagged.</p>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Upload prescriptions or lab reports. Abnormal lab
+              values are automatically flagged.</p>
           </div>
         </div>
 
-        <div style="border:2px dashed var(--ayush-green); background:var(--ayush-green-whisper); border-radius:16px; padding:2rem; text-align:center;">
+        <div
+          style="border:2px dashed var(--ayush-green); background:var(--ayush-green-whisper); border-radius:16px; padding:2rem; text-align:center;">
           <span style="font-size:2.5rem;">📄</span>
           <div style="font-size:1.1rem; font-weight:800; margin:0.5rem 0;">Drag &amp; Drop or Upload Reports</div>
           <div style="display:flex; justify-content:center; gap:0.6rem; margin-top:1rem; flex-wrap:wrap;">
-            <button class="btn-preset-chip" onclick="alert('🌿 Loaded AIIA Prescription: Amavata, Yogaraj Guggulu, ESR 48 mm/hr HIGH')">
+            <button class="btn-preset-chip"
+              onclick="alert('🌿 Loaded AIIA Prescription: Amavata, Yogaraj Guggulu, ESR 48 mm/hr HIGH')">
               🌿 Load AIIA Prescription
             </button>
-            <button class="btn-preset-chip" onclick="alert('🩸 Loaded Thyrocare Lab: HbA1c 8.4% HIGH, Glucose 168 mg/dL HIGH')">
+            <button class="btn-preset-chip"
+              onclick="alert('🩸 Loaded Thyrocare Lab: HbA1c 8.4% HIGH, Glucose 168 mg/dL HIGH')">
               🩸 Load Blood Panel
             </button>
           </div>
@@ -1438,7 +1534,8 @@
         <div class="kiosk-hero-title">
           <div>
             <h2>🌿 AYUSH Assessment (14 Classical Parameters)</h2>
-            <p style="color:var(--text-muted); font-size:0.92rem;">Traditional Ayurvedic OPD assessment parameters for AIIA clinicians.</p>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Traditional Ayurvedic OPD assessment parameters for
+              AIIA clinicians.</p>
           </div>
         </div>
 
@@ -1484,17 +1581,21 @@
         <div class="kiosk-hero-title">
           <div>
             <h2>✅ Confirm &amp; Submit to Doctor Queue</h2>
-            <p style="color:var(--text-muted); font-size:0.92rem;">Review your details before transmitting to the attending Vaidya.</p>
+            <p style="color:var(--text-muted); font-size:0.92rem;">Review your details before transmitting to the
+              attending Vaidya.</p>
           </div>
         </div>
 
-        <div style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:14px; padding:1.25rem;">
+        <div
+          style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:14px; padding:1.25rem;">
           <div style="font-size:0.95rem; font-weight:800; color:var(--text);">Summary of Registered Complaint:</div>
-          <p id="sumComplaintPreview" style="font-size:1.05rem; font-weight:700; color:var(--ayush-green); margin:0.5rem 0;">
+          <p id="sumComplaintPreview"
+            style="font-size:1.05rem; font-weight:700; color:var(--ayush-green); margin:0.5rem 0;">
             Severe bilateral knee joint pain and morning stiffness for 6 months
           </p>
           <div style="font-size:0.85rem; color:var(--text-muted);">
-            Department: <strong>Kayachikitsa</strong> &bull; Priority: <strong>Medium</strong> &bull; Prakriti: <strong>Vata-Kapha</strong>
+            Department: <strong>Kayachikitsa</strong> &bull; Priority: <strong>Medium</strong> &bull; Prakriti:
+            <strong>Vata-Kapha</strong>
           </div>
         </div>
 
@@ -1521,8 +1622,10 @@
           </p>
         </div>
         <div style="display:flex; gap:0.6rem;">
-          <input class="login-input" id="doctorSearchInput" placeholder="Search UHID, ABHA, Name..." style="height:42px; width:240px;" oninput="filterDoctorCases()" />
-          <button class="btn-primary-action" style="padding:0.4rem 1rem; font-size:0.85rem;" onclick="fetchCasesFromServer()">
+          <input class="login-input" id="doctorSearchInput" placeholder="Search UHID, ABHA, Name..."
+            style="height:42px; width:240px;" oninput="filterDoctorCases()" />
+          <button class="btn-primary-action" style="padding:0.4rem 1rem; font-size:0.85rem;"
+            onclick="fetchCasesFromServer()">
             <span>🔄 Refresh</span>
           </button>
         </div>
@@ -1530,10 +1633,13 @@
 
       <!-- Doctor Tabs: Cases Queue vs Patient Messages -->
       <div style="display:flex; gap:0.6rem; border-bottom:1px solid var(--border); padding-bottom:0.5rem;">
-        <button class="btn-preset-chip" style="font-size:0.88rem; padding:0.5rem 1rem; font-weight:800; border-color:var(--ayush-green); color:var(--ayush-green);" id="tabDocCasesBtn" onclick="toggleDoctorTab('cases')">
+        <button class="btn-preset-chip"
+          style="font-size:0.88rem; padding:0.5rem 1rem; font-weight:800; border-color:var(--ayush-green); color:var(--ayush-green);"
+          id="tabDocCasesBtn" onclick="toggleDoctorTab('cases')">
           📋 Review Queue (<span id="docQueueCount">5</span>)
         </button>
-        <button class="btn-preset-chip" style="font-size:0.88rem; padding:0.5rem 1rem; font-weight:800;" id="tabDocMessagesBtn" onclick="toggleDoctorTab('messages')">
+        <button class="btn-preset-chip" style="font-size:0.88rem; padding:0.5rem 1rem; font-weight:800;"
+          id="tabDocMessagesBtn" onclick="toggleDoctorTab('messages')">
           💬 Patient Inquiries (<span id="docMsgCount">2</span>)
         </button>
       </div>
@@ -1672,7 +1778,8 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <div>
-          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
+          <h3
+            style="font-size:1.25rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
             <span>Clinical Review:</span>
             <span id="modalPatName">Rajesh Varma</span>
             <span class="ps-badge" id="modalPatUhid">AIIA-MK-2026-1001</span>
@@ -1681,12 +1788,16 @@
             48M &bull; Bengaluru &bull; Kayachikitsa &bull; ABHA: 91-4829-1049-2810
           </div>
         </div>
-        <button class="control-btn" style="border-radius:50%; width:36px; height:36px; padding:0; justify-content:center;" onclick="closeClinicalModal()">✕</button>
+        <button class="control-btn"
+          style="border-radius:50%; width:36px; height:36px; padding:0; justify-content:center;"
+          onclick="closeClinicalModal()">✕</button>
       </div>
 
       <div class="modal-body">
-        <div style="background:var(--saffron-pastel); border:1px solid var(--saffron-border); border-radius:10px; padding:0.85rem 1.15rem; font-size:0.88rem; color:#b45309;">
-          ⚠️ <strong>AI-GENERATED DRAFT:</strong> Clinician must verify history and approve before official AIIA record entry.
+        <div
+          style="background:var(--saffron-pastel); border:1px solid var(--saffron-border); border-radius:10px; padding:0.85rem 1.15rem; font-size:0.88rem; color:#b45309;">
+          ⚠️ <strong>AI-GENERATED DRAFT:</strong> Clinician must verify history and approve before official AIIA record
+          entry.
         </div>
 
         <div class="login-field">
@@ -1700,15 +1811,18 @@
         </div>
 
         <div class="login-field">
-          <label style="font-weight:800; color:var(--ayush-green);">Attending Doctor Notes &amp; Panchakarma Plan</label>
-          <textarea class="kiosk-textarea" id="editModalDoctorNotes" rows="3" placeholder="Advise Ayurvedic therapies (e.g. Janu Basti, Patra Pinda Sveda) and oral medicines..."></textarea>
+          <label style="font-weight:800; color:var(--ayush-green);">Attending Doctor Notes &amp; Panchakarma
+            Plan</label>
+          <textarea class="kiosk-textarea" id="editModalDoctorNotes" rows="3"
+            placeholder="Advise Ayurvedic therapies (e.g. Janu Basti, Patra Pinda Sveda) and oral medicines..."></textarea>
         </div>
       </div>
 
       <div class="modal-footer">
         <div style="display:flex; align-items:center; gap:0.5rem;">
           <span style="font-size:0.85rem; font-weight:700;">Status:</span>
-          <select class="kiosk-select" style="min-height:38px; padding:0.3rem 0.6rem; font-size:0.85rem;" id="modalStatusSelect">
+          <select class="kiosk-select" style="min-height:38px; padding:0.3rem 0.6rem; font-size:0.85rem;"
+            id="modalStatusSelect">
             <option value="Awaiting Clinical Review">Awaiting Clinical Review</option>
             <option value="Reviewed">Reviewed &amp; Approved</option>
             <option value="Completed">Completed</option>
@@ -1861,10 +1975,10 @@
       if (!currentUser) return;
       const patNameEl = document.getElementById('patDashName');
       if (patNameEl) patNameEl.textContent = currentUser.name;
-      
+
       const patUhidEl = document.getElementById('patDashUhid');
       if (patUhidEl) patUhidEl.textContent = activePatientCaseId || "AIIA-MK-2026-1001";
-      
+
       const patAbhaEl = document.getElementById('patDashAbha');
       if (patAbhaEl) patAbhaEl.textContent = currentUser.abhaId || "91-4829-1049-2810";
 
@@ -1872,8 +1986,8 @@
       let patCase = null;
       if (globalCases && globalCases.length > 0) {
         patCase = globalCases.find(c => c.id === activePatientCaseId) ||
-                  globalCases.find(c => c.name && currentUser.name && c.name.toLowerCase().includes(currentUser.name.toLowerCase())) ||
-                  globalCases[0];
+          globalCases.find(c => c.name && currentUser.name && c.name.toLowerCase().includes(currentUser.name.toLowerCase())) ||
+          globalCases[0];
       }
 
       if (!patCase) {
@@ -2423,7 +2537,7 @@
             tbody.appendChild(tr);
           });
         }
-      } catch (e) {}
+      } catch (e) { }
     }
 
     function toggleTheme() {
@@ -2447,7 +2561,7 @@
     (function init() {
       fetchCasesFromServer();
       fetchUsersFromServer();
-      
+
       const savedUser = sessionStorage.getItem('medikiosk_user');
       if (savedUser) {
         try {
@@ -2461,4 +2575,5 @@
     })();
   </script>
 </body>
+
 </html>
