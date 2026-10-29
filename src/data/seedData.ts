@@ -6,6 +6,7 @@ import type {
   AppUser,
   SystemSettings,
 } from '../types';
+import { normalizeCase } from '../utils/helpers';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -48,7 +49,7 @@ function makeTest(
 
 // ─── Seed Cases ───────────────────────────────────────────────────────────────
 
-export const SEED_CASES: PatientCase[] = [
+const RAW_CASES: any[] = [
   // ── 1. Arun Kumar Sharma ─────────────────────────────────────────────────
   {
     id: 'CA-2026-0001',
@@ -495,6 +496,8 @@ export const SEED_CASES: PatientCase[] = [
     ],
   },
 ];
+
+export const SEED_CASES: PatientCase[] = RAW_CASES.map(normalizeCase);
 
 // ─── Default User ─────────────────────────────────────────────────────────────
 

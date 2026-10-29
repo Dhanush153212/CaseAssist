@@ -10,18 +10,22 @@ import type { CaseStatus, CasePriority } from '../types';
 // ─── Analytics Page ───────────────────────────────────────────────────────────
 
 const STATUS_COLORS: Record<CaseStatus, string> = {
-  'Registered':     '#3b82f6',
-  'Under Review':   '#f59e0b',
-  'Awaiting Tests': '#f97316',
-  'In Treatment':   '#8b5cf6',
-  'Follow-Up':      '#14b8a6',
-  'Completed':      '#22c55e',
-  'Closed':         '#9ca3af',
+  'New':                      '#3b82f6',
+  'Awaiting Clinical Review': '#f59e0b',
+  'Reviewed':                 '#22c55e',
+  'Registered':               '#0284c7',
+  'Under Review':             '#eab308',
+  'Awaiting Tests':           '#f97316',
+  'In Treatment':             '#8b5cf6',
+  'Follow-Up':                '#14b8a6',
+  'Completed':                '#10b981',
+  'Closed':                   '#9ca3af',
 };
 
 const PRIORITY_COLORS: Record<CasePriority, string> = {
   Low:      '#22c55e',
   Normal:   '#3b82f6',
+  Medium:   '#f59e0b',
   High:     '#f97316',
   Critical: '#ef4444',
 };

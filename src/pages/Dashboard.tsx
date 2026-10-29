@@ -15,13 +15,16 @@ import type { CaseStatus } from '../types';
 // ─── Colour maps ──────────────────────────────────────────────────────────────
 
 const STATUS_COLORS: Record<CaseStatus, string> = {
-  'Registered':     '#3b82f6',
-  'Under Review':   '#f59e0b',
-  'Awaiting Tests': '#f97316',
-  'In Treatment':   '#8b5cf6',
-  'Follow-Up':      '#14b8a6',
-  'Completed':      '#22c55e',
-  'Closed':         '#9ca3af',
+  'Registered':               '#3b82f6',
+  'New':                      '#0284c7',
+  'Under Review':             '#f59e0b',
+  'Awaiting Tests':           '#f97316',
+  'Awaiting Clinical Review': '#ea580c',
+  'In Treatment':             '#8b5cf6',
+  'Reviewed':                 '#0d9488',
+  'Follow-Up':                '#14b8a6',
+  'Completed':                '#22c55e',
+  'Closed':                   '#9ca3af',
 };
 
 // ─── Dashboard ────────────────────────────────────────────────────────────────

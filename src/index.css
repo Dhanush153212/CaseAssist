@@ -1,34 +1,247 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   CASEASSIST DESIGN SYSTEM: INDIAN HEALTHCARE & AYUSH THEME
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --gov-navy: #0b2540;
+  --gov-navy-light: #163a5f;
+  --ayush-teal: #0f766e;
+  --ayush-teal-dark: #064e3b;
+  --ayush-teal-light: #ccfbf1;
+  --ayush-teal-whisper: #f0fdf4;
+  --saffron-gold: #d97706;
+  --saffron-pastel: #fef3c7;
+  --saffron-border: #fcd34d;
+  --emergency-red: #dc2626;
+  --emergency-pastel: #fee2e2;
+  --emergency-border: #fca5a5;
+
+  --bg-base: #f4f7fa;
+  --surface: #ffffff;
+  --surface-elevated: #f8fafc;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 3px rgba(11, 37, 64, 0.06);
+  --shadow-md: 0 4px 16px rgba(11, 37, 64, 0.08);
+  --shadow-lg: 0 12px 36px rgba(11, 37, 64, 0.12);
+
+  --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-base: #070e17;
+  --surface: #0f1b2b;
+  --surface-elevated: #16253b;
+  --border: #223752;
+  --border-strong: #2f4b70;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --ayush-teal-whisper: rgba(15, 118, 110, 0.15);
+  --saffron-pastel: rgba(217, 119, 6, 0.15);
+  --emergency-pastel: rgba(220, 38, 38, 0.18);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 14px 44px rgba(0, 0, 0, 0.6);
+}
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body,
-#root {
+html, body, #root {
   width: 100%;
-  min-height: 100%;
-  margin: 0;
+  min-height: 100vh;
 }
 
 body {
-  font-family: 'Inter', Arial, sans-serif;
-  background: #f4f7fb;
-  color: #172b4d;
+  font-family: var(--font-main);
+  background-color: var(--bg-base);
+  color: var(--text);
+  line-height: 1.5;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
+/* ─── Top Tricolor Government Strip ─── */
+.gov-strip {
+  background: linear-gradient(90deg, #b45309 0%, #ffffff 48%, #15803d 100%);
+  height: 4px;
+  width: 100%;
 }
 
-button {
+/* ─── Buttons & Controls ─── */
+.btn-primary {
+  background: linear-gradient(135deg, #0f766e 0%, #064e3b 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
 }
 
-img {
-  max-width: 100%;
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 118, 110, 0.35);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1.15rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-elevated);
+  border-color: var(--ayush-teal);
+  color: var(--ayush-teal);
+}
+
+.btn-teal {
+  background: #0f766e;
+  color: white;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.15s;
+}
+
+.btn-teal:hover {
+  background: #064e3b;
+}
+
+/* ─── Card Containers ─── */
+.card-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+
+.card-box:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ─── Institutional Badges ─── */
+.ps-badge {
+  background: var(--saffron-pastel);
+  color: #b45309;
+  border: 1px solid var(--saffron-border);
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ─── Input Fields ─── */
+.input-field {
+  width: 100%;
+  min-height: 48px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-elevated);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.input-field:focus {
+  border-color: var(--ayush-teal);
+  background: var(--surface);
+}
+
+/* ─── Modal Dialogs ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 37, 64, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-dialog {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out;
 }

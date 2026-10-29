@@ -5,7 +5,7 @@ import {
   ClipboardList, Settings, Eye, X, Plus
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { generateCaseId } from '../utils/helpers';
+import { generateCaseId, normalizeCase } from '../utils/helpers';
 import { INDIAN_STATES, DEPARTMENTS, CLINICIANS } from '../data/seedData';
 import type {
   PatientCase, PatientInfo, ClinicalInfo, MedicalHistory,
@@ -181,27 +181,32 @@ export default function CaseForm() {
       };
       updateCase(updated);
     } else {
-      const newCase: PatientCase = {
+      const creatorName = currentUser?.name || 'Dr. Ramesh Sharma, MD (Ayu)';
+      const creatorRole = currentUser?.role || 'doctor';
+      const hospital = currentUser?.hospitalName || 'All India Institute of Ayurveda (AIIA)';
+
+      const newCase: PatientCase = normalizeCase({
         id: generateCaseId(cases.map(c => c.id)),
         patientInfo: patient,
         clinicalInfo: clinical,
         medicalHistory: history,
         caseManagement: mgmt,
-        hospitalName: currentUser.hospitalName,
+        hospitalName: hospital,
+        hospital: hospital,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        createdBy: currentUser.name,
+        createdBy: creatorName,
         reviewerNotes: '',
         testResults: [],
         activityLog: [{
           id: Math.random().toString(36).slice(2),
           timestamp: new Date().toISOString(),
           action: 'Case Created',
-          performedBy: currentUser.name,
-          role: currentUser.role,
-          details: 'Case registered via 5-step form',
+          performedBy: creatorName,
+          role: creatorRole,
+          details: 'Case registered via form',
         }],
-      };
+      });
       addCase(newCase);
     }
     setSaved(true);

@@ -6,10 +6,14 @@ import type { UserRole } from '../types';
 
 // ─── Role badge colours ────────────────────────────────────────────────────────
 
-const ROLE_COLORS: Record<UserRole, string> = {
-  Admin:     'bg-purple-100 text-purple-700',
-  Clinician: 'bg-blue-100 text-blue-700',
-  Reviewer:  'bg-amber-100 text-amber-700',
+const ROLE_COLORS: Record<string, string> = {
+  Admin:      'bg-purple-100 text-purple-700',
+  Clinician:  'bg-blue-100 text-blue-700',
+  Reviewer:   'bg-amber-100 text-amber-700',
+  patient:    'bg-sky-100 text-sky-700',
+  doctor:     'bg-teal-100 text-teal-700',
+  superadmin: 'bg-amber-100 text-amber-700',
+  triage:     'bg-rose-100 text-rose-700',
 };
 
 // ─── Audit Log ────────────────────────────────────────────────────────────────
