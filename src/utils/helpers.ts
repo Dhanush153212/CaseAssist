@@ -141,6 +141,9 @@ export function normalizeCase(raw: any): PatientCase {
       allergies,
       previousProcedures,
       familyHistory,
+      prescriptionImages: Array.isArray(raw.prescriptionImages)
+        ? raw.prescriptionImages
+        : (Array.isArray(raw.medicalHistory?.prescriptionImages) ? raw.medicalHistory.prescriptionImages : []),
     },
     caseManagement: {
       priority,
@@ -167,6 +170,10 @@ export function normalizeCase(raw: any): PatientCase {
     ayushAssessment: raw.ayushAssessment,
     hasEmergencyRedFlag: emergencyCheck.hasEmergency,
     emergencyFlags: emergencyCheck.flags,
+
+    prescriptionImages: Array.isArray(raw.prescriptionImages)
+      ? raw.prescriptionImages
+      : (Array.isArray(raw.medicalHistory?.prescriptionImages) ? raw.medicalHistory.prescriptionImages : []),
 
     messages: Array.isArray(raw.messages) ? raw.messages : [],
     testResults: Array.isArray(raw.testResults) ? raw.testResults : [],

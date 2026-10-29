@@ -3,14 +3,112 @@ import { useApp } from '../context/AppContext';
 import {
   User, Stethoscope, ClipboardList, Pill, History, CheckCircle,
   ChevronRight, ChevronLeft, AlertTriangle, Sparkles, Mic,
-  Volume2, Plus, X, Send, Bot, RefreshCw
+  Volume2, Plus, X, Send, Bot, RefreshCw, UploadCloud, Camera,
+  Image as ImageIcon, Trash2, Eye, ShieldAlert, CheckCircle2,
+  FileText, Check
 } from 'lucide-react';
 import {
   calculateCompleteness, detectGaps, generateMemoryPrompts,
   checkEmergencyFlags, generateCaseId, normalizeCase
 } from '../utils/helpers';
 import { INDIAN_STATES, DEPARTMENTS } from '../data/seedData';
-import type { PatientCase, Department, Gender } from '../types';
+import type { PatientCase, Department, Gender, PrescriptionAttachment } from '../types';
+import { uploadPrescriptionPhoto, validatePrescriptionFile } from '../services/storage';
+
+export interface IntakeTopic {
+  id: number;
+  key: string;
+  title: string;
+  prompt: string;
+  options: string[];
+}
+
+export const INTAKE_TOPICS: IntakeTopic[] = [
+  {
+    id: 0,
+    key: 'complaint',
+    title: 'Reason for Visit',
+    prompt: 'What primary health concern or symptom brought you to the hospital today?',
+    options: ['Joint / Back Pain', 'Digestive / Stomach Issue', 'Fever & Weakness', 'Skin Problem', 'Headache & Migraine', 'Other Health Concern']
+  },
+  {
+    id: 1,
+    key: 'sensation',
+    title: 'Location & Sensation',
+    prompt: 'Which part of your body is affected, and does the discomfort feel sharp, dull, burning, aching, or stiff?',
+    options: ['Dull Ache', 'Sharp / Stabbing', 'Burning Sensation', 'Throbbing & Stiff', 'Mild Discomfort']
+  },
+  {
+    id: 2,
+    key: 'duration',
+    title: 'Onset & Duration',
+    prompt: 'Approximately when did you first notice this problem starting?',
+    options: ['Started today', '2 to 3 days ago', 'About 1 week ago', '2 to 3 weeks ago', 'Chronic (months)']
+  },
+  {
+    id: 3,
+    key: 'timing',
+    title: 'Continuous or Intermittent',
+    prompt: 'Does this symptom trouble you continuously throughout the day, or does it come and go in waves?',
+    options: ['Continuous all day', 'Comes and goes in waves', 'Worse in the morning', 'Worse in evening', 'Triggered after meals']
+  },
+  {
+    id: 4,
+    key: 'progression',
+    title: 'Symptom Progression',
+    prompt: 'Over the past few days, has your condition been getting better, worsening, or staying about the same?',
+    options: ['Getting worse', 'Gradually improving', 'Staying unchanged', 'Fluctuating daily']
+  },
+  {
+    id: 5,
+    key: 'associated',
+    title: 'Other Symptoms',
+    prompt: 'Have you noticed any other related symptoms, such as fever, nausea, dizziness, fatigue, or disturbed sleep?',
+    options: ['No other symptoms', 'Mild fever & chills', 'Nausea / loss of appetite', 'Fatigue & exhaustion', 'Difficulty sleeping']
+  },
+  {
+    id: 6,
+    key: 'medications',
+    title: 'Current Medicines',
+    prompt: 'Are you currently taking any prescription tablets, daily supplements, or Ayurvedic remedies?',
+    options: ['No daily medicines', 'Blood pressure medicine', 'Diabetes tablets', 'Ayurvedic formulations', 'Pain relievers']
+  },
+  {
+    id: 7,
+    key: 'allergies',
+    title: 'Known Allergies',
+    prompt: 'Do you have any known allergies to medicines (such as penicillin or sulfa), foods, or herbs?',
+    options: ['No known allergies (NKDA)', 'Penicillin / antibiotics', 'Sulfa drugs', 'Food allergy', 'I am not sure']
+  },
+  {
+    id: 8,
+    key: 'conditions',
+    title: 'Existing Conditions',
+    prompt: 'Have you previously been diagnosed with high blood pressure, diabetes, thyroid, asthma, or other conditions?',
+    options: ['No chronic conditions', 'Diabetes (high sugar)', 'Hypertension (high BP)', 'Thyroid disorder', 'Asthma / respiratory']
+  },
+  {
+    id: 9,
+    key: 'surgeries',
+    title: 'Past Surgeries & Illnesses',
+    prompt: 'Have you had any previous major illnesses, hospitalizations, or surgical operations in the past?',
+    options: ['No past surgeries', 'Appendectomy / gallbladder', 'Orthopedic surgery', 'Past hospitalization only', 'Prefer not to say']
+  },
+  {
+    id: 10,
+    key: 'family',
+    title: 'Family Medical History',
+    prompt: 'Is there any history of diabetes, heart conditions, arthritis, or asthma in your immediate family?',
+    options: ['None known in family', 'Diabetes in family', 'Heart condition in family', 'Hypertension in family', 'Joint / arthritis in family']
+  },
+  {
+    id: 11,
+    key: 'additional',
+    title: 'Additional Notes',
+    prompt: 'Is there anything else about your daily routine, diet, or health you would like the doctor to know?',
+    options: ['Everything covered', 'Have recent blood test reports', 'Vegetarian diet', 'High stress / desk job']
+  },
+];
 
 const STEPS = [
   { id: 1, label: 'Demographics', icon: User },
@@ -67,12 +165,23 @@ export default function PatientIntakeWizard() {
   const [procedureInput, setProcedureInput] = useState('');
   const [familyHistory, setFamilyHistory] = useState('');
 
-  // AI Intake Assistant Chat Modal
+  // Prescription Photo Upload
+  const [prescriptionImages, setPrescriptionImages] = useState<PrescriptionAttachment[]>([]);
+  const [uploadingRx, setUploadingRx] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [rxError, setRxError] = useState('');
+  const [previewRxModal, setPreviewRxModal] = useState<PrescriptionAttachment | null>(null);
+
+  // AI Intake Assistant Chat Modal & Clinical Topics State
   const [showAiModal, setShowAiModal] = useState(false);
+  const [aiTopicIndex, setAiTopicIndex] = useState(0);
+  const [aiHistoryAnswers, setAiHistoryAnswers] = useState<Record<string, string>>({});
+  const [showSummaryReview, setShowSummaryReview] = useState(false);
+  const [isEmergencyDetected, setIsEmergencyDetected] = useState(false);
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'bot' | 'user'; text: string }>>([
     {
       sender: 'bot',
-      text: 'Namaste! I am your AI Clinical Intake Assistant for Ministry of AYUSH & AIIA. What primary discomfort or health symptoms brings you to the hospital today?',
+      text: 'Namaste! I am your AI Clinical Intake Assistant for Ministry of AYUSH & AIIA. What primary health concern or symptom brought you to the hospital today?',
     },
   ]);
   const [userInput, setUserInput] = useState('');
@@ -90,6 +199,7 @@ export default function PatientIntakeWizard() {
       state,
       department,
       complaint,
+      prescriptionImages,
       patientInfo: {
         name,
         age: Number(age) || 0,
@@ -119,6 +229,7 @@ export default function PatientIntakeWizard() {
         allergies: nkdaConfirmed ? ['No Known Drug Allergies (NKDA)'] : allergies,
         previousProcedures: procedures,
         familyHistory,
+        prescriptionImages,
       },
       caseManagement: {
         priority: severity >= 8 ? 'High' : 'Normal',
@@ -129,7 +240,7 @@ export default function PatientIntakeWizard() {
         nextActions: '',
       },
     };
-  }, [name, age, gender, dob, contact, city, state, district, pinCode, abhaId, uhid, complaint, duration, severity, department, symptoms, initialObservations, conditions, medications, allergies, nkdaConfirmed, procedures, familyHistory]);
+  }, [name, age, gender, dob, contact, city, state, district, pinCode, abhaId, uhid, complaint, duration, severity, department, symptoms, initialObservations, conditions, medications, allergies, nkdaConfirmed, procedures, familyHistory, prescriptionImages]);
 
   const { score: completenessScore, items: completenessItems } = useMemo(() => calculateCompleteness(currentCaseDraft), [currentCaseDraft]);
   const gaps = useMemo(() => detectGaps(currentCaseDraft), [currentCaseDraft]);
@@ -194,27 +305,145 @@ export default function PatientIntakeWizard() {
     }
   }
 
-  // Send AI Chat Message
-  async function handleSendAiChat() {
-    if (!userInput.trim()) return;
-    const msg = userInput.trim();
-    setUserInput('');
-    setChatMessages(prev => [...prev, { sender: 'user', text: msg }]);
+  // ── Prescription Photo Upload Handlers ──
+  async function handlePrescriptionFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    // Auto-populate symptom or complaint if empty
-    if (!complaint.trim()) {
-      setComplaint(msg);
-    } else if (!symptoms.includes(msg)) {
-      setSymptoms(prev => [...prev, msg]);
+    setRxError('');
+    const validation = validatePrescriptionFile(file);
+    if (!validation.valid) {
+      setRxError(validation.error || 'Invalid file format');
+      return;
     }
 
+    setUploadingRx(true);
+    setUploadProgress(15);
+    try {
+      const attachment = await uploadPrescriptionPhoto(file, {
+        onProgress: (pct) => setUploadProgress(pct),
+      });
+      setPrescriptionImages(prev => [...prev, attachment]);
+      // If candidate medicines were detected, auto-add to medications list
+      if (attachment.extractedMedicines && attachment.extractedMedicines.length > 0) {
+        attachment.extractedMedicines.forEach(m => {
+          if (!medications.includes(m)) {
+            setMedications(prev => [...prev, m]);
+          }
+        });
+      }
+    } catch (err: any) {
+      setRxError(err.message || 'Prescription photo upload failed');
+    } finally {
+      setUploadingRx(false);
+      setUploadProgress(0);
+      if (e.target) e.target.value = '';
+    }
+  }
+
+  function handleRemovePrescription(id: string) {
+    setPrescriptionImages(prev => prev.filter(img => img.id !== id));
+  }
+
+  // ── AI Intake Assistant Handlers ──
+  async function handleSendAiChat(customText?: string) {
+    const textToSend = (customText !== undefined ? customText : userInput).trim();
+    if (!textToSend) return;
+    setUserInput('');
+
+    // Check emergency red flags
+    const lower = textToSend.toLowerCase();
+    const isEmerg = (lower.includes('chest') && (lower.includes('pain') || lower.includes('pressure'))) ||
+      lower.includes('shortness of breath') || lower.includes('difficulty breathing') ||
+      lower.includes('loss of consciousness') || lower.includes('coughing blood') ||
+      lower.includes('stroke') || lower.includes('facial drooping');
+
+    if (isEmerg) {
+      setIsEmergencyDetected(true);
+    }
+
+    setChatMessages(prev => [...prev, { sender: 'user', text: textToSend }]);
+
+    // Save answer to current clinical topic
+    const currentTopic = INTAKE_TOPICS[aiTopicIndex];
+    if (currentTopic) {
+      setAiHistoryAnswers(prev => ({ ...prev, [currentTopic.key]: textToSend }));
+
+      // Automatically sync relevant answers to wizard form state
+      if (currentTopic.key === 'complaint' && !complaint) setComplaint(textToSend);
+      if (currentTopic.key === 'duration' && !duration) setDuration(textToSend);
+      if (currentTopic.key === 'sensation' && !symptoms.includes(textToSend)) setSymptoms(prev => [...prev, textToSend]);
+      if (currentTopic.key === 'associated' && textToSend.toLowerCase() !== 'none' && !textToSend.toLowerCase().includes('no other')) {
+        if (!symptoms.includes(textToSend)) setSymptoms(prev => [...prev, textToSend]);
+      }
+      if (currentTopic.key === 'medications' && !textToSend.toLowerCase().includes('no daily') && !textToSend.toLowerCase().includes('none')) {
+        if (!medications.includes(textToSend)) setMedications(prev => [...prev, textToSend]);
+      }
+      if (currentTopic.key === 'allergies') {
+        if (textToSend.toLowerCase().includes('no known') || textToSend.toLowerCase().includes('nkda')) {
+          setNkdaConfirmed(true);
+        } else if (!allergies.includes(textToSend) && textToSend.toLowerCase() !== 'none') {
+          setAllergies(prev => [...prev, textToSend]);
+        }
+      }
+      if (currentTopic.key === 'conditions' && !textToSend.toLowerCase().includes('no chronic') && !textToSend.toLowerCase().includes('none')) {
+        if (!conditions.includes(textToSend)) setConditions(prev => [...prev, textToSend]);
+      }
+      if (currentTopic.key === 'family' && !familyHistory && !textToSend.toLowerCase().includes('none')) {
+        setFamilyHistory(textToSend);
+      }
+    }
+
+    // Handle "I don't understand" or confusion gracefully
+    if (lower.includes("don't understand") || lower.includes("dont understand") || lower.includes("what do you mean") || lower === 'what' || lower === 'explain') {
+      setTimeout(() => {
+        setChatMessages(prev => [
+          ...prev,
+          {
+            sender: 'bot',
+            text: `No worries at all! Let me rephrase more simply: In your own everyday words, what part of your body is troubling you right now, and does it feel sharp, dull, burning, or aching?`,
+          }
+        ]);
+        setAiLoading(false);
+      }, 400);
+      return;
+    }
+
+    // Handle "I don't know" or "skip"
+    if (lower.includes("don't know") || lower.includes("dont know") || lower === 'skip' || lower === 'not sure') {
+      const nextIdx = aiTopicIndex + 1;
+      if (nextIdx >= INTAKE_TOPICS.length) {
+        setShowSummaryReview(true);
+        setChatMessages(prev => [
+          ...prev,
+          {
+            sender: 'bot',
+            text: `Thank you! We have completed all clinical intake topics. You can now review your structured clinical summary below and apply it directly to your intake form.`,
+          }
+        ]);
+        return;
+      }
+      setAiTopicIndex(nextIdx);
+      const nextTopic = INTAKE_TOPICS[nextIdx];
+      setChatMessages(prev => [
+        ...prev,
+        {
+          sender: 'bot',
+          text: `Understood, we can skip that. ${nextTopic.prompt}`,
+        }
+      ]);
+      return;
+    }
+
+    // Call serverless intake assistant or fallback
     setAiLoading(true);
     try {
       const response = await fetch('/api/intake-assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          prompt: msg,
+          prompt: textToSend,
+          topicIndex: aiTopicIndex,
           history: chatMessages.map(m => ({ role: m.sender === 'bot' ? 'assistant' : 'user', content: m.text })),
         }),
       });
@@ -222,23 +451,84 @@ export default function PatientIntakeWizard() {
       if (response.ok) {
         const data = await response.json();
         setChatMessages(prev => [...prev, { sender: 'bot', text: data.reply }]);
+        if (data.isEmergency) {
+          setIsEmergencyDetected(true);
+        }
+        const nextIdx = aiTopicIndex + 1;
+        if (nextIdx < INTAKE_TOPICS.length) {
+          setAiTopicIndex(nextIdx);
+        } else {
+          setShowSummaryReview(true);
+        }
+        setAiLoading(false);
         return;
       }
     } catch (_) {}
 
-    // Fallback conversational logic
+    // Deterministic Adaptive Advance
     setTimeout(() => {
-      let reply = 'Thank you for sharing that. On a scale of 1 to 10, how severe would you rate this discomfort?';
-      const lower = msg.toLowerCase();
-      if (lower.includes('chest') && lower.includes('pain')) {
-        reply = '[RED FLAG ALERT] Please notify the triage nurse immediately or proceed to Casualty. Are you experiencing pain spreading to your left arm or jaw?';
-      } else if (lower.includes('month') || lower.includes('week') || lower.includes('day')) {
-        reply = 'Noted the duration. Are you currently taking any prescription tablets or Ayurvedic medicines for this condition?';
-        setDuration(msg);
+      const nextIdx = aiTopicIndex + 1;
+      if (nextIdx >= INTAKE_TOPICS.length) {
+        setShowSummaryReview(true);
+        setChatMessages(prev => [
+          ...prev,
+          {
+            sender: 'bot',
+            text: `Thank you for sharing your clinical history. I have organized your answers into a structured summary for the doctor. Please review the summary below and click "Apply to Intake Form".`,
+          }
+        ]);
+      } else {
+        setAiTopicIndex(nextIdx);
+        const nextTopic = INTAKE_TOPICS[nextIdx];
+        setChatMessages(prev => [
+          ...prev,
+          {
+            sender: 'bot',
+            text: `Noted. ${nextTopic.prompt}`,
+          }
+        ]);
       }
-      setChatMessages(prev => [...prev, { sender: 'bot', text: reply }]);
       setAiLoading(false);
-    }, 600);
+    }, 400);
+  }
+
+  function handleSkipAiQuestion() {
+    handleSendAiChat("Skip this question");
+  }
+
+  function handleApplySummaryToForm() {
+    if (aiHistoryAnswers.complaint && !complaint) setComplaint(aiHistoryAnswers.complaint);
+    if (aiHistoryAnswers.duration && !duration) setDuration(aiHistoryAnswers.duration);
+    if (aiHistoryAnswers.sensation && !symptoms.includes(aiHistoryAnswers.sensation)) {
+      setSymptoms(prev => [...prev, aiHistoryAnswers.sensation]);
+    }
+    if (aiHistoryAnswers.associated && !aiHistoryAnswers.associated.toLowerCase().includes('none')) {
+      if (!symptoms.includes(aiHistoryAnswers.associated)) {
+        setSymptoms(prev => [...prev, aiHistoryAnswers.associated]);
+      }
+    }
+    if (aiHistoryAnswers.medications && !aiHistoryAnswers.medications.toLowerCase().includes('none')) {
+      if (!medications.includes(aiHistoryAnswers.medications)) {
+        setMedications(prev => [...prev, aiHistoryAnswers.medications]);
+      }
+    }
+    if (aiHistoryAnswers.conditions && !aiHistoryAnswers.conditions.toLowerCase().includes('none')) {
+      if (!conditions.includes(aiHistoryAnswers.conditions)) {
+        setConditions(prev => [...prev, aiHistoryAnswers.conditions]);
+      }
+    }
+    if (aiHistoryAnswers.allergies) {
+      if (aiHistoryAnswers.allergies.toLowerCase().includes('no known') || aiHistoryAnswers.allergies.toLowerCase().includes('nkda')) {
+        setNkdaConfirmed(true);
+      } else if (!allergies.includes(aiHistoryAnswers.allergies)) {
+        setAllergies(prev => [...prev, aiHistoryAnswers.allergies]);
+      }
+    }
+    if (aiHistoryAnswers.family && !familyHistory && !aiHistoryAnswers.family.toLowerCase().includes('none')) {
+      setFamilyHistory(aiHistoryAnswers.family);
+    }
+    setShowAiModal(false);
+    alert('AI Clinical History successfully synchronized into your Intake Form!');
   }
 
   // Speech Recognition Simulation
@@ -800,6 +1090,144 @@ export default function PatientIntakeWizard() {
                   </div>
                 </div>
 
+                {/* ── Prescription Photo Upload Section ── */}
+                <div className="p-4 rounded-2xl border-2 border-dashed border-teal-300 bg-teal-50/40 dark:bg-teal-950/20 space-y-3">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center shadow-sm">
+                        <UploadCloud className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-extrabold text-sm text-[var(--text)]">Prescription Photo Upload</h3>
+                        <p className="text-[11px] text-[var(--text-muted)]">
+                          Attach prescription slips, doctor notes, or recent medicine packaging (JPG, PNG, WEBP &bull; Max 5MB).
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {/* Hidden File Picker */}
+                      <input
+                        type="file"
+                        id="rx-file-input"
+                        accept="image/jpeg,image/png,image/webp,image/jpg"
+                        onChange={handlePrescriptionFileSelect}
+                        className="hidden"
+                      />
+                      {/* Hidden Camera Input for Mobile */}
+                      <input
+                        type="file"
+                        id="rx-camera-input"
+                        accept="image/*"
+                        capture="environment"
+                        onChange={handlePrescriptionFileSelect}
+                        className="hidden"
+                      />
+
+                      <label
+                        htmlFor="rx-file-input"
+                        className="btn-primary !py-2 !px-3 text-xs cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      >
+                        <ImageIcon className="w-3.5 h-3.5" />
+                        <span>Upload Prescription</span>
+                      </label>
+
+                      <label
+                        htmlFor="rx-camera-input"
+                        className="btn-secondary !py-2 !px-3 text-xs cursor-pointer flex items-center gap-1.5 shadow-sm"
+                        title="Take a photo using device camera"
+                      >
+                        <Camera className="w-3.5 h-3.5 text-teal-700" />
+                        <span>Take Photo</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Upload Progress Bar */}
+                  {uploadingRx && (
+                    <div className="space-y-1.5 p-3 bg-white rounded-xl border border-teal-200 shadow-sm animate-pulse">
+                      <div className="flex justify-between text-xs font-bold text-teal-900">
+                        <span>Uploading Prescription...</span>
+                        <span>{uploadProgress}%</span>
+                      </div>
+                      <div className="w-full h-2 bg-teal-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-teal-600 transition-all duration-200"
+                          style={{ width: `${uploadProgress}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Error Notification */}
+                  {rxError && (
+                    <div className="p-2.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-xs font-semibold flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+                      <span>{rxError}</span>
+                    </div>
+                  )}
+
+                  {/* Attached Prescriptions List */}
+                  {prescriptionImages.length > 0 ? (
+                    <div className="space-y-2 pt-1">
+                      <span className="text-[11px] font-bold text-teal-900 block">
+                        Attached Prescriptions ({prescriptionImages.length}):
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {prescriptionImages.map((rx) => (
+                          <div
+                            key={rx.id}
+                            className="p-3 bg-white dark:bg-slate-800 rounded-xl border border-teal-200 dark:border-teal-900 shadow-sm flex items-start justify-between gap-3"
+                          >
+                            <div className="flex items-start gap-2.5 min-w-0">
+                              <img
+                                src={rx.storageUrl}
+                                alt={rx.fileName}
+                                className="w-12 h-12 object-cover rounded-lg border border-gray-200 shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+                                onClick={() => setPreviewRxModal(rx)}
+                              />
+                              <div className="min-w-0">
+                                <p className="text-xs font-bold text-[var(--text)] truncate">{rx.fileName}</p>
+                                <span className="text-[10px] text-[var(--text-muted)] block">
+                                  {(rx.fileSize / 1024).toFixed(0)} KB &bull; Attached
+                                </span>
+                                {rx.extractedMedicines && rx.extractedMedicines.length > 0 && (
+                                  <span className="inline-block mt-1 px-1.5 py-0.5 rounded bg-purple-50 text-purple-800 border border-purple-200 text-[10px] font-semibold">
+                                    Detected: {rx.extractedMedicines.join(', ')}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-1 shrink-0">
+                              <button
+                                type="button"
+                                onClick={() => setPreviewRxModal(rx)}
+                                className="p-1.5 hover:bg-teal-50 text-teal-700 rounded-lg"
+                                title="View full image"
+                              >
+                                <Eye className="w-4 h-4" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleRemovePrescription(rx.id)}
+                                className="p-1.5 hover:bg-rose-50 text-rose-600 rounded-lg"
+                                title="Remove prescription"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-2 text-[11px] text-[var(--text-muted)]">
+                      No prescription photos attached yet. You can upload an image or photograph of your physical prescription.
+                    </div>
+                  )}
+                </div>
+
                 {/* Allergies */}
                 <div className="space-y-2 pt-3 border-t border-[var(--border)]">
                   <div className="flex items-center justify-between">
@@ -1115,28 +1543,58 @@ export default function PatientIntakeWizard() {
         </div>
       </div>
 
-      {/* ── AI Intake Assistant Modal ── */}
+      {/* ── Upgraded AI Clinical Intake Assistant Modal ── */}
       {showAiModal && (
         <div className="modal-overlay">
-          <div className="modal-dialog max-w-xl">
-            <div className="flex items-center justify-between p-4 border-b border-[var(--border)] bg-teal-800 text-white">
-              <div className="flex items-center gap-2">
-                <Bot className="w-5 h-5" />
+          <div className="modal-dialog max-w-2xl flex flex-col max-h-[92vh]">
+            {/* Modal Header */}
+            <div className="p-4 border-b border-[var(--border)] bg-teal-800 text-white flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-teal-700 text-teal-100 flex items-center justify-center">
+                  <Bot className="w-5 h-5" />
+                </div>
                 <div>
-                  <h3 className="font-bold text-sm">AI Clinical Intake Assistant</h3>
-                  <span className="text-[10px] text-teal-200">Powered by Groq Qwen 3.8-27B &bull; Ministry of AYUSH</span>
+                  <h3 className="font-extrabold text-sm">AI Clinical Intake Assistant</h3>
+                  <span className="text-[10px] text-teal-200">
+                    Topic {Math.min(12, aiTopicIndex + 1)} of 12: {INTAKE_TOPICS[Math.min(11, aiTopicIndex)]?.title} &bull; Ministry of AYUSH
+                  </span>
                 </div>
               </div>
               <button
                 onClick={() => setShowAiModal(false)}
-                className="p-1 hover:bg-teal-700 rounded-lg transition-colors"
+                className="p-1.5 hover:bg-teal-700 rounded-lg text-teal-200 hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
+            {/* Topic Progress Bar */}
+            <div className="w-full bg-teal-950/30 h-1.5">
+              <div
+                className="bg-teal-400 h-full transition-all duration-300"
+                style={{ width: `${Math.min(100, ((aiTopicIndex + 1) / 12) * 100)}%` }}
+              />
+            </div>
+
+            {/* Emergency Red-Flag Alert Banner */}
+            {isEmergencyDetected && (
+              <div className="p-3 bg-red-600 text-white text-xs font-bold flex items-center justify-between gap-2 shadow-md">
+                <div className="flex items-center gap-2">
+                  <ShieldAlert className="w-4 h-4 shrink-0" />
+                  <span>[SAFETY ALERT] Potential urgent symptoms detected. Please notify hospital triage immediately.</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsEmergencyDetected(false)}
+                  className="text-red-200 hover:text-white text-[11px] underline"
+                >
+                  Dismiss
+                </button>
+              </div>
+            )}
+
             {/* Chat Body */}
-            <div className="p-4 overflow-y-auto max-h-[380px] space-y-3 bg-[var(--surface-elevated)] flex-1">
+            <div className="p-4 overflow-y-auto space-y-3 bg-[var(--surface-elevated)] flex-1 min-h-[260px] max-h-[380px]">
               {chatMessages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -1147,7 +1605,7 @@ export default function PatientIntakeWizard() {
                   }`}
                 >
                   <span className="text-[10px] opacity-70 font-bold uppercase mb-0.5">
-                    {msg.sender === 'user' ? 'Patient' : 'MediKiosk AI'}
+                    {msg.sender === 'user' ? 'Patient' : 'Clinical Intake AI'}
                   </span>
                   <span>{msg.text}</span>
                 </div>
@@ -1155,9 +1613,89 @@ export default function PatientIntakeWizard() {
               {aiLoading && (
                 <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] italic">
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                  <span>AI assistant is formulating clinical inquiry...</span>
+                  <span>Formulating clinical inquiry...</span>
                 </div>
               )}
+            </div>
+
+            {/* Structured Clinical Summary Card (End of Intake) */}
+            {showSummaryReview && (
+              <div className="p-4 bg-emerald-50/80 border-t border-b border-emerald-200 space-y-3 max-h-[220px] overflow-y-auto">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-extrabold text-emerald-900">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>Structured Clinical Intake Summary</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleApplySummaryToForm}
+                    className="btn-primary !py-1.5 !px-3 text-xs flex items-center gap-1 shadow-sm"
+                  >
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Apply to Intake Form</span>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                  <div className="p-2 bg-white rounded-lg border border-emerald-100">
+                    <strong className="text-emerald-900 block">Chief Complaint:</strong>
+                    <span>{aiHistoryAnswers.complaint || complaint || 'Not reported'}</span>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-emerald-100">
+                    <strong className="text-emerald-900 block">Location &amp; Sensation:</strong>
+                    <span>{aiHistoryAnswers.sensation || 'Described in consultation'}</span>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-emerald-100">
+                    <strong className="text-emerald-900 block">Duration &amp; Timing:</strong>
+                    <span>{aiHistoryAnswers.duration || duration || 'Recent'} &bull; {aiHistoryAnswers.timing || 'Variable'}</span>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-emerald-100">
+                    <strong className="text-emerald-900 block">Progression:</strong>
+                    <span>{aiHistoryAnswers.progression || 'Unchanged'}</span>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-emerald-100">
+                    <strong className="text-emerald-900 block">Current Medications:</strong>
+                    <span>{aiHistoryAnswers.medications || (medications.length ? medications.join(', ') : 'None reported')}</span>
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-emerald-100">
+                    <strong className="text-emerald-900 block">Allergies:</strong>
+                    <span>{aiHistoryAnswers.allergies || (nkdaConfirmed ? 'No Known Drug Allergies (NKDA)' : 'Unspecified')}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Quick Response Option Chips */}
+            <div className="p-2.5 border-t border-[var(--border)] bg-[var(--surface-elevated)] space-y-2">
+              <div className="flex items-center justify-between text-[11px] text-[var(--text-muted)] font-semibold">
+                <span>Suggested Quick Replies:</span>
+                <button
+                  type="button"
+                  onClick={handleSkipAiQuestion}
+                  className="text-teal-700 hover:underline font-bold text-[10px]"
+                >
+                  Skip this question &rarr;
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-1.5 max-h-[70px] overflow-y-auto">
+                {INTAKE_TOPICS[Math.min(11, aiTopicIndex)]?.options.map((option, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleSendAiChat(option)}
+                    className="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-[var(--border-strong)] hover:border-teal-600 hover:bg-teal-50 text-[11px] font-bold text-[var(--text)] transition-colors"
+                  >
+                    {option}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => handleSendAiChat("I don't understand, please explain simply")}
+                  className="px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-bold hover:bg-amber-100 transition-colors"
+                >
+                  "I don't understand"
+                </button>
+              </div>
             </div>
 
             {/* Input Row */}
@@ -1174,7 +1712,7 @@ export default function PatientIntakeWizard() {
               </button>
               <input
                 type="text"
-                placeholder={isListening ? 'Listening...' : 'Type symptoms or reply to AI...'}
+                placeholder={isListening ? 'Listening...' : 'Type symptoms or reply in your own words...'}
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -1187,11 +1725,69 @@ export default function PatientIntakeWizard() {
               />
               <button
                 type="button"
-                onClick={handleSendAiChat}
+                onClick={() => handleSendAiChat()}
                 className="p-2 rounded-full bg-teal-700 text-white hover:bg-teal-800 transition-colors"
                 title="Send message"
               >
                 <Send className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Prescription Lightbox Modal ── */}
+      {previewRxModal && (
+        <div className="modal-overlay">
+          <div className="modal-dialog max-w-3xl p-4 space-y-4">
+            <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
+              <div className="flex items-center gap-2">
+                <FileText className="w-5 h-5 text-teal-700" />
+                <div>
+                  <h3 className="font-extrabold text-sm text-[var(--text)]">{previewRxModal.fileName}</h3>
+                  <span className="text-[10px] text-[var(--text-muted)]">
+                    {(previewRxModal.fileSize / 1024).toFixed(0)} KB &bull; Uploaded {new Date(previewRxModal.uploadedAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setPreviewRxModal(null)}
+                className="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-800"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex justify-center bg-black/5 dark:bg-black/30 rounded-xl p-2 max-h-[60vh] overflow-auto">
+              <img
+                src={previewRxModal.storageUrl}
+                alt={previewRxModal.fileName}
+                className="max-h-[55vh] object-contain rounded-lg shadow-sm"
+              />
+            </div>
+
+            {previewRxModal.extractedMedicines && previewRxModal.extractedMedicines.length > 0 && (
+              <div className="p-3 bg-purple-50 border border-purple-200 rounded-xl text-purple-900 text-xs">
+                <strong>Candidate Medications Detected:</strong> {previewRxModal.extractedMedicines.join(', ')}
+              </div>
+            )}
+
+            <div className="flex justify-end gap-2 pt-2">
+              <a
+                href={previewRxModal.storageUrl}
+                download={previewRxModal.fileName}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-secondary text-xs"
+              >
+                Open Original
+              </a>
+              <button
+                type="button"
+                onClick={() => setPreviewRxModal(null)}
+                className="btn-primary text-xs"
+              >
+                Close Preview
               </button>
             </div>
           </div>

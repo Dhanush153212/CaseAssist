@@ -124,18 +124,25 @@ export default function GatewayLogin() {
 
           <div className="space-y-2 pt-2 border-t border-[var(--border)]">
             <button
-              onClick={() => loginWithRole('doctor', { name: 'Dr. Ramesh Sharma, MD (Ayu)', email: 'dr.sharma@aiia.gov.in' })}
+              onClick={() => setActiveView('doctor-login')}
               className="w-full bg-gradient-to-r from-teal-700 to-teal-900 hover:from-teal-800 hover:to-teal-950 text-white font-extrabold text-sm py-3 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 transition-transform"
             >
-              <span>Access Clinical Review Queue</span>
+              <span>Doctor Sign In &amp; Review Queue</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
-              onClick={() => setActiveView('split-view')}
+              onClick={() => loginWithRole('doctor', { name: 'Dr. Ramesh Sharma, MD (Ayu)', email: 'dr.sharma@aiia.gov.in' })}
               className="w-full bg-[var(--surface-elevated)] hover:bg-[var(--surface)] text-[var(--text)] border border-[var(--border-strong)] font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-2 transition-colors"
             >
-              <span>Open Split View Workstation</span>
+              <span>Instant Demo (Dr. Ramesh Sharma)</span>
+            </button>
+
+            <button
+              onClick={() => setActiveView('split-view')}
+              className="w-full text-[var(--text-muted)] hover:text-teal-700 font-bold text-xs py-1.5 flex items-center justify-center gap-1.5 transition-colors"
+            >
+              <span>Open Split View Workstation &rarr;</span>
             </button>
           </div>
         </div>
@@ -158,18 +165,25 @@ export default function GatewayLogin() {
 
           <div className="space-y-2 pt-2 border-t border-[var(--border)]">
             <button
-              onClick={() => loginWithRole('superadmin', { name: 'AIIA Hospital Director', email: 'director.admin@aiia.gov.in' })}
+              onClick={() => setActiveView('admin-login')}
               className="w-full bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-800 hover:to-amber-950 text-white font-extrabold text-sm py-3 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 transition-transform"
             >
-              <span>Access Admin Dashboard</span>
+              <span>Admin Sign In &amp; Governance</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
-              onClick={() => setActiveView('audit')}
+              onClick={() => loginWithRole('superadmin', { name: 'AIIA Hospital Director', email: 'director.admin@aiia.gov.in' })}
               className="w-full bg-[var(--surface-elevated)] hover:bg-[var(--surface)] text-[var(--text)] border border-[var(--border-strong)] font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-2 transition-colors"
             >
-              <span>Inspect DPDP Compliance Audit Log</span>
+              <span>Instant Demo (Hospital Director)</span>
+            </button>
+
+            <button
+              onClick={() => setActiveView('audit')}
+              className="w-full text-[var(--text-muted)] hover:text-amber-800 font-bold text-xs py-1.5 flex items-center justify-center gap-1.5 transition-colors"
+            >
+              <span>Inspect DPDP Audit Trail &rarr;</span>
             </button>
           </div>
         </div>

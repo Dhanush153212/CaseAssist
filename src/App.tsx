@@ -3,6 +3,8 @@ import { AppProvider, useApp } from './context/AppContext';
 import Header from './components/Header';
 import EmergencyBanner from './components/EmergencyBanner';
 import GatewayLogin from './pages/GatewayLogin';
+import DoctorLogin from './pages/DoctorLogin';
+import AdminLogin from './pages/AdminLogin';
 import PatientIntakeWizard from './pages/PatientIntakeWizard';
 import PatientDashboard from './pages/PatientDashboard';
 import DoctorPortal from './pages/DoctorPortal';
@@ -42,6 +44,8 @@ function AppContent() {
         )}
 
         {activeView === 'gateway' && <GatewayLogin />}
+        {activeView === 'doctor-login' && <DoctorLogin />}
+        {activeView === 'admin-login' && <AdminLogin />}
         {activeView === 'patient-intake' && <PatientIntakeWizard />}
         {activeView === 'patient-dashboard' && <PatientDashboard />}
         {activeView === 'clinical-queue' && <DoctorPortal />}
@@ -51,7 +55,7 @@ function AppContent() {
         {activeView === 'analytics' && <AnalyticsView />}
         {activeView === 'audit' && <AuditLogView />}
         {activeView === 'help' && <HelpAboutView />}
-        {!['gateway', 'patient-intake', 'patient-dashboard', 'clinical-queue', 'split-view', 'admin', 'settings', 'ai-summary', 'analytics', 'audit', 'help'].includes(activeView) && <GatewayLogin />}
+        {!['gateway', 'doctor-login', 'admin-login', 'patient-intake', 'patient-dashboard', 'clinical-queue', 'split-view', 'admin', 'settings', 'ai-summary', 'analytics', 'audit', 'help'].includes(activeView) && <GatewayLogin />}
       </main>
 
       {/* ── Global Institutional Footer ── */}
