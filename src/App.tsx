@@ -46,11 +46,12 @@ function AppContent() {
         {activeView === 'patient-dashboard' && <PatientDashboard />}
         {activeView === 'clinical-queue' && <DoctorPortal />}
         {activeView === 'split-view' && <SplitView />}
-        {activeView === 'admin' && <AdminPortal />}
+        {(activeView === 'admin' || activeView === 'settings') && <AdminPortal />}
         {activeView === 'ai-summary' && <AISummaryView />}
         {activeView === 'analytics' && <AnalyticsView />}
         {activeView === 'audit' && <AuditLogView />}
         {activeView === 'help' && <HelpAboutView />}
+        {!['gateway', 'patient-intake', 'patient-dashboard', 'clinical-queue', 'split-view', 'admin', 'settings', 'ai-summary', 'analytics', 'audit', 'help'].includes(activeView) && <GatewayLogin />}
       </main>
 
       {/* ── Global Institutional Footer ── */}

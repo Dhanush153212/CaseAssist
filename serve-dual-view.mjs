@@ -7,7 +7,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = 5174;
-const INDEX_FILE = path.join(__dirname, 'index.html');
+const INDEX_FILE = fs.existsSync(path.join(__dirname, 'combined-view.html'))
+  ? path.join(__dirname, 'combined-view.html')
+  : (fs.existsSync(path.join(__dirname, 'legacy-kiosk.html')) ? path.join(__dirname, 'legacy-kiosk.html') : path.join(__dirname, 'index.html'));
 const CASES_DB_FILE = path.join(__dirname, 'cases-db.json');
 const AUDIT_DB_FILE = path.join(__dirname, 'audit-db.json');
 const USERS_DB_FILE = path.join(__dirname, 'users-db.json');
