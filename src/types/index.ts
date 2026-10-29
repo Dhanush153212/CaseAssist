@@ -71,6 +71,18 @@ export interface ClinicalInfo {
   severity?: number;         // 1-10 scale
 }
 
+export interface PrescriptionAttachment {
+  id: string;
+  fileName: string;
+  fileSize: number;
+  fileType: string;
+  storageUrl: string;
+  storageRef?: string;
+  uploadedAt: string;
+  extractedMedicines?: string[];
+  ocrDraftText?: string;
+}
+
 // ─── Medical History ──────────────────────────────────────────────────────────
 
 export interface MedicalHistory {
@@ -79,6 +91,7 @@ export interface MedicalHistory {
   allergies: string[];
   previousProcedures: string[];
   familyHistory: string;
+  prescriptionImages?: PrescriptionAttachment[];
 }
 
 // ─── Case Management ──────────────────────────────────────────────────────────
@@ -156,6 +169,9 @@ export interface PatientCase {
   // Red-flag alerts
   hasEmergencyRedFlag?: boolean;
   emergencyFlags?: string[];
+
+  // Attachments
+  prescriptionImages?: PrescriptionAttachment[];
 
   // Child collections
   messages: CaseMessage[];

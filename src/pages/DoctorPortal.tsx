@@ -2,11 +2,12 @@ import { useState, useMemo } from 'react';
 import { useApp } from '../context/AppContext';
 import {
   Stethoscope, Eye, AlertTriangle, Sparkles,
-  Search, Send, MessageSquare, X, Shield, Check
+  Search, Send, MessageSquare, X, Shield, Check,
+  FileText, Image as ImageIcon, Download
 } from 'lucide-react';
 import { statusBadgeClass, priorityBadgeClass, detectGaps } from '../utils/helpers';
 import { DEPARTMENTS } from '../data/seedData';
-import type { PatientCase, CaseStatus } from '../types';
+import type { PatientCase, CaseStatus, PrescriptionAttachment } from '../types';
 
 export default function DoctorPortal() {
   const { cases, currentUser, updateCase, sendMessageToCase, setActiveView } = useApp();
@@ -24,6 +25,7 @@ export default function DoctorPortal() {
   const [aiGenerating, setAiGenerating] = useState(false);
   const [abdmPushSuccess, setAbdmPushSuccess] = useState(false);
   const [replyInput, setReplyInput] = useState('');
+  const [previewRx, setPreviewRx] = useState<PrescriptionAttachment | null>(null);
 
   const activeCase = cases.find(c => c.id === reviewingCaseId) || null;
   const activeGaps = activeCase ? detectGaps(activeCase) : [];
@@ -123,6 +125,36 @@ export default function DoctorPortal() {
     setReplyInput('');
   }
 
+  if (currentUser && currentUser.role === 'patient') {
+    return (
+      <div className="max-w-md mx-auto my-16 p-8 card-box text-center space-y-4 animate-fade-in shadow-xl">
+        <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-100 dark:bg-amber-950/40 text-amber-700 flex items-center justify-center">
+          <Shield className="w-8 h-8" />
+        </div>
+        <div className="space-y-1">
+          <h2 className="text-xl font-extrabold text-[var(--text)]">Clinical Access Restricted</h2>
+          <p className="text-xs text-[var(--text-muted)]">
+            You are logged in as a Patient ({currentUser.name}). Doctor review queue and confidential patient records are restricted to licensed clinicians.
+          </p>
+        </div>
+        <div className="flex flex-col gap-2 pt-2">
+          <button
+            onClick={() => setActiveView('patient-dashboard')}
+            className="btn-primary w-full justify-center text-xs"
+          >
+            Go to My Patient Dashboard
+          </button>
+          <button
+            onClick={() => setActiveView('doctor-login')}
+            className="btn-secondary w-full justify-center text-xs"
+          >
+            Switch to Doctor Login
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-6 animate-fade-in">
       {/* Header */}
@@ -144,6 +176,23 @@ export default function DoctorPortal() {
           <span>Open Split View Workstation</span>
         </button>
       </div>
+
+      {!currentUser && (
+        <div className="p-3 bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800 rounded-xl flex items-center justify-between gap-3 flex-wrap text-xs">
+          <div className="flex items-center gap-2 text-teal-900 dark:text-teal-200">
+            <Shield className="w-4 h-4 text-teal-700 shrink-0" />
+            <span>
+              <strong>Clinician Preview Mode:</strong> Sign in with your official Doctor account to digitally sign reviews with your AYUSH / Medical Registration Number.
+            </span>
+          </div>
+          <button
+            onClick={() => setActiveView('doctor-login')}
+            className="btn-primary !py-1 !px-3 text-xs shrink-0"
+          >
+            Doctor Login
+          </button>
+        </div>
+      )}
 
       {/* Filter Toolbar */}
       <div className="card-box !p-4 space-y-3">
@@ -314,6 +363,62 @@ export default function DoctorPortal() {
                 </div>
               </div>
 
+              {/* Attached Prescription Documents / Photos */}
+              {((activeCase.prescriptionImages && activeCase.prescriptionImages.length > 0) ||
+                (activeCase.medicalHistory?.prescriptionImages && activeCase.medicalHistory.prescriptionImages.length > 0)) && (
+                <div className="p-4 bg-teal-50/60 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900 rounded-xl space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-teal-700" />
+                      <strong className="text-teal-950 dark:text-teal-100 text-xs uppercase tracking-wider">
+                        Patient Uploaded Prescription Photo(s)
+                      </strong>
+                    </div>
+                    <span className="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full font-bold">
+                      {(activeCase.prescriptionImages || activeCase.medicalHistory?.prescriptionImages || []).length} Document(s)
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {(activeCase.prescriptionImages || activeCase.medicalHistory?.prescriptionImages || []).map((rx) => (
+                      <div
+                        key={rx.id}
+                        className="p-2.5 bg-white dark:bg-slate-800 rounded-xl border border-teal-200 shadow-sm flex items-center justify-between gap-3"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <img
+                            src={rx.storageUrl}
+                            alt={rx.fileName}
+                            className="w-12 h-12 object-cover rounded-lg border border-gray-200 shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => setPreviewRx(rx)}
+                          />
+                          <div className="min-w-0">
+                            <p className="font-bold text-xs text-[var(--text)] truncate">{rx.fileName}</p>
+                            <span className="text-[10px] text-[var(--text-muted)] block">
+                              {(rx.fileSize / 1024).toFixed(0)} KB &bull; Uploaded {new Date(rx.uploadedAt).toLocaleDateString()}
+                            </span>
+                            {rx.extractedMedicines && rx.extractedMedicines.length > 0 && (
+                              <span className="inline-block mt-0.5 px-1.5 py-0.2 bg-purple-50 text-purple-800 border border-purple-200 text-[10px] font-semibold rounded">
+                                Detected: {rx.extractedMedicines.join(', ')}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setPreviewRx(rx)}
+                          className="btn-primary !py-1.5 !px-2.5 text-xs shrink-0 flex items-center gap-1 shadow-sm"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>View Photo</span>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Clinical Gap Detection Flags */}
               {activeGaps.length > 0 && (
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-1.5">
@@ -460,6 +565,70 @@ export default function DoctorPortal() {
                 <span>Save Clinical Review &amp; Sign Off</span>
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Doctor Prescription Full-Resolution Lightbox Modal */}
+      {previewRx && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <div className="p-4 border-b border-[var(--border)] flex items-center justify-between bg-[var(--surface-elevated)]">
+              <div className="flex items-center gap-2">
+                <ImageIcon className="w-5 h-5 text-teal-700" />
+                <div>
+                  <h3 className="font-bold text-sm text-[var(--text)]">{previewRx.fileName}</h3>
+                  <p className="text-[11px] text-[var(--text-muted)]">
+                    {(previewRx.fileSize / 1024).toFixed(0)} KB &bull; Uploaded {new Date(previewRx.uploadedAt).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={previewRx.storageUrl}
+                  download={previewRx.fileName}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-secondary !py-1.5 !px-3 text-xs flex items-center gap-1.5"
+                  title="Open original image in new tab / download"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download / Open</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setPreviewRx(null)}
+                  className="p-1.5 hover:bg-[var(--surface-hover)] rounded-lg text-[var(--text-muted)]"
+                  title="Close viewer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4 flex-1 overflow-auto bg-slate-950 flex items-center justify-center min-h-[300px]">
+              <img
+                src={previewRx.storageUrl}
+                alt={previewRx.fileName}
+                className="max-h-[70vh] max-w-full object-contain rounded-lg shadow-lg border border-slate-800"
+              />
+            </div>
+
+            {previewRx.extractedMedicines && previewRx.extractedMedicines.length > 0 && (
+              <div className="p-3 bg-[var(--surface-elevated)] border-t border-[var(--border)] flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-semibold text-teal-800 dark:text-teal-300">
+                  Detected Medications:
+                </span>
+                {previewRx.extractedMedicines.map((med, idx) => (
+                  <span
+                    key={idx}
+                    className="text-xs px-2.5 py-0.5 bg-teal-100 text-teal-900 border border-teal-300 rounded-full font-medium"
+                  >
+                    {med}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}

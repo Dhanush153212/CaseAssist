@@ -76,6 +76,28 @@ export default function Header() {
             </select>
           </div>
 
+          {/* Quick Login buttons for unauthenticated visitors */}
+          {!currentUser && (
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setActiveView('doctor-login')}
+                className="btn-secondary !py-1 !px-2.5 text-xs flex items-center gap-1 font-bold text-teal-800"
+                title="Sign in to Doctor Portal"
+              >
+                <Stethoscope className="w-3.5 h-3.5 text-teal-700" />
+                <span className="hidden sm:inline">Doctor</span> Login
+              </button>
+              <button
+                onClick={() => setActiveView('admin-login')}
+                className="btn-secondary !py-1 !px-2.5 text-xs flex items-center gap-1 font-bold text-amber-800"
+                title="Sign in to Admin Portal"
+              >
+                <Shield className="w-3.5 h-3.5 text-amber-600" />
+                <span className="hidden sm:inline">Admin</span> Login
+              </button>
+            </div>
+          )}
+
           {/* Theme Toggle */}
           <button
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -163,8 +185,8 @@ export default function Header() {
           </button>
         )}
 
-        {/* Clinical Review Queue */}
-        {(role === 'doctor' || role === 'superadmin' || !currentUser) && (
+        {/* Doctor Portal / Clinical Review Queue */}
+        {role === 'doctor' || role === 'superadmin' ? (
           <button
             onClick={() => setActiveView('clinical-queue')}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
@@ -176,7 +198,19 @@ export default function Header() {
             <Stethoscope className="w-3.5 h-3.5" />
             <span>Clinical Review</span>
           </button>
-        )}
+        ) : !currentUser ? (
+          <button
+            onClick={() => setActiveView('doctor-login')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
+              activeView === 'doctor-login'
+                ? 'bg-teal-50 text-teal-800 border border-teal-200 shadow-sm'
+                : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-elevated)]'
+            }`}
+          >
+            <Stethoscope className="w-3.5 h-3.5" />
+            <span>Doctor Portal</span>
+          </button>
+        ) : null}
 
         {/* Split View */}
         <button
@@ -205,19 +239,31 @@ export default function Header() {
         </button>
 
         {/* Admin Portal */}
-        {(role === 'superadmin' || !currentUser) && (
+        {role === 'superadmin' ? (
           <button
             onClick={() => setActiveView('admin')}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
               activeView === 'admin'
-                ? 'bg-teal-50 text-teal-800 border border-teal-200 shadow-sm'
+                ? 'bg-amber-50 text-amber-800 border border-amber-200 shadow-sm'
                 : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-elevated)]'
             }`}
           >
             <Shield className="w-3.5 h-3.5 text-amber-600" />
             <span>Admin &amp; Users</span>
           </button>
-        )}
+        ) : !currentUser ? (
+          <button
+            onClick={() => setActiveView('admin-login')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
+              activeView === 'admin-login'
+                ? 'bg-amber-50 text-amber-800 border border-amber-200 shadow-sm'
+                : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-elevated)]'
+            }`}
+          >
+            <Shield className="w-3.5 h-3.5 text-amber-600" />
+            <span>Admin Portal</span>
+          </button>
+        ) : null}
 
         {/* Analytics */}
         <button
