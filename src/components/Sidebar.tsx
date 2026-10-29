@@ -134,15 +134,17 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
 
         {/* ── User Footer ──────────────────────────────────────────────────── */}
         <div className="px-3 pb-4 border-t border-white/10 pt-3">
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/5 mb-2">
-            <div className="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
-              {currentUser.avatarInitials}
+          {currentUser && (
+            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/5 mb-2">
+              <div className="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                {currentUser.avatarInitials}
+              </div>
+              <div className="min-w-0">
+                <p className="text-white text-xs font-semibold truncate">{currentUser.name}</p>
+                <p className="text-blue-300 text-[10px] truncate">{currentUser.role}</p>
+              </div>
             </div>
-            <div className="min-w-0">
-              <p className="text-white text-xs font-semibold truncate">{currentUser.name}</p>
-              <p className="text-blue-300 text-[10px] truncate">{currentUser.role}</p>
-            </div>
-          </div>
+          )}
           <button
             onClick={handleLogout}
             className="sidebar-link sidebar-link-inactive w-full"

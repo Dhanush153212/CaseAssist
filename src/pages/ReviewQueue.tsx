@@ -17,14 +17,14 @@ export default function ReviewQueue() {
 
   // Only show cases that need review
   const queue = cases.filter(c =>
-    ['Registered', 'Under Review', 'Awaiting Tests'].includes(c.caseManagement.reviewStatus)
+    ['Registered', 'Under Review', 'Awaiting Tests', 'Awaiting Clinical Review'].includes(c.caseManagement.reviewStatus)
   ).sort((a, b) => {
-    const pOrder = { Critical: 0, High: 1, Normal: 2, Low: 3 };
-    return pOrder[a.caseManagement.priority] - pOrder[b.caseManagement.priority];
+    const pOrder: Record<string, number> = { Critical: 0, High: 1, Medium: 2, Normal: 2, Low: 3 };
+    return (pOrder[a.caseManagement.priority] ?? 2) - (pOrder[b.caseManagement.priority] ?? 2);
   });
 
   const completedCases = cases.filter(c =>
-    ['Completed', 'Closed', 'In Treatment', 'Follow-Up'].includes(c.caseManagement.reviewStatus)
+    ['Completed', 'Closed', 'In Treatment', 'Follow-Up', 'Reviewed'].includes(c.caseManagement.reviewStatus)
   );
 
   function openReview(id: string) {
@@ -40,11 +40,14 @@ export default function ReviewQueue() {
     const c = cases.find(x => x.id === reviewCase);
     if (!c) return;
 
+    const reviewerName = currentUser?.name || 'Dr. Ramesh Sharma, MD (Ayu)';
+    const reviewerRole = currentUser?.role || 'doctor';
+
     const updated = {
       ...c,
       caseManagement: { ...c.caseManagement, reviewStatus: newStatus },
       reviewerNotes: notes,
-      reviewedBy: currentUser.name,
+      reviewedBy: reviewerName,
       reviewedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       activityLog: [
@@ -53,8 +56,8 @@ export default function ReviewQueue() {
           id: Math.random().toString(36).slice(2),
           timestamp: new Date().toISOString(),
           action: 'Clinical Review Completed',
-          performedBy: currentUser.name,
-          role: currentUser.role,
+          performedBy: reviewerName,
+          role: reviewerRole,
           details: `Status updated to "${newStatus}". Notes: ${notes || 'No notes added.'}`,
         },
       ],
