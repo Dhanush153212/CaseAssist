@@ -1,5 +1,46 @@
 [
   {
+    "id": "AUD-1793292546994",
+    "timestamp": "2026-10-29T16:49:06.995Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793292492236",
+    "timestamp": "2026-10-29T16:48:12.236Z",
+    "userId": "USR-101",
+    "userName": "Dr. Ramesh Sharma, MD (Ayu)",
+    "role": "doctor",
+    "action": "USER_LOGIN",
+    "details": "User logged in to DOCTOR portal",
+    "ip": "127.0.0.1"
+  },
+  {
+    "id": "AUD-1793291947928",
+    "timestamp": "2026-10-29T16:39:07.928Z",
+    "userId": "staff-session",
+    "userName": "Dhanush C",
+    "role": "Patient",
+    "action": "CASE_SUBMITTED",
+    "details": "Patient case AIIA-MK-2026-1208 registered for department: Kayachikitsa (Ayurveda Internal Medicine)",
+    "ip": "127.0.0.1",
+    "resourceId": "AIIA-MK-2026-1208"
+  },
+  {
+    "id": "AUD-1793291925689",
+    "timestamp": "2026-10-29T16:38:45.690Z",
+    "userId": "USR-201",
+    "userName": "Rajesh Varma",
+    "role": "patient",
+    "action": "USER_LOGIN",
+    "details": "User logged in to PATIENT portal",
+    "ip": "127.0.0.1"
+  },
+  {
     "id": "AUD-1793280087224",
     "timestamp": "2026-10-29T13:21:27.224Z",
     "userId": "USR-201",

@@ -1,5 +1,26 @@
 [
   {
+    "id": "AIIA-MK-2026-1208",
+    "name": "Dhanush C",
+    "age": 28,
+    "gender": "Male",
+    "contact": "+91 98450 88219",
+    "city": "Bengaluru, Karnataka",
+    "department": "Kayachikitsa (Ayurveda Internal Medicine)",
+    "complaint": "\n            Severe bilateral knee joint pain and morning stiffness for 6 months\n          ",
+    "priority": "Medium",
+    "status": "Awaiting Clinical Review",
+    "date": "2026-10-29",
+    "ayushAssessment": {
+      "prakriti": "Vata-Kapha",
+      "agni": "Mandagni (Sluggish)",
+      "koshtha": "Krura (Constipated)",
+      "vikriti": "Vata-Kapha Dushti with Ama"
+    },
+    "messages": [],
+    "createdAt": "2026-10-29T16:39:07.738Z"
+  },
+  {
     "id": "AIIA-MK-2026-1262",
     "name": "Dhanush C",
     "age": 28,
