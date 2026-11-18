@@ -33,3 +33,9 @@ dist/
 
 # Local Netlify folder
 .netlify
+
+cases-db.json
+users-db.json
+audit-db.json
+cases-db-backup.json
+.env
